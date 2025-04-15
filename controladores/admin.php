@@ -18,15 +18,6 @@
         $usus->modUser($nom, $contra,$id);
         header("Location: ./admin.php?action=irLista");
     }
-    //Introduce un usuario y te envia a la lista
-    function insertar(){
-        $nom = $_POST["nom"];
-        $contra = $_POST["contra"];
-        require_once("../classes/usuario.php");
-        $usus = new usuario("../../../");
-        $usus->insertUser($nom, $contra);
-        header("Location: ./admin.php?action=irLista");
-    }
     //Busca usuarios con nombres que contengan la string introducida
     function buscar(){
         $busqueda = $_POST["nom"];

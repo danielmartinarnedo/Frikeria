@@ -2,7 +2,7 @@
     class usuario{
         private $db;
         public function __construct($barritas){
-            require_once ($barritas.'cred.php');
+            // require_once ($barritas.'cred.php');
             // $this->db = new mysqli("localhost",USU_CONN, PSW_CONN, "frikeria");
             $this->db = new mysqli("localhost","root", "", "frikeria");
         }
@@ -97,7 +97,7 @@
         //Introducir los datos de un Usuario
 
         public function insertUser(String $nom, String $contra, String $mail){
-            $sentencia = "INSERT INTO usuario (nombre, contra, mail) VALUES (?,?)";
+            $sentencia = "INSERT INTO usuario (nombre, contra, mail) VALUES (?,?,?)";
             $consulta = $this->db->prepare($sentencia);
             $consulta->bind_param("sss", $nom, $contra, $mail);
             $consulta->execute();
@@ -113,6 +113,18 @@
             $consulta->fetch();
             $consulta->close();
             return $id;
+        }
+
+        public function getUser(String $nom){
+            $sentencia = "SELECT nombre, foto FROM usuario WHERE nombre=?";
+            $consulta = $this->db->prepare($sentencia);
+            $consulta->bind_param("s", $nom);
+            $consulta->bind_result($nombre,$foto);
+            $consulta->execute();
+            $consulta->fetch();
+            $consulta->close();
+            $result=array($nombre,$foto);
+            return $result;
         }
     }
 ?>

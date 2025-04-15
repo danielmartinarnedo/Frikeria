@@ -1,10 +1,16 @@
-document.ready(function () {
-    const name = "John";
-
-    fetch(`../controladores/src.php?action=conseguirUsuario`)
-        .then(response => response.text())
+document.addEventListener("DOMContentLoaded", function () {
+    usuarioDiv=document.getElementById("usuarioHeader");
+    fetch(`/Frikeria/controladores/src.php?action=conseguirUsuario`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    })
+        .then(res => res.json())
         .then(data => {
-            console.log(data); // Output: Hello, John
-            document.getElementById("output").innerText = data;
+            console.log(data);
+            if (data !== null) {
+                
+            }
         });
 })   
