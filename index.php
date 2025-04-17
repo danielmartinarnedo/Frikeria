@@ -41,7 +41,7 @@
         if(is_session('user')){ 
             separador();
         }else{
-            header("Location: vista/normal/index.php");
+            header("Location: vista/landing.php");
         }
     }
 ?>

@@ -1,4 +1,4 @@
-<?php require_once('../header.php');?>
+<?php require_once('./header.php');?>
     
     <section class="py-5 bg-image" style="background-image: url('https://picsum.photos/2000/1000')">
         <div class="container">
@@ -29,5 +29,5 @@
             </div>
         </div>
     </section>
-<?php require_once('../footer.php');?>  
+<?php require_once('./footer.php');?>  
     

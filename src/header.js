@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     usuarioDiv = document.getElementById("usuarioHeader");
-    fetch(`/Frikeria/controladores/src.php?action=conseguirUsuario`, {
+    ruta = `../controladores/src.php?action=`;
+    fetch(ruta+"conseguirUsuario", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -8,16 +9,15 @@ document.addEventListener("DOMContentLoaded", function () {
     })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             if (data !== null) {
                 usuarioDiv.innerHTML = `
-                <div class="btn-group">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    Right-aligned menu example</button>
+                <div class="btn-group nav-item">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                        ${data}
+                    </a>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><button class="dropdown-item" type="button">Action</button></li>
-                        <li><button class="dropdown-item" type="button">Another action</button></li>
-                        <li><button class="dropdown-item" type="button">Something else here</button></li>
+                        <li><a class="dropdown-item" href="${ruta+"irModUser"}">Modificar Datos</a></li>
+                        <li><a class="dropdown-item" href="${ruta+"cerrarSes"}">Cerrar Sesion</a></li>
                     </ul>
                 </div>
                 `;

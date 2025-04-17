@@ -2,7 +2,7 @@
 //Va hacia Index
 function irLanding()
 {
-    header("Location: ../vista/normal/landing.php");
+    header("Location: ../vista/landing.php");
 }
 //Introduce un usuario y te envia a la lista
 function insertarUsuario()
@@ -21,20 +21,13 @@ function insertarUsuario()
             header("Location: ../index.php");
         } else {
             echo "<script>alert('Las contreseñas tienen que ser iguales.');</script>";
-            header("Location: ../vista/normal/introUser.php?action=Uno");
+            header("Location: ../vista/introUser.php?action=Uno");
         }
     } else {
         echo "<script>alert('La contraseña tiene que tener al menos 1 numero, 1 mayuscula, 1 minuscula y 8 caracteres');</script>";
-        header("Location: ../vista/normal/introUser.php?action=Dos");
+        header("Location: ../vista/introUser.php?action=Dos");
     }
     
-}
-//Cerrar Session
-function cerrarSes()
-{
-    require_once("../modelo.php");
-    unset_session("user");
-    header("Location: ../vista/normal/index.php");
 }
 //Maneja las acciones enviadas por el usuario
 if (isset($_REQUEST["action"])) {

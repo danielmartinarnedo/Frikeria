@@ -86,11 +86,10 @@
         }
         
         //Modifica los datos de un usuario
-        public function modUser(String $nom, String $contra){
-            $id = $this->getId($nom);
-            $sentencia = "UPDATE usuario SET contra=?, nombre=? WHERE id=?";
+        public function modUser(String $nom, String $contra, String $mail, String $foto){
+            $sentencia = "UPDATE usuario SET contra=?, nombre=?, mail=?, foto=? WHERE nombre=?";
             $consulta = $this->db->prepare($sentencia);
-            $consulta->bind_param("sss", $contra, $nom, $id);
+            $consulta->bind_param("sssss", $contra, $nom, $mail, $foto, $nom);
             $consulta->execute();
             $consulta->close();
         }
@@ -115,16 +114,21 @@
             return $id;
         }
 
-        public function getUser(String $nom){
-            $sentencia = "SELECT nombre, foto FROM usuario WHERE nombre=?";
+        //Conseguir todos los datos del usuario
+        public function getDatos(String $nom){
+            $sentencia = "SELECT contra, mail, foto FROM usuario WHERE nombre=?";
             $consulta = $this->db->prepare($sentencia);
             $consulta->bind_param("s", $nom);
-            $consulta->bind_result($nombre,$foto);
+            $consulta->bind_result($contra, $mail, $foto);
             $consulta->execute();
             $consulta->fetch();
             $consulta->close();
-            $result=array($nombre,$foto);
-            return $result;
+            return array(
+                "nom" => $nom,
+                'contra' => $contra,
+                'mail' => $mail,
+                'foto' => $foto
+            );
         }
     }
 ?>

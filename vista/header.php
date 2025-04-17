@@ -28,7 +28,7 @@
                             <a class="nav-link" href="#">MENSAJES</a>
                         </li>
                         <li class="nav-item" id="usuarioHeader">
-                            <a class="nav-link" href="../login.php">INICIAR SESION</a>
+                            <a class="nav-link" href="./login.php">INICIAR SESION</a>
                         </li>
                     </ul>
                 </div>
@@ -36,4 +36,4 @@
         </nav>
     </header>
     
-    <script src="../../src/header.js"></script>
+    <script src="../src/header.js"></script>

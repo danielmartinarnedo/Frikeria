@@ -1,4 +1,4 @@
-<?php require_once("../header.php"); ?>
+<?php require_once("./header.php"); ?>
 <div class="d-flex justify-content-center align-items-center vh-100">
   <div class="card" style="width: 30rem;">
     <div class="card-body">
@@ -21,4 +21,4 @@
     </div>
   </div>
 </div>
-<?php require_once("../header.php"); ?>
+<?php require_once("./header.php"); ?>
