@@ -8,16 +8,6 @@
     function irIntro(){
         header("Location: ../vista/admin/introUser.php");
     }
-    //Modica los datos de un usuario y te envia a la lista de este
-    function modificar(){
-        $nom = $_POST["nom"];
-        $contra = $_POST["contra"];
-        require_once("../classes/usuario.php");
-        $usus = new usuario("../../../");
-        $id=$usus->getId($_REQUEST["valor"]);
-        $usus->modUser($nom, $contra,$id);
-        header("Location: ./admin.php?action=irLista");
-    }
     //Busca usuarios con nombres que contengan la string introducida
     function buscar(){
         $busqueda = $_POST["nom"];

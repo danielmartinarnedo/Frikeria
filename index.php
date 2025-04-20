@@ -16,7 +16,7 @@
                     set_session('user', $_POST["nom"]);
                 separador();
             }else{
-                require_once('vista/login.php');
+                header('./vista/login.php');
             }
         }
     }

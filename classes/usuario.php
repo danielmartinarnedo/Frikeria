@@ -87,7 +87,7 @@
         
         //Modifica los datos de un usuario
         public function modUser(String $nom, String $contra, String $mail, String $foto){
-            $sentencia = "UPDATE usuario SET contra=?, nombre=?, mail=?, foto=? WHERE nombre=?";
+            $sentencia = "UPDATE usuario SET contra=?, nombre=?, mail=?, foto= CASE WHEN ? IS NOT NULL THEN ? ELSE foto END WHERE nombre=?";
             $consulta = $this->db->prepare($sentencia);
             $consulta->bind_param("sssss", $contra, $nom, $mail, $foto, $nom);
             $consulta->execute();

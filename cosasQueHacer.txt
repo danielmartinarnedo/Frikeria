@@ -1,0 +1,2 @@
+1. El login cuando introduces datos errorneamente da error
+2. El modificar datos de usuario dar error completamente mirar que ocurre es posible que lo tengas que rahacer
