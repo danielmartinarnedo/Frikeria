@@ -1,58 +1,103 @@
-<?php require_once("./header.php"); ?>
-
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQRBU4caqOv1t1Fi3NuI9ZlG8Eb9oV9mY"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQRBU4caqOv1t1Fi3NuI9ZlG8Eb9oV9mY&libraries=places"></script>
 <script>
     function initMap() {
-        // Map options
+        // Opciones del mapa
         var options = {
             zoom: 8,
-            center: { lat: 40.7128, lng: -74.0060 } // Coordinates for New York City
+            center: {
+                lat: 0,
+                lng: 0
+            }
         };
 
-        // Create the map
+        // Crear el mapa
         var map = new google.maps.Map(document.getElementById('map'), options);
 
-        // Add a marker
+        // Agregar un marcador
         var marker = new google.maps.Marker({
-            position: { lat: 40.7128, lng: -74.0060 },
+            position: {
+                lat: 0,
+                lng: 0
+            },
             map: map,
-            title: 'New York City'
+            title: 'No has seleccionado una ubicación',
         });
 
-        // Add a click listener to the map
-        google.maps.event.addListener(map, 'click', function(event) {
-            // Place the marker at the clicked location
-            marker.setPosition(event.latLng); // Corrected line
+        // Solicitar permiso para obtener la ubicación del usuario
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    // Centrar el mapa en la ubicación del usuario
+                    var userLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    map.setCenter(userLocation);
+                    marker.setPosition(userLocation);
 
-            // Get latitude and longitude
+                    console.log('Ubicación del usuario:', userLocation);
+                },
+                function(error) {
+                    console.error('Error al obtener la ubicación:', error.message);
+                }
+            );
+        } else {
+            console.error('La geolocalización no es compatible con este navegador.');
+        }
+
+        // Agregar un listener para los clics en el mapa
+        google.maps.event.addListener(map, 'click', function(event) {
+            // Colocar el marcador en la ubicación clickeada
+            marker.setPosition(event.latLng);
+
+            // Obtener latitud y longitud
             var lat = event.latLng.lat();
             var lng = event.latLng.lng();
 
-            // Use Geocoding API to get the city/town/village name
+            // Usar la API de Geocodificación para obtener el nombre de la ciudad/pueblo/villa
             var geocoder = new google.maps.Geocoder();
-            geocoder.geocode({ location: event.latLng }, function(results, status) {
+            geocoder.geocode({
+                location: event.latLng
+            }, function(results, status) {
                 if (status === 'OK' && results[0]) {
-                    // Extract the city/town/village name
+                    // Extraer el nombre de la ciudad/pueblo/villa
                     var addressComponents = results[0].address_components;
                     var city = addressComponents.find(component =>
                         component.types.includes('locality') ||
                         component.types.includes('administrative_area_level_2')
-                    )?.long_name || 'Unknown';
+                    )?.long_name || 'Desconocido';
 
-                    // Log the details to the console
-                    console.log('Latitude:', lat);
-                    console.log('Longitude:', lng);
-                    console.log('City/Town/Village:', city);
+                    // Actualizar el marcador con la información de la ubicación
+                    document.getElementById('lat').value = lat;
+                    document.getElementById('lng').value = lng;
+                    document.getElementById('city').value = city;
+
+                    // Mostrar los detalles en la consola
+                    console.log('Latitud:', lat);
+                    console.log('Longitud:', lng);
+                    console.log('Ciudad/Pueblo/Villa:', city);
                 } else {
-                    console.error('Geocoder failed due to:', status);
+                    console.error('La geocodificación falló debido a:', status);
                 }
             });
         });
     }
 </script>
-</head>
+
 <body onload="initMap()">
-    <h1>Google Map Example</h1>
+    <h1 class="text-center">¿Donde quieres jugar?</h1>
     <div id="map" style="height: 500px; width: 100%;"></div>
+    <form method="POST" action="./normal.php?action=crearPartida" enctype="multipart/form-data">
+        <?php foreach ($data as $key => $value): ?>
+            <?php if ($key !== 'portada'): ?>
+                <input type="hidden" name="<?php echo htmlspecialchars($key); ?>" value="<?php echo htmlspecialchars($value); ?>">
+            <?php endif; ?>
+        <?php endforeach; ?>
+        <input type="hidden" name="portada_path" value="<?php echo htmlspecialchars($data['portada_path']); ?>">
+        <input type="hidden" name="lat" id="lat">
+        <input type="hidden" name="lng" id="lng">
+        <input type="hidden" name="city" id="city">
+
+        <button class="btn btn-primary col-12" type="submit" name="crearPartida">CREAR PARTIDA</button>
+    </form>
 </body>
-<?php require_once("./footer.php"); ?>

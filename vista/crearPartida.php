@@ -2,7 +2,7 @@
 
 <div class="container mt-5">
     <h1 class="mb-4">Crear Partida</h1>
-    <form id="crearPartidaForm" action="../controladores/normal.php?action=irMapa" method="POST" enctype="multipart/form-data" class="mb-5">
+    <form id="crearPartidaForm" action="../controladores/normal.php?action=descargarFoto" method="POST" enctype="multipart/form-data" class="mb-5">
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="nombre" name="nombre" minlength="5" required>
