@@ -106,15 +106,6 @@ function descargarFoto()
 //Ir al mapa
 function irMapa()
 {
-    session_start();
-    $data = $_SESSION;
-    unset($_SESSION["nombre"]);
-    unset($_SESSION["juego"]);
-    unset($_SESSION["numeroJugadores"]);
-    unset($_SESSION["fechaInicio"]);
-    unset($_SESSION["descripcion"]);
-    unset($_SESSION["portada_path"]);
-
     require_once("../vista/header.php");
     require_once("../vista/crearPartidaMapa.php");
     require_once("../vista/footer.php");
@@ -122,15 +113,22 @@ function irMapa()
 //Crear una partida y te manda a la landing
 function crearPartida()
 {
-    $nombre = $_POST["nombre"];
-    $juego = $_POST["juego"];
-    $numJugadores = $_POST["numeroJugadores"];
-    $fechaInicio = $_POST["fechaInicio"];
-    $descripcion = $_POST["descripcion"];
+    session_start();
+    $nombre = $_SESSION["nombre"];
+    $juego = $_SESSION["juego"];
+    $numJugadores = $_SESSION["numeroJugadores"];
+    $fechaInicio = $_SESSION["fechaInicio"];
+    $descripcion = $_SESSION["descripcion"];
     $latitud = $_POST["lat"];
     $longitud = $_POST["lng"];
     $ciudad = $_POST["city"];
-    $portada_path = $_POST["portada_path"];
+    $portada_path = $_SESSION["portada_path"];
+    unset($_SESSION["nombre"]);
+    unset($_SESSION["juego"]);
+    unset($_SESSION["numeroJugadores"]);
+    unset($_SESSION["fechaInicio"]);
+    unset($_SESSION["descripcion"]);
+    unset($_SESSION["portada_path"]);
     require_once("../classes/partida.php");
     $partida = new partida("../../../");
     $partida->crearPartida($nombre, $juego, $numJugadores, $fechaInicio, $descripcion, $latitud, $longitud, $ciudad, $portada_path);

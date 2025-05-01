@@ -1,5 +1,37 @@
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQRBU4caqOv1t1Fi3NuI9ZlG8Eb9oV9mY&libraries=places"></script>
 <script>
+    function geolocalizar(localizacion) {
+        // Usar la API de Geocodificación para obtener el nombre de la ciudad/pueblo/villa
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({
+            location: localizacion
+        }, function(results, status) {
+            if (status === 'OK' && results[0]) {
+                // Extraer el nombre de la ciudad/pueblo/villa
+                var addressComponents = results[0].address_components;
+                var city = addressComponents.find(component =>
+                    component.types.includes('locality') ||
+                    component.types.includes('administrative_area_level_2')
+                )?.long_name || 'Desconocido';
+
+                var lat = localizacion["lat"];
+                var lng = localizacion["lng"];
+
+                // Actualizar el marcador con la información de la ubicación
+                document.getElementById('lat').value = lat;
+                document.getElementById('lng').value = lng;
+                document.getElementById('city').value = city;
+
+                // Mostrar los detalles en la consola
+                console.log('Latitud:', lat);
+                console.log('Longitud:', lng);
+                console.log('Ciudad/Pueblo/Villa:', city);
+            } else {
+                console.error('La geocodificación falló debido a:', status);
+            }
+        });
+    }
+
     function initMap() {
         // Opciones del mapa
         var options = {
@@ -35,7 +67,7 @@
                     map.setCenter(userLocation);
                     marker.setPosition(userLocation);
 
-                    console.log('Ubicación del usuario:', userLocation);
+                    geolocalizar(userLocation)
                 },
                 function(error) {
                     console.error('Error al obtener la ubicación:', error.message);
@@ -49,37 +81,13 @@
         google.maps.event.addListener(map, 'click', function(event) {
             // Colocar el marcador en la ubicación clickeada
             marker.setPosition(event.latLng);
+            const clickedLocation = {
+                lat: event.latLng.lat(),
+                lng: event.latLng.lng()
+            };
 
-            // Obtener latitud y longitud
-            var lat = event.latLng.lat();
-            var lng = event.latLng.lng();
-
-            // Usar la API de Geocodificación para obtener el nombre de la ciudad/pueblo/villa
-            var geocoder = new google.maps.Geocoder();
-            geocoder.geocode({
-                location: event.latLng
-            }, function(results, status) {
-                if (status === 'OK' && results[0]) {
-                    // Extraer el nombre de la ciudad/pueblo/villa
-                    var addressComponents = results[0].address_components;
-                    var city = addressComponents.find(component =>
-                        component.types.includes('locality') ||
-                        component.types.includes('administrative_area_level_2')
-                    )?.long_name || 'Desconocido';
-
-                    // Actualizar el marcador con la información de la ubicación
-                    document.getElementById('lat').value = lat;
-                    document.getElementById('lng').value = lng;
-                    document.getElementById('city').value = city;
-
-                    // Mostrar los detalles en la consola
-                    console.log('Latitud:', lat);
-                    console.log('Longitud:', lng);
-                    console.log('Ciudad/Pueblo/Villa:', city);
-                } else {
-                    console.error('La geocodificación falló debido a:', status);
-                }
-            });
+            // Pasar al método geolocalizar
+            geolocalizar(clickedLocation);
         });
     }
 </script>
@@ -88,12 +96,6 @@
     <h1 class="text-center">¿Donde quieres jugar?</h1>
     <div id="map" style="height: 500px; width: 100%;"></div>
     <form method="POST" action="./normal.php?action=crearPartida" enctype="multipart/form-data">
-        <?php foreach ($data as $key => $value): ?>
-            <?php if ($key !== 'portada'): ?>
-                <input type="hidden" name="<?php echo htmlspecialchars($key); ?>" value="<?php echo htmlspecialchars($value); ?>">
-            <?php endif; ?>
-        <?php endforeach; ?>
-        <input type="hidden" name="portada_path" value="<?php echo htmlspecialchars($data['portada_path']); ?>">
         <input type="hidden" name="lat" id="lat">
         <input type="hidden" name="lng" id="lng">
         <input type="hidden" name="city" id="city">
