@@ -22,7 +22,7 @@
                             <a class="nav-link" href="./crearPartida.php">CREAR PARTIDA</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">BUSCAR PARTIDA</a>
+                            <a class="nav-link" href="buscarPartida.php">BUSCAR PARTIDA</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">MENSAJES</a>

@@ -123,6 +123,7 @@ function crearPartida()
     $longitud = $_POST["lng"];
     $ciudad = $_POST["city"];
     $portada_path = $_SESSION["portada_path"];
+
     unset($_SESSION["nombre"]);
     unset($_SESSION["juego"]);
     unset($_SESSION["numeroJugadores"]);
@@ -134,6 +135,24 @@ function crearPartida()
     $partida->crearPartida($nombre, $juego, $numJugadores, $fechaInicio, $descripcion, $latitud, $longitud, $ciudad, $portada_path);
 
     header("Location: ../index.php");
+}
+//Ir a Buscar partida
+function irBuscarPartida()
+{
+    require_once("../vista/header.php");
+    require_once("../vista/buscarPartida.php");
+    require_once("../vista/footer.php");
+}
+//Buscar partida
+function buscarPartida()
+{   
+    header('Content-Type: application/json');
+    $lat = $_POST['lat'];
+    $lon = $_POST['lng'];
+    require_once("../classes/partida.php");
+    $partida = new partida("../../../");
+    $datos = $partida->buscarPartidas($lat,$lon);
+    echo json_encode($datos);
 }
 
 //Maneja las acciones enviadas por el usuario
