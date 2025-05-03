@@ -26,7 +26,7 @@ class partida
     {
         require_once("../classes/usuario.php");
         $sentencia = "
-        SELECT titulo, juego, numJugadores, fecha, descripcion, latitud, longitud, ciudad, portada
+        SELECT titulo, juego, numJugadores, fecha, descripcion, latitud, longitud, ciudad, portada, id
         FROM partidas
         ORDER BY (6371 * ACOS(
             COS(RADIANS(?)) * COS(RADIANS(latitud)) *
@@ -35,7 +35,7 @@ class partida
         )) ASC";
         $consulta = $this->db->prepare($sentencia);
         $consulta->bind_param("ddd", $latitud, $longitud, $latitud);
-        $consulta->bind_result($titulo, $juego, $numJugadores, $fecha, $descripcion, $lat, $lng, $ciudad, $portada);
+        $consulta->bind_result($titulo, $juego, $numJugadores, $fecha, $descripcion, $lat, $lng, $ciudad, $portada, $id);
         $consulta->execute();
         $res = [];
         while ($consulta->fetch()) {
@@ -48,7 +48,8 @@ class partida
                 'latitud' => $lat,
                 'longitud' => $lng,
                 'ciudad' => $ciudad,
-                'portada' => $portada
+                'portada' => $portada,
+                'id' => $id
             ];
         }
         $consulta->close();

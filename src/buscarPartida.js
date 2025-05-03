@@ -45,7 +45,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         <p>Fecha: ${partida.fecha}</p>
                         <p>Ciudad: ${partida.ciudad}</p>
                         <p>${partida.descripcion}</p>
-                        <button class="btn btn-primary col-12" href="./verPartida.php?titulo=${encodeURIComponent(partida.titulo)}&juego=${encodeURIComponent(partida.juego)}&jugadores=${partida.numJugadores}&fecha=${partida.fecha}&ciudad=${encodeURIComponent(partida.ciudad)}&descripcion=${encodeURIComponent(partida.descripcion)}&portada=${encodeURIComponent(partida.portada)}">ENVIAR</button>
+                        <a class="btn btn-primary col-12" 
+                        href="./verPartida.php?titulo=${encodeURIComponent(partida.titulo)}&juego=${encodeURIComponent(partida.juego)}&jugadores=${partida.numJugadores}&fecha=${partida.fecha}&ciudad=${encodeURIComponent(partida.ciudad)}&descripcion=${encodeURIComponent(partida.descripcion)}&portada=${encodeURIComponent(partida.portada)}&foro=${encodeURIComponent(partida.id)}">
+                        ENVIAR
+                        </a>                    
                     </div>
                 </div>
             </div>
