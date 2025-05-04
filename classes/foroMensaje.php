@@ -9,7 +9,7 @@ class foroMensaje
         $this->db = new mysqli("localhost", "root", "", "frikeria");
     }
     //Crear una partida
-    public function crearPartida($texto, $id_anuncio)
+    public function crearMensajeForo($texto, $id_anuncio)
     {
         require_once("../classes/usuario.php");
         session_start();
@@ -20,5 +20,18 @@ class foroMensaje
         $consulta->bind_param("iis", $id_user, $id_anuncio, $texto);
         $consulta->execute();
         $consulta->close();
+    }
+    public function buscarMensajes($id_anuncio)
+    {
+        $sentencia = "SELECT * FROM foromensaje WHERE idAnuncio = ?";
+        $consulta = $this->db->prepare($sentencia);
+        $consulta->bind_param("i", $id_anuncio);
+        $consulta->execute();
+        $resultado = $consulta->get_result();
+        $mensajes = array();
+        while ($datos = $resultado->fetch_assoc()) {
+            array_push($mensajes, $datos);
+        }
+        return $mensajes;
     }
 }

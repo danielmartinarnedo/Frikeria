@@ -156,7 +156,23 @@ function buscarPartida()
 }
 
 //FORO
-
+function buscarMensajes(){
+    header('Content-Type: application/json');
+    $idPartida = $_POST['id'];
+    require_once("../classes/foro.php");
+    $foro = new foroMensaje("../../../");
+    $datos = $foro->buscarMensajes($idPartida);
+    echo json_encode($datos);
+}
+function crearMensajes(){
+    header('Content-Type: application/json');
+    $idPartida = $_POST['id'];
+    $texto = $_POST['texto'];
+    require_once("../classes/foro.php");
+    $foro = new foroMensaje("../../../");
+    $datos = $foro->crearMensajeForo($texto,$idPartida);
+    echo json_encode($datos);
+}
 
 //Maneja las acciones enviadas por el usuario
 if (isset($_REQUEST["action"])) {

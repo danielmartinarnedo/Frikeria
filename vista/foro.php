@@ -38,4 +38,5 @@
         </div>
     </section>
 </main>
+<script src="../src/foro.js"></script>
 <?php require_once("./footer.php"); ?>
