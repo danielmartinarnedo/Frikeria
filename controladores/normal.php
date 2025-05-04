@@ -156,13 +156,7 @@ function buscarPartida()
 }
 
 //FORO
-function irForo()
-{
-    $_GET["foro"];
-    require_once("../vista/header.php");
-    require_once("../vista/foro.php");
-    require_once("../vista/footer.php");
-}
+
 
 //Maneja las acciones enviadas por el usuario
 if (isset($_REQUEST["action"])) {

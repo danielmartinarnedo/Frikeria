@@ -11,7 +11,7 @@
                     <p class="card-text"><?php echo $_GET["jugadores"]; ?></p>
                     <p class="card-text"><?php echo $_GET["fecha"]; ?></p>
                     <p class="card-text"><?php echo $_GET["descripcion"]; ?></p>
-                    <a class="btn btn-primary col-12" href="../normal.php?action=irForo?foro=<?php echo $_GET["foro"]; ?>">IR AL FORO</a>
+                    <a class="btn btn-primary col-12" href="./foro.php?foro=<?php echo $_GET["foro"]; ?>&titulo=<?php echo $_GET["titulo"]; ?>">IR AL FORO</a>
                 </div>
             </div>
         </div>
