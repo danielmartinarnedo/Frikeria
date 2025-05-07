@@ -130,5 +130,19 @@
                 'foto' => $foto
             );
         }
+        //Conseguir el nombre de un usuario a partir de su ID
+        public function getDatosForoUsuario(int $id){
+            $sentencia = "SELECT nombre, foto FROM usuario WHERE id=?";
+            $consulta = $this->db->prepare($sentencia);
+            $consulta->bind_param("i", $id);
+            $consulta->bind_result($nom, $foto);
+            $consulta->execute();
+            $consulta->fetch();
+            $consulta->close();
+            return array(
+                "nom" => $nom,
+                'foto' => $foto
+            );
+        }
     }
 ?>

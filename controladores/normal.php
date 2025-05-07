@@ -159,7 +159,7 @@ function buscarPartida()
 function buscarMensajes(){
     header('Content-Type: application/json');
     $idPartida = $_POST['id'];
-    require_once("../classes/foro.php");
+    require_once("../classes/foroMensaje.php");
     $foro = new foroMensaje("../../../");
     $datos = $foro->buscarMensajes($idPartida);
     echo json_encode($datos);
@@ -168,7 +168,7 @@ function crearMensajes(){
     header('Content-Type: application/json');
     $idPartida = $_POST['id'];
     $texto = $_POST['texto'];
-    require_once("../classes/foro.php");
+    require_once("../classes/foroMensaje.php");
     $foro = new foroMensaje("../../../");
     $datos = $foro->crearMensajeForo($texto,$idPartida);
     echo json_encode($datos);

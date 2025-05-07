@@ -23,14 +23,23 @@ class foroMensaje
     }
     public function buscarMensajes($id_anuncio)
     {
-        $sentencia = "SELECT * FROM foromensaje WHERE idAnuncio = ?";
+        $sentencia = "SELECT idUser, texto FROM foromensaje WHERE idAnuncio = ? AND estado = 1 ORDER BY fecha DESC";
         $consulta = $this->db->prepare($sentencia);
         $consulta->bind_param("i", $id_anuncio);
         $consulta->execute();
         $resultado = $consulta->get_result();
+        $consulta->close();
         $mensajes = array();
         while ($datos = $resultado->fetch_assoc()) {
-            array_push($mensajes, $datos);
+            require_once("../classes/usuario.php");
+            $user = new usuario("../../../");
+            $usuario = $user->getDatosForoUsuario($datos["idUser"]);
+            $texto = htmlspecialchars($datos["texto"]);
+            array_push($mensajes, array(
+                "usuarioNom" => $usuario["nom"],
+                "usuarioImg" => $usuario["foto"],
+                "texto" => $texto
+            ));
         }
         return $mensajes;
     }

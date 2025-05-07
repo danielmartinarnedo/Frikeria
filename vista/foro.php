@@ -2,7 +2,7 @@
 <main class="container-fluid">
     <h2 class="text-center"><?php echo $_GET["titulo"]; ?></h2>
     <section id="foro-container" class="row d-flex justify-content-center align-items-center">
-        <div class="col-12 col-md-8">
+        <div class="col-12 col-md-8" id="mensajes-container">
             <div class="container">
                 <div class="row d-flex justify-content-center align-items-center">
                     <div class="col-1 d-flex justify-content-end align-items-center">
