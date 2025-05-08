@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const idPartida = new URLSearchParams(window.location.search).get("foro");
     console.log(idPartida);
     const mensajeContendor = document.getElementById("mensajes-container");
+    const enviarBoton = document.getElementById("enviar");
+    const escribirMensaje = document.getElementById("escribirMensaje");
 
     // Funciones
     function cargarMensajes() {
@@ -16,12 +18,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 id: idPartida
             })
         })
-            .then(response => response.text()) // Keep as .text() for debugging
-            .then(data => {
-                console.log('Raw Response:', data); // Log the raw response
-                return JSON.parse(data); // Parse the JSON
-            })
+            .then(response => response.json())
             .then(mensajes => {
+                mensajeContendor.innerHTML = "";
                 mensajes.forEach(mensaje => {
                     mensajeContendor.innerHTML += `<div class="container">
                     <div class="row d-flex justify-content-center align-items-center">
@@ -49,27 +48,32 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch(error => console.error('Error:', error));
     }
-    function enviarMensaje() {
-        const mensaje = document.getElementById("mensaje").value;
+    function enviarMensaje(texto) {
         fetch('../controladores/normal.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: new URLSearchParams({
-                action: 'enviarMensaje',
-                id: idPartida,
-                mensaje: mensaje
+                action: 'crearMensajeForo',
+                texto: texto,
+                id: idPartida
             })
         })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                cargarMensajes();
-            })
+            .then(cargarMensajes())
             .catch(error => console.error('Error:', error));
     }
-    
+
     // Codigo General
     cargarMensajes();
+
+    // Enviar mensaje al hacer clic en el botón
+    enviarBoton.addEventListener("click", function (e) {
+        e.preventDefault();
+        enviarMensaje(escribirMensaje.value);
+        escribirMensaje.value = "";
+    });
+
+    // Actualizar mensajes cada 5 segundos
+    setInterval(cargarMensajes, 5000);
 });

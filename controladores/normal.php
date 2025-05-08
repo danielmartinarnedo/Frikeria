@@ -164,7 +164,7 @@ function buscarMensajes(){
     $datos = $foro->buscarMensajes($idPartida);
     echo json_encode($datos);
 }
-function crearMensajes(){
+function crearMensajeForo(){
     header('Content-Type: application/json');
     $idPartida = $_POST['id'];
     $texto = $_POST['texto'];

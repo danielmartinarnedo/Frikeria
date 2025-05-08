@@ -23,7 +23,7 @@ class foroMensaje
     }
     public function buscarMensajes($id_anuncio)
     {
-        $sentencia = "SELECT idUser, texto FROM foromensaje WHERE idAnuncio = ? AND estado = 1 ORDER BY fecha DESC";
+        $sentencia = "SELECT idUser, texto FROM foromensaje WHERE idAnuncio = ? AND estado = 1 ORDER BY fecha ASC";
         $consulta = $this->db->prepare($sentencia);
         $consulta->bind_param("i", $id_anuncio);
         $consulta->execute();
