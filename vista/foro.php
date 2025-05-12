@@ -1,13 +1,17 @@
 <?php require_once("./header.php"); ?>
 <main class="container-fluid">
     <h2 class="text-center"><?php echo $_GET["titulo"]; ?></h2>
-    <section id="foro-container" class="row d-flex justify-content-center align-items-center">
-        <div class="col-12 col-md-8" id="mensajes-container">
-            <div class="container">
-                
+    <main class="container-fluid">
+        <section id="foro-container" class="row d-flex justify-content-center align-items-center">
+            <div class="col-11 col-md-8">
+                <div class="container">
+                    <div id="mensajes-container" class="row d-flex justify-content-center align-items-center">
+                        
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
     <section id="input-foro" class="row d-flex justify-content-center align-items-center">
         <div class="col-12 col-md-8">
             <div class="mb-3">

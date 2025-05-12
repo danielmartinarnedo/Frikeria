@@ -30,15 +30,22 @@ class foroMensaje
         $resultado = $consulta->get_result();
         $consulta->close();
         $mensajes = array();
+        session_start();
+        $nombre_usuario = $_SESSION["user"];
         while ($datos = $resultado->fetch_assoc()) {
             require_once("../classes/usuario.php");
             $user = new usuario("../../../");
             $usuario = $user->getDatosForoUsuario($datos["idUser"]);
             $texto = htmlspecialchars($datos["texto"]);
+            $soyYo = false;
+            if ($nombre_usuario == $usuario["nom"]) {
+                $soyYo = true;
+            }
             array_push($mensajes, array(
                 "usuarioNom" => $usuario["nom"],
                 "usuarioImg" => $usuario["foto"],
-                "texto" => $texto
+                "texto" => $texto,
+                "estado" => $soyYo
             ));
         }
         return $mensajes;

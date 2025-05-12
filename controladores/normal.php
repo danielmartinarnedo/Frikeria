@@ -173,6 +173,9 @@ function crearMensajeForo(){
     $datos = $foro->crearMensajeForo($texto,$idPartida);
     echo json_encode($datos);
 }
+function solicitudAmistad(){
+    
+}
 
 //Maneja las acciones enviadas por el usuario
 if (isset($_REQUEST["action"])) {
