@@ -156,6 +156,7 @@ function buscarPartida()
 }
 
 //FORO
+//Buscar los Mensajes de un foro
 function buscarMensajes(){
     header('Content-Type: application/json');
     $idPartida = $_POST['id'];
@@ -164,6 +165,7 @@ function buscarMensajes(){
     $datos = $foro->buscarMensajes($idPartida);
     echo json_encode($datos);
 }
+//Crear un mensaje en un foro
 function crearMensajeForo(){
     header('Content-Type: application/json');
     $idPartida = $_POST['id'];
@@ -173,8 +175,20 @@ function crearMensajeForo(){
     $datos = $foro->crearMensajeForo($texto,$idPartida);
     echo json_encode($datos);
 }
-function solicitudAmistad(){
-    
+// BLOQUEO
+//Bloquear Usuario
+function bloquearUsuario(){
+    $nombreBloqueado = $_POST['nombreBloqueado'];
+    require_once("../classes/bloqueado.php");
+    $bloc = new bloqueado("../../../");
+    $bloc->crearBloqueo($nombreBloqueado);
+}
+//Desbloquear Usuario
+function desbloquearUsuario(){
+    $nombreBloqueado = $_POST['nombreBloqueado'];
+    require_once("../classes/bloqueado.php");
+    $bloc = new bloqueado("../../../");
+    $bloc->desbloquear($nombreBloqueado);
 }
 
 //Maneja las acciones enviadas por el usuario

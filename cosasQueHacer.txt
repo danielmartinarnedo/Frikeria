@@ -1,0 +1,3 @@
+Crear el chat
+
+Anotaciones: Si idReceptor es igual a la id del usuario de la session entonces cambiar en la base de datos leido=1

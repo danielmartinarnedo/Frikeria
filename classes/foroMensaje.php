@@ -32,20 +32,29 @@ class foroMensaje
         $mensajes = array();
         session_start();
         $nombre_usuario = $_SESSION["user"];
+        require_once("../classes/usuario.php");
+        require_once("../classes/bloqueado.php");
+        $user = new usuario("../../../");
+        $bloc = new bloqueado("../../../");
         while ($datos = $resultado->fetch_assoc()) {
-            require_once("../classes/usuario.php");
-            $user = new usuario("../../../");
             $usuario = $user->getDatosForoUsuario($datos["idUser"]);
             $texto = htmlspecialchars($datos["texto"]);
             $soyYo = false;
+            $bloqueado = false;
+            $estoyBloqueado = false;
             if ($nombre_usuario == $usuario["nom"]) {
                 $soyYo = true;
+            } else {
+                $bloqueado = $bloc->buscarBloqueado($usuario["nom"]);
+                $estoyBloqueado = $bloc->estoyBloqueado($usuario["nom"]);
             }
             array_push($mensajes, array(
                 "usuarioNom" => $usuario["nom"],
                 "usuarioImg" => $usuario["foto"],
                 "texto" => $texto,
-                "estado" => $soyYo
+                "estado" => $soyYo,
+                "bloqueo" => $bloqueado,
+                "estoyBloqueado" => $estoyBloqueado
             ));
         }
         return $mensajes;
