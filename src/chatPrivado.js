@@ -1,39 +1,22 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Variables
-    const idPartida = new URLSearchParams(window.location.search).get("foro");
-    console.log(idPartida);
-    const mensajeContendor = document.getElementById("mensajes-container");
-    const enviarBoton = document.getElementById("enviar");
-    const escribirMensaje = document.getElementById("escribirMensaje");
+document.addEventListener('DOMContentLoaded', function () {
+    // VARIABLES
+    const idPrivado = document.getElementById("idChatPrivado").value;
+    const areareaMensajes = document.getElementById('areaMensajes');
+    const areaInput = document.getElementById('areaInput');
+    const inputMensaje = document.getElementById('escribirMensaje');
+    const btnEnviar = document.getElementById('btnEnviarMensaje');
 
-    // Funciones
-    // Funcion para bloquear un usuario
-    function bloquear(nombreBloqueado) {
-        console.log("Bloqueando a " + nombreBloqueado);
+    // FUNCIONES
+    function enviarMensaje(texto) {
         fetch('../controladores/normal.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: new URLSearchParams({
-                action: 'bloquearUsuario',
-                nombreBloqueado: nombreBloqueado
-            })
-        })
-            .then(cargarMensajes())
-            .catch(error => console.error('Error:', error));
-    }
-    // Funcion para desbloquear un usuario
-    function desbloquear(nombreBloqueado) {
-        console.log("Desbloqueando a " + nombreBloqueado);
-        fetch('../controladores/normal.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: new URLSearchParams({
-                action: 'desbloquearUsuario',
-                nombreBloqueado: nombreBloqueado
+                action: 'crearMensajePrivado',
+                texto: texto,
+                id: idPrivado
             })
         })
             .then(cargarMensajes())
@@ -46,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: new URLSearchParams({
-                action: 'buscarMensajes',
+                action: 'buscarMensajesPrivado',
                 id: idPartida
             })
         })
@@ -112,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>`;
                             }
                         } else {
-                            mensajeContendor.innerHTML += `<div class="container">
+                            mensajeContendor.innerHTML += `<div class="container d-flex justify-content-end">
                     <div class="row d-flex justify-content-center align-items-center">
                         <div class="col-1 d-flex justify-content-end align-items-center">
                             <img class="logoUser" src="${mensaje.usuarioImg}" alt="logo">
@@ -149,32 +132,28 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch(error => console.error('Error:', error));
     }
-    function enviarMensaje(texto) {
-        fetch('../controladores/normal.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: new URLSearchParams({
-                action: 'crearMensajeForo',
-                texto: texto,
-                id: idPartida
-            })
-        })
-            .then(cargarMensajes())
-            .catch(error => console.error('Error:', error));
+
+    // Da el minimo de altura del chat en correlación a la altura de la ventana
+    function prepararChat() {
+        const cabecera = document.querySelector('header');
+        const pie = document.querySelector('footer');
+        const cabeceraAltura = cabecera ? cabecera.offsetHeight : 0;
+        const pieAltura = pie ? pie.offsetHeight : 0;
+        const restoAltura = window.innerHeight - (cabeceraAltura + pieAltura);
+        areareaMensajes.style.height = (restoAltura * 0.80) + 'px';
+        inputMensaje.style.height = (restoAltura * 0.20) + 'px';
+        btnEnviar.style.height = (restoAltura * 0.20) + 'px';
     }
+    // CODIGO GENERICO
+    document.getElementById("idChatPrivado").remove();
+    prepararChat();
 
-    // Codigo General
-    cargarMensajes();
-
-    // Enviar mensaje al hacer clic en el botón
-    enviarBoton.addEventListener("click", function (e) {
-        e.preventDefault();
-        enviarMensaje(escribirMensaje.value);
-        escribirMensaje.value = "";
+    window.addEventListener('resize', function () {
+        prepararChat();
     });
 
-    // Actualizar mensajes cada 5 segundos
-    setInterval(cargarMensajes, 5000);
+    btnEnviar.addEventListener('click', function () {
+        enviarMensaje(inputMensaje.value);
+        inputMensaje.value = '';
+    });
 });

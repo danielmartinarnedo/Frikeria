@@ -1,3 +1,9 @@
-Crear el chat
-
-Anotaciones: Si idReceptor es igual a la id del usuario de la session entonces cambiar en la base de datos leido=1
+1.Terminar el chat privado y las listas
+2.Hacer la modificacion de datos del propio usuario
+3.Poner que en la lista de juegos no coja si la fecha es superior al dia que se supone que empieza
+4.Cambiar los textarea de los chat y al crear partida por Summernote boostrap
+5.Hacer que una lista de partidas que el usuario haya creado
+6.Cambiar el Header para que la creacion, lista de partidas y mis partidas este en un dropdown similar al apartado de usuario
+7.Crear la modificacion del anuncio de partidas si eres el creador.
+8.Mejorar la pagina de inicio y embellezar la pagina web
+9.Hacer la documentación (JUEVES) y emprimirlo (VIERNES)

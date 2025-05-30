@@ -175,7 +175,7 @@ function crearMensajeForo(){
     $datos = $foro->crearMensajeForo($texto,$idPartida);
     echo json_encode($datos);
 }
-// BLOQUEO
+// BLOQUEO Y REPORTES
 //Bloquear Usuario
 function bloquearUsuario(){
     $nombreBloqueado = $_POST['nombreBloqueado'];
@@ -191,6 +191,33 @@ function desbloquearUsuario(){
     $bloc->desbloquear($nombreBloqueado);
 }
 
+//CHAT PRIVADOS
+//Ir a un chat privado
+function irChatPrivado(){
+    $nomUsuario = $_REQUEST['usuarioNom'];
+    require_once("../classes/chatPrivado.php");
+    $chat = new chatPrivado("../../../"); 
+    $idChat = $chat->checkExistenciaChat($nomUsuario);
+    require_once("../vista/header.php");
+    require_once("../vista/chatPrivado.php");
+    require_once("../vista/footer.php");
+}
+// Crear un mensaje en un chat privado
+function crearMensajePrivado(){
+    $texto = $_POST['texto'];
+    $idPrivado = $_POST['idPrivado'];
+    require_once("../classes/mensajesPrivados.php");
+    $mensajes = new mensajesPrivados("../../../");
+    $mensajes->crearMensajePrivado($texto, $idPrivado);
+}
+function buscarMensajesPrivados(){
+    header('Content-Type: application/json');
+    $idPrivado = $_POST['idPrivado'];
+    require_once("../classes/mensajesPrivados.php");
+    $mensajes = new mensajesPrivados("../../../");
+    $datos = $mensajes->buscarMensajesPrivados($idPrivado);
+    echo json_encode($datos);
+}
 //Maneja las acciones enviadas por el usuario
 if (isset($_REQUEST["action"])) {
     $action = $_REQUEST["action"];
