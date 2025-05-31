@@ -14,11 +14,10 @@ document.addEventListener('DOMContentLoaded', function () {
             })
         })
             .then(response => response.json()).then(datos => {
-                console.log(datos);
                 padreLista.innerHTML = '';
                 datos.forEach(chat => {
                     padreLista.innerHTML += `
-                        <div class="container border-bottom mb-3" data-id="${chat.idChat}">
+                        <div class="container border-bottom mb-3" data-id="${chat.nombre}">
                             <div class="row align-items-center">
                                 <div class="col-1"><img class="logoUser" src="${chat.foto}" alt="Logo de ${chat.nombre}"></div>
                                 <div class="col-11 fw-bold">${chat.nombre}</div>
@@ -26,6 +25,10 @@ document.addEventListener('DOMContentLoaded', function () {
                             </div>
                         </div>
                     `;
+                    const chatPrivado = document.querySelector(`[data-id="${chat.nombre}"]`);
+                    chatPrivado.addEventListener('click', function () {
+                        window.location.href = `../controladores/normal.php?action=irChatPrivado&usuarioNom=${chat.nombre}`;
+                    });
                 })
             });
     }

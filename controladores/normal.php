@@ -32,6 +32,17 @@ function insertarUsuario()
         header("Location: ../vista/introUser.php?action=Dos");
     }
 }
+//Ir a la modificación de un usuario
+function irModUser(){
+    session_start();
+    $usuario = $_SESSION['user'];
+    require_once("../classes/usuario.php");
+    $usus = new usuario("../../../");
+    $datos=$usus->getDatos($usuario);
+    require_once("../vista/header.php");
+    require_once("../vista/modUser.php");
+    require_once("../vista/footer.php");
+}
 
 //Modifica el usuario y te manda a la landing
 function modUsuario()
@@ -40,36 +51,35 @@ function modUsuario()
     $contra = $_POST["contra"];
     $mail = $_POST["mail"];
     $foto = null;
-    // Check if the file was uploaded
-    if (isset($_FILES['foto'])) {
-        // Get the file information
-        $fotodata = $_FILES['picture'];
-        $foto = $_FILES["foto"]["tmp_name"];
 
-        // Get the file name and extension
-        $fileName = $fotodata['name'];
+    if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+        $fotodata = $_FILES['foto'];
+        $fileName = basename($fotodata['name']);
         $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
 
-        // Check if the file is an image
-        if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif'])) {
-            // Get the file path
+        // Only allow image extensions
+        if (in_array(strtolower($fileExtension), ['jpg', 'jpeg', 'png', 'gif'])) {
             $filePath = "../images/" . $fileName;
 
-            // Move the file to the images directory
             if (move_uploaded_file($fotodata['tmp_name'], $filePath)) {
-                echo "File uploaded successfully!";
+                $foto = $filePath;
             } else {
-                echo "Error uploading file!";
+                echo json_encode(["estado" => false, "msj" => "Error al subir la imagen."]);
+                exit;
             }
         } else {
-            echo "Only image files are allowed!";
+            echo json_encode(["estado" => false, "msj" => "Solo se permiten archivos de imagen (jpg, jpeg, png, gif)."]);
+            exit;
         }
     }
+
     require_once("../classes/usuario.php");
     $usus = new usuario("../../../");
     $usus->modUser($nom, $contra, $mail, $foto);
-    header("Location: ../index.php");
+
+    echo json_encode(["estado" => true]);
 }
+
 
 //Consigue el usuario logueado y su rol
 function conseguirUsuario()

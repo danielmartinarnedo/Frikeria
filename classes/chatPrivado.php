@@ -57,7 +57,6 @@ class chatPrivado
         $datos = [];
         while ($consulta->fetch()) {
             array_push($datos, [
-                "idChat" => $idChat,
                 "nombre" => $nombre,
                 "idUsuario" => $idUsuario,
                 "foto" => $foto
@@ -67,7 +66,7 @@ class chatPrivado
         require_once("../classes/mensajesPrivados.php");
         $mensajes = new mensajesPrivados("../../../");
         foreach ($datos as &$dato) {
-            $ultimoMensaje = $mensajes->buscarUltimoMensaje($dato["idChat"]);
+            $ultimoMensaje = $mensajes->buscarUltimoMensaje($idChat);
             $dato["ultimoMensaje"] = $ultimoMensaje["texto"] ?? "";
             $dato["nombreUsuario"] = $ultimoMensaje["nombreUsu"];
         }

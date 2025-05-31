@@ -1,7 +1,7 @@
 Terminar el chat privado y las listas (Hecho)
-Cambiar el Header para que la creacion, lista de partidas y mis partidas este en un dropdown similar al apartado de usuario
-Cambiar el Header si el usuario no esta iniciado (solo tiene inciar sesion y el logo), si es un usuario normal (dejarlo), si el usuario es administrador (Solo tiene el logo [que te lleva al sistema de reportes] y salir)
-Hacer la modificacion de datos del propio usuario
+Cambiar el Header para que la creacion, lista de partidas y mis partidas este en un dropdown similar al apartado de usuario (Hecho)
+Cambiar el Header si el usuario no esta iniciado (solo tiene inciar sesion y el logo), si es un usuario normal (dejarlo), si el usuario es administrador (Solo tiene el logo [que te lleva al sistema de reportes] y salir) (Hecho)
+Hacer la modificacion de datos del propio usuario (Hecho)
 Hacer que una lista de partidas que el usuario haya creado
 Arreglar los formularios de registro, inicio de sesion y creacion de partida. Cambiando el Form por un div y haciendo que se vaya por JS cogiendo todos los campos e inviarlos a PHP.
 Poner que en la lista de juegos no coja si la fecha es superior al dia que se supone que empieza
