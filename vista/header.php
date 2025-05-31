@@ -13,28 +13,21 @@
     <header class="bg-light py-5">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Logo</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" href="../vista/landing.php">Logo</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="./crearPartida.php">CREAR PARTIDA</a>
+                    <ul class="navbar-nav ms-auto" id="menuHeader">
+                        <li class="nav-item ms-3 me-3">
+                            <a class="nav-link" href="./login.php">INICIAR SESIÓN</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="buscarPartida.php">BUSCAR PARTIDA</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./listaChatPrivado.php">MENSAJES</a>
-                        </li>
-                        <li class="nav-item" id="usuarioHeader">
-                            <a class="nav-link" href="./login.php">INICIAR SESION</a>
-                        </li>
+                        <li class="nav-item ms-3 me-3">
+                            <a class="nav-link" href="./introUser.php">REGISTRARSE</a>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    
-    <script src="../src/header.js"></script>

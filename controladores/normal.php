@@ -7,6 +7,7 @@ function irLanding()
 {
     header("Location: ../vista/landing.php");
 }
+//USUARIO
 //Introduce un usuario y te envia a la landing
 function insertarUsuario()
 {
@@ -70,7 +71,46 @@ function modUsuario()
     header("Location: ../index.php");
 }
 
+//Consigue el usuario logueado y su rol
+function conseguirUsuario()
+{
+    session_start();
+    $usuario = $_SESSION['user'] ?? null;
+    require_once("../classes/usuario.php");
+    $usus = new usuario("../../../");
+    $role = $usus->getRole($usuario);
+
+    if ($usuario) {
+        header('Content-Type: application/json');
+        $datos=array(
+            'nombre' => $usuario,
+            'role' => $role
+        );
+        echo json_encode($datos);
+    } else {
+        header('Content-Type: application/json');
+        echo json_encode(null);
+    }
+}
+//Cierra la sesión del usuario
+
+function cerrarSes()
+{
+    require_once("../modelo.php");
+    unset_session("user");
+    header("Location: ../vista/landing.php");
+}
 //PARTIDAS
+//Ir a la creación de una partida
+function irCrearPartida()
+{
+    header("Location: ../vista/crearPartida.php");
+}
+//Ir a la busqueda de una partida
+function irBuscarPartida()
+{
+    header("Location: ../vista/buscarPartida.php");
+}
 //Descargar foto
 function descargarFoto()
 {
@@ -139,13 +179,6 @@ function crearPartida()
 
     header("Location: ../index.php");
 }
-//Ir a Buscar partida
-function irBuscarPartida()
-{
-    require_once("../vista/header.php");
-    require_once("../vista/buscarPartida.php");
-    require_once("../vista/footer.php");
-}
 //Buscar partida
 function buscarPartida()
 {   
@@ -196,6 +229,9 @@ function desbloquearUsuario(){
 
 //CHAT PRIVADOS
 //Ir a un chat privado
+function irListaChatPrivado(){
+    header("Location: ../vista/listaChatPrivado.php");
+}
 function irChatPrivado(){
     $nomUsuario = $_REQUEST['usuarioNom'];
     require_once("../classes/chatPrivado.php");

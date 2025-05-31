@@ -155,5 +155,17 @@
             $consulta->close();
             return $nom;
         }
+
+        //Conseguir el role de un usuario a partir de su nombre
+        public function getRole(String $nom){
+            $sentencia = "SELECT role FROM usuario WHERE nombre=?";
+            $consulta = $this->db->prepare($sentencia);
+            $consulta->bind_param("s", $nom);
+            $consulta->bind_result($role);
+            $consulta->execute();
+            $consulta->fetch();
+            $consulta->close();
+            return $role;
+        }
     }
 ?>
