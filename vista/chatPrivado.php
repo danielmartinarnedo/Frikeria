@@ -1,23 +1,24 @@
 <input type="hidden" id="idChatPrivado" value="<?php echo $idChat; ?>">
-<main class="container">
-    <div class="row" id="areaMensajes">
-        <div class="col-12">
-            <!-- 75% height content -->
-        </div>
-    </div>
-    <div class="row" id="areaInput">
-        <div class="col-12">
-            <div class="container">
-                <div class="row">
-                    <div class="col-11">
-                        <textarea name="escribirMensaje" id="escribirMensaje" class="w-100 no-resize"></textarea>
-                    </div>
-                    <div class="col-1">
-                        <button class="btn btn-primary" id="btnEnviarMensaje" class="w-100">></button>
+<main class="container-fluid">
+    <main class="container-fluid">
+        <section id="foro-container" class="row d-flex justify-content-center align-items-center">
+            <div class="col-11 col-md-8">
+                <div class="container">
+                    <div id="mensajes-container" class="row d-flex justify-content-center align-items-center">
+                        
                     </div>
                 </div>
             </div>
+        </section>
+    </main>
+    <section class="row d-flex justify-content-center align-items-center">
+        <div class="col-12 col-md-8">
+            <div class="mb-3">
+                <label for="escribirMensaje" class="form-label">Escribe tu mensaje</label>
+                <textarea class="form-control" id="escribirMensaje" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" id="enviar">Enviar</button>
         </div>
-    </div>
+    </section>
 </main>
 <script src="../src/chatPrivado.js"></script>

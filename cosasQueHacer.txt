@@ -1,9 +1,12 @@
-1.Terminar el chat privado y las listas
-2.Hacer la modificacion de datos del propio usuario
-3.Poner que en la lista de juegos no coja si la fecha es superior al dia que se supone que empieza
-4.Cambiar los textarea de los chat y al crear partida por Summernote boostrap
-5.Hacer que una lista de partidas que el usuario haya creado
-6.Cambiar el Header para que la creacion, lista de partidas y mis partidas este en un dropdown similar al apartado de usuario
-7.Crear la modificacion del anuncio de partidas si eres el creador.
-8.Mejorar la pagina de inicio y embellezar la pagina web
-9.Hacer la documentación (JUEVES) y emprimirlo (VIERNES)
+Terminar el chat privado y las listas
+Cambiar el Header para que la creacion, lista de partidas y mis partidas este en un dropdown similar al apartado de usuario
+Cambiar el Header si el usuario no esta iniciado (solo tiene inciar sesion y el logo), si es un usuario normal (dejarlo), si el usuario es administrador (Solo tiene el logo [que te lleva al sistema de reportes] y salir)
+Administracion
+Hacer la modificacion de datos del propio usuario
+Hacer que una lista de partidas que el usuario haya creado
+Arreglar los formularios de registro, inicio de sesion y creacion de partida. Cambiando el Form por un div y haciendo que se vaya por JS cogiendo todos los campos e inviarlos a PHP.
+Poner que en la lista de juegos no coja si la fecha es superior al dia que se supone que empieza
+Cambiar los textarea de los chat y al crear partida por Summernote boostrap
+Crear la modificacion del anuncio de partidas si eres el creador.
+Mejorar la pagina de inicio y embellezar la pagina web.
+Hacer la documentación

@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 0); // oculta errores en la salida
+ini_set('log_errors', 1); // activa log
+ini_set('error_log', __DIR__ . '/errores.log'); // archivo donde se guardan errores
 //Va hacia Index
 function irLanding()
 {
@@ -205,14 +208,14 @@ function irChatPrivado(){
 // Crear un mensaje en un chat privado
 function crearMensajePrivado(){
     $texto = $_POST['texto'];
-    $idPrivado = $_POST['idPrivado'];
+    $idPrivado = $_POST['id'];
     require_once("../classes/mensajesPrivados.php");
     $mensajes = new mensajesPrivados("../../../");
     $mensajes->crearMensajePrivado($texto, $idPrivado);
 }
 function buscarMensajesPrivados(){
     header('Content-Type: application/json');
-    $idPrivado = $_POST['idPrivado'];
+    $idPrivado = $_POST['id'];
     require_once("../classes/mensajesPrivados.php");
     $mensajes = new mensajesPrivados("../../../");
     $datos = $mensajes->buscarMensajesPrivados($idPrivado);

@@ -1,10 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
     // VARIABLES
     const idPrivado = document.getElementById("idChatPrivado").value;
-    const areareaMensajes = document.getElementById('areaMensajes');
-    const areaInput = document.getElementById('areaInput');
+    const areaMensajes = document.getElementById('mensajes-container');
     const inputMensaje = document.getElementById('escribirMensaje');
-    const btnEnviar = document.getElementById('btnEnviarMensaje');
+    const btnEnviar = document.getElementById('enviar');
 
     // FUNCIONES
     function enviarMensaje(texto) {
@@ -29,16 +28,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: new URLSearchParams({
-                action: 'buscarMensajesPrivado',
-                id: idPartida
+                action: 'buscarMensajesPrivados',
+                id: idPrivado
             })
         })
             .then(response => response.json())
             .then(mensajes => {
-                mensajeContendor.innerHTML = "";
+                areaMensajes.innerHTML = "";
                 mensajes.forEach(mensaje => {
                     if (mensaje.bloqueo) {
-                        mensajeContendor.innerHTML += `<div class="container">
+                        areaMensajes.innerHTML += `<div class="container">
                     <div class="row d-flex justify-content-center align-items-center">
                         <div class="col-1 d-flex justify-content-end align-items-center">
                             <img class="logoUser" src="${mensaje.usuarioImg}" alt="logo">
@@ -61,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     } else {
                         if (!mensaje.estado) {
                             if (mensaje.estoyBloqueado) {
-                                mensajeContendor.innerHTML += `<div class="container">
+                                areaMensajes.innerHTML += `<div class="container">
                     <div class="row d-flex justify-content-center align-items-center">
                         <div class="col-1 d-flex justify-content-end align-items-center">
                             <img class="logoUser" src="${mensaje.usuarioImg}" alt="logo">
@@ -75,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         </div>
                     </div>`;
                             } else {
-                                mensajeContendor.innerHTML += `<div class="container">
+                                areaMensajes.innerHTML += `<div class="container">
                     <div class="row d-flex justify-content-center align-items-center">
                         <div class="col-1 d-flex justify-content-end align-items-center">
                             <img class="logoUser" src="${mensaje.usuarioImg}" alt="logo">
@@ -95,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>`;
                             }
                         } else {
-                            mensajeContendor.innerHTML += `<div class="container d-flex justify-content-end">
+                            areaMensajes.innerHTML += `<div class="container">
                     <div class="row d-flex justify-content-center align-items-center">
                         <div class="col-1 d-flex justify-content-end align-items-center">
                             <img class="logoUser" src="${mensaje.usuarioImg}" alt="logo">
@@ -105,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         </div>
                     </div>`;
                         }
-                        mensajeContendor.innerHTML += `<div class="row">
+                        areaMensajes.innerHTML += `<div class="row">
                         <div class="col-12">
                             ${mensaje.texto}
                         </div>
@@ -133,27 +132,13 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Error:', error));
     }
 
-    // Da el minimo de altura del chat en correlación a la altura de la ventana
-    function prepararChat() {
-        const cabecera = document.querySelector('header');
-        const pie = document.querySelector('footer');
-        const cabeceraAltura = cabecera ? cabecera.offsetHeight : 0;
-        const pieAltura = pie ? pie.offsetHeight : 0;
-        const restoAltura = window.innerHeight - (cabeceraAltura + pieAltura);
-        areareaMensajes.style.height = (restoAltura * 0.80) + 'px';
-        inputMensaje.style.height = (restoAltura * 0.20) + 'px';
-        btnEnviar.style.height = (restoAltura * 0.20) + 'px';
-    }
     // CODIGO GENERICO
     document.getElementById("idChatPrivado").remove();
-    prepararChat();
-
-    window.addEventListener('resize', function () {
-        prepararChat();
-    });
 
     btnEnviar.addEventListener('click', function () {
         enviarMensaje(inputMensaje.value);
         inputMensaje.value = '';
     });
+
+    cargarMensajes();
 });
