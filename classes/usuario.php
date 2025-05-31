@@ -101,7 +101,13 @@ class usuario
         $consulta = $this->db->prepare($sentencia);
         $consulta->bind_param("ssssss", $contra, $nom, $mail, $foto, $foto, $usuario);
         $consulta->execute();
+        $filasAfectadas = $consulta->affected_rows;
         $consulta->close();
+
+        if ($filasAfectadas> 0) {
+            unset($_SESSION['user']);
+            $_SESSION['user'] = $nom;
+        }
     }
     //Introducir los datos de un Usuario
 

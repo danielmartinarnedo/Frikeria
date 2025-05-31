@@ -12,7 +12,9 @@ class partida
     public function crearPartida($nombre, $juego, $numJugadores, $fechaInicio, $descripcion, $latitud, $longitud, $ciudad, $portada_path)
     {
         require_once("../classes/usuario.php");
-        session_start();
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         $user = new usuario("../../../");
         $id_user = $user->getId($_SESSION["user"]);
         $sentencia = "INSERT INTO partidas (titulo, juego, numJugadores, fecha, descripcion, latitud, longitud, ciudad, idCreador, portada) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -27,7 +29,7 @@ class partida
         require_once("../classes/usuario.php");
         $sentencia = "
         SELECT titulo, juego, numJugadores, fecha, descripcion, latitud, longitud, ciudad, portada, id
-        FROM partidas
+        FROM partidas WHERE fecha >= CURDATE()
         ORDER BY (6371 * ACOS(
             COS(RADIANS(?)) * COS(RADIANS(latitud)) *
             COS(RADIANS(longitud) - RADIANS(?)) +
