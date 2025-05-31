@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         <div class="container border-bottom mb-3" data-id="${chat.idChat}">
                             <div class="row align-items-center">
                                 <div class="col-1"><img class="logoUser" src="${chat.foto}" alt="Logo de ${chat.nombre}"></div>
-                                <div class="col-11">${chat.nombre}</div>
-                                <div class="col-12 text-truncate">Ultimo Mensaje: ${chat.ultimoMensaje}</div>
+                                <div class="col-11 fw-bold">${chat.nombre}</div>
+                                <div class="col-12 text-truncate"><span class="fw-bold">${chat.nombreUsuario}:</span> ${chat.ultimoMensaje}</div>
                             </div>
                         </div>
                     `;

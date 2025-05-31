@@ -68,7 +68,8 @@ class chatPrivado
         $mensajes = new mensajesPrivados("../../../");
         foreach ($datos as &$dato) {
             $ultimoMensaje = $mensajes->buscarUltimoMensaje($dato["idChat"]);
-            $dato["ultimoMensaje"] = $ultimoMensaje;
+            $dato["ultimoMensaje"] = $ultimoMensaje["texto"] ?? "";
+            $dato["nombreUsuario"] = $ultimoMensaje["nombreUsu"];
         }
         return $datos;
     }
