@@ -58,5 +58,25 @@ class mensajesPrivados
         }
         return $mensajes;
     }
+    // Buscar el ultimo mensaje de un chat privado de un usuario
+    public function buscarUltimoMensaje($idChat)
+    {
+        $sentencia = "SELECT texto, id FROM mensajeschatprivados WHERE idChat = ? ORDER BY fecha DESC LIMIT 1";
+        $consulta = $this->db->prepare($sentencia);
+        $consulta->bind_param("i", $idChat);
+        $consulta->bind_result($texto, $idUsuario);
+        $consulta->execute();
+        if ($consulta->fetch()) {
+            $texto = htmlspecialchars($texto);
+            $idUsuario = intval($idUsuario);
+            require_once("../classes/usuario.php");
+            $user = new usuario("../../../");
+            
+            return array("texto" => $texto, "idUsuario" => $idUsuario);
+        } else {
+            return null;
+        }
+        $consulta->close();
+    }
 }
 ?>

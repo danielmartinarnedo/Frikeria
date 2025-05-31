@@ -26,7 +26,7 @@
                             <a class="nav-link" href="buscarPartida.php">BUSCAR PARTIDA</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="listaChatPrivado.php">MENSAJES</a>
+                            <a class="nav-link" href="./listaChatPrivado.php">MENSAJES</a>
                         </li>
                         <li class="nav-item" id="usuarioHeader">
                             <a class="nav-link" href="./login.php">INICIAR SESION</a>

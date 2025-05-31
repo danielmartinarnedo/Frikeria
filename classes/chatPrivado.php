@@ -43,6 +43,34 @@ class chatPrivado
         }
         return $id;
     }
-    
+    public function buscarChatsPrivados()
+    {
+        session_start();
+        require_once("../classes/usuario.php");
+        $user = new usuario("../../../");
+        $id_user = $user->getId($_SESSION["user"]);
+        $sentencia = "SELECT cp.id, u.nombre, u.id, u.foto FROM chatprivado cp JOIN usuario u ON (u.id = cp.idUsuario1 OR u.id = cp.idUsuario2) WHERE (cp.idUsuario1 = ? OR cp.idUsuario2 = ?) AND u.id != ?";
+        $consulta = $this->db->prepare($sentencia);
+        $consulta->bind_param("iii", $id_user, $id_user, $id_user);
+        $consulta->bind_result($idChat, $nombre, $idUsuario, $foto);
+        $consulta->execute();
+        $datos = [];
+        while ($consulta->fetch()) {
+            array_push($datos, [
+                "idChat" => $idChat,
+                "nombre" => $nombre,
+                "idUsuario" => $idUsuario,
+                "foto" => $foto
+            ]);
+        }
+        $consulta->close();
+        require_once("../classes/mensajesPrivados.php");
+        $mensajes = new mensajesPrivados("../../../");
+        foreach ($datos as &$dato) {
+            $ultimoMensaje = $mensajes->buscarUltimoMensaje($dato["idChat"]);
+            $dato["ultimoMensaje"] = $ultimoMensaje;
+        }
+        return $datos;
+    }
 }
 ?>

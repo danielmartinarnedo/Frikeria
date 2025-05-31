@@ -213,12 +213,21 @@ function crearMensajePrivado(){
     $mensajes = new mensajesPrivados("../../../");
     $mensajes->crearMensajePrivado($texto, $idPrivado);
 }
+// Buscar los mensajes de un chat privado
 function buscarMensajesPrivados(){
     header('Content-Type: application/json');
     $idPrivado = $_POST['id'];
     require_once("../classes/mensajesPrivados.php");
     $mensajes = new mensajesPrivados("../../../");
     $datos = $mensajes->buscarMensajesPrivados($idPrivado);
+    echo json_encode($datos);
+}
+// Buscar los chats privados del usuario
+function buscarChatsPrivados(){
+    header('Content-Type: application/json');
+    require_once("../classes/chatPrivado.php");
+    $chat = new chatPrivado("../../../");
+    $datos = $chat->buscarChatsPrivados();
     echo json_encode($datos);
 }
 //Maneja las acciones enviadas por el usuario

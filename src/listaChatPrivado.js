@@ -3,8 +3,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const padreLista = document.getElementById('listaChat');
 
     //FUNCIONES
-
-    //CODIGO GENERICO
     function cargarChatPrivado() {
         fetch('../controladores/normal.php', {
             method: 'POST',
@@ -12,23 +10,26 @@ document.addEventListener('DOMContentLoaded', function () {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: new URLSearchParams({
-                action: 'cargarChatPrivados'
+                action: 'buscarChatsPrivados'
             })
         })
             .then(response => response.json()).then(datos => {
                 console.log(datos);
+                padreLista.innerHTML = '';
                 datos.forEach(chat => {
                     padreLista.innerHTML += `
-                <div class="card col-12 col-md-3" data-chat="${chat.id}">
-                        <img class="logoUser" src="${mensaje.usuarioImg}" alt="logo de ${mensaje.usuarioNom}" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <div class="container border-bottom mb-3" data-id="${chat.idChat}">
+                            <div class="row align-items-center">
+                                <div class="col-1"><img class="logoUser" src="${chat.foto}" alt="Logo de ${chat.nombre}"></div>
+                                <div class="col-11">${chat.nombre}</div>
+                                <div class="col-12 text-truncate">Ultimo Mensaje: ${chat.ultimoMensaje}</div>
+                            </div>
                         </div>
-                    </div>
-                `;
+                    `;
                 })
             });
     }
+
+    //CODIGO GENERICO
+    cargarChatPrivado()
 });

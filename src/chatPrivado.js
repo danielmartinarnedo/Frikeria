@@ -141,4 +141,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     cargarMensajes();
+
+    setInterval(cargarMensajes, 5000);
 });
