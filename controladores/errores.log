@@ -26,3 +26,49 @@ Stack trace:
 #1 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(282): conseguirUsuario()
 #2 {main}
   thrown in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\usuario.php on line 181
+[01-Jun-2025 10:03:56 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: usuario::getRole(): Argument #1 ($nom) must be of type string, null given, called in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php on line 91 and defined in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\usuario.php:181
+Stack trace:
+#0 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(91): usuario->getRole(NULL)
+#1 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(291): conseguirUsuario()
+#2 {main}
+  thrown in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\usuario.php on line 181
+[01-Jun-2025 10:04:04 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: usuario::getRole(): Argument #1 ($nom) must be of type string, null given, called in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php on line 91 and defined in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\usuario.php:181
+Stack trace:
+#0 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(91): usuario->getRole(NULL)
+#1 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(291): conseguirUsuario()
+#2 {main}
+  thrown in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\usuario.php on line 181
+[01-Jun-2025 10:09:03 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: usuario::getRole(): Argument #1 ($nom) must be of type string, null given, called in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php on line 91 and defined in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\usuario.php:181
+Stack trace:
+#0 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(91): usuario->getRole(NULL)
+#1 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(295): conseguirUsuario()
+#2 {main}
+  thrown in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\usuario.php on line 181
+[01-Jun-2025 10:12:30 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: usuario::getRole(): Argument #1 ($nom) must be of type string, null given, called in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php on line 91 and defined in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\usuario.php:181
+Stack trace:
+#0 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(91): usuario->getRole(NULL)
+#1 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(295): conseguirUsuario()
+#2 {main}
+  thrown in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\usuario.php on line 181
+[01-Jun-2025 10:12:32 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: usuario::getRole(): Argument #1 ($nom) must be of type string, null given, called in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php on line 91 and defined in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\usuario.php:181
+Stack trace:
+#0 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(91): usuario->getRole(NULL)
+#1 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(295): conseguirUsuario()
+#2 {main}
+  thrown in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\usuario.php on line 181
+[01-Jun-2025 10:18:03 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: usuario::getRole(): Argument #1 ($nom) must be of type string, null given, called in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php on line 91 and defined in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\usuario.php:181
+Stack trace:
+#0 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(91): usuario->getRole(NULL)
+#1 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(295): conseguirUsuario()
+#2 {main}
+  thrown in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\usuario.php on line 181
+[01-Jun-2025 10:22:19 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: usuario::getRole(): Argument #1 ($nom) must be of type string, null given, called in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php on line 91 and defined in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\usuario.php:181
+Stack trace:
+#0 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(91): usuario->getRole(NULL)
+#1 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(295): conseguirUsuario()
+#2 {main}
+  thrown in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\usuario.php on line 181
+[01-Jun-2025 10:24:13 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined function irlistaPartidasPropias() in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php:295
+Stack trace:
+#0 {main}
+  thrown in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php on line 295

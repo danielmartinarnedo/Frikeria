@@ -57,4 +57,36 @@ class partida
         $consulta->close();
         return $res;
     }
+    //Buscar las partidas que ha creado el usuario
+    function buscarPartidasPropias()
+    {
+        require_once("../classes/usuario.php");
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $user = new usuario("../../../");
+        $id_user = $user->getId($_SESSION["user"]);
+        $sentencia = "SELECT titulo, juego, numJugadores, fecha, descripcion, latitud, longitud, ciudad, portada, id FROM partidas WHERE idCreador = ?";
+        $consulta = $this->db->prepare($sentencia);
+        $consulta->bind_param("i", $id_user);
+        $consulta->bind_result($titulo, $juego, $numJugadores, $fecha, $descripcion, $latitud, $longitud, $ciudad, $portada, $id);
+        $consulta->execute();
+        $res = [];
+        while ($consulta->fetch()) {
+            $res[] = [
+                'titulo' => $titulo,
+                'juego' => $juego,
+                'numJugadores' => $numJugadores,
+                'fecha' => $fecha,
+                'descripcion' => $descripcion,
+                'latitud' => $latitud,
+                'longitud' => $longitud,
+                'ciudad' => $ciudad,
+                'portada' => $portada,
+                'id' => $id
+            ];
+        }
+        $consulta->close();
+        return $res;
+    }
 }

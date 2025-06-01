@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
             <li><a class="dropdown-item" href="${ruta + 'irCrearPartida'}">CREAR PARTIDA</a></li>
+            <li><a class="dropdown-item" href="${ruta + 'irlistaPartidasPropias'}">MIS PARTIDA</a></li>
             <li><a class="dropdown-item" href="${ruta + 'irBuscarPartida'}">BUSCAR PARTIDA</a></li>
           </ul>
         </li>

@@ -200,7 +200,20 @@ function buscarPartida()
     $datos = $partida->buscarPartidas($lat,$lon);
     echo json_encode($datos);
 }
-
+//Buscar las partidas que ha creado el usuario
+function buscarPartidasPropias()
+{
+    header('Content-Type: application/json');
+    require_once("../classes/partida.php");
+    $partida = new partida("../../../");
+    $datos = $partida->buscarPartidasPropias();
+    echo json_encode($datos);
+}
+//Ir a lista de partidas propias
+function irlistaPartidasPropias()
+{
+    header("Location: ../vista/listaPartidasPropias.php");
+}
 //FORO
 //Buscar los Mensajes de un foro
 function buscarMensajes(){

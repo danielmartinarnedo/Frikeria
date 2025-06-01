@@ -1,0 +1,48 @@
+document.addEventListener('DOMContentLoaded', function () {
+    const container = document.getElementById('partidas-container');
+
+    fetch('../controladores/normal.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        action: 'buscarPartidasPropias',
+                    })
+                })
+                    .then(response => response.json())
+                    .then(datos => {
+
+                        datos.forEach(partida => {
+                            const row = document.createElement('div');
+                            row.className = 'row justify-content-center mb-4';
+                        
+                            row.innerHTML =`
+                            <div class="col-12 mt-3 pb-1 pt-1 border bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        <img class="img-fluid h-100" src="${partida.portada}" alt="Portada de ${partida.titulo}" srcset="">
+                    </div>
+                    <div class="col-8">
+                        <h3>${partida.titulo}</h3>
+                        <h4>${partida.juego}</h4>
+                        <p>Número de jugadores: ${partida.numJugadores}</p>
+                        <p>Fecha: ${partida.fecha}</p>
+                        <p>Ciudad: ${partida.ciudad}</p>
+                        <p>${partida.descripcion}</p>
+                        <a class="btn btn-primary col-12" 
+                        href="./verPartida.php?titulo=${encodeURIComponent(partida.titulo)}&juego=${encodeURIComponent(partida.juego)}&jugadores=${partida.numJugadores}&fecha=${partida.fecha}&ciudad=${encodeURIComponent(partida.ciudad)}&descripcion=${encodeURIComponent(partida.descripcion)}&portada=${encodeURIComponent(partida.portada)}&foro=${encodeURIComponent(partida.id)}">
+                        ENVIAR
+                        </a>                    
+                    </div>
+                </div>
+            </div>
+        </div>
+                            `;
+                        
+                            container.appendChild(row);
+                        });
+                    })
+                    .catch(error => console.error('Error:', error));
+});
