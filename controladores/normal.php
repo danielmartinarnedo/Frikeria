@@ -33,12 +33,13 @@ function insertarUsuario()
     }
 }
 //Ir a la modificación de un usuario
-function irModUser(){
+function irModUser()
+{
     session_start();
     $usuario = $_SESSION['user'];
     require_once("../classes/usuario.php");
     $usus = new usuario("../../../");
-    $datos=$usus->getDatos($usuario);
+    $datos = $usus->getDatos($usuario);
     require_once("../vista/header.php");
     require_once("../vista/modUser.php");
     require_once("../vista/footer.php");
@@ -57,7 +58,7 @@ function modUsuario()
         $fileName = basename($fotodata['name']);
         $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
 
-        // Only allow image extensions
+        // Permitir solo ciertos tipos de archivos de imagen
         if (in_array(strtolower($fileExtension), ['jpg', 'jpeg', 'png', 'gif'])) {
             $filePath = "../images/" . $fileName;
 
@@ -92,7 +93,7 @@ function conseguirUsuario()
 
     if ($usuario) {
         header('Content-Type: application/json');
-        $datos=array(
+        $datos = array(
             'nombre' => $usuario,
             'role' => $role
         );
@@ -121,42 +122,35 @@ function irBuscarPartida()
 {
     header("Location: ../vista/buscarPartida.php");
 }
-//Descargar foto
-function descargarFoto()
+// Crea la foto de la partida y devuelve la ruta
+function crearPartidaForm()
 {
-    $uploadPath = '';
+    $fotoRuta = null;
 
     if (isset($_FILES['portada']) && $_FILES['portada']['error'] === UPLOAD_ERR_OK) {
-        $tmpName = $_FILES['portada']['tmp_name'];
-        $originalName = basename($_FILES['portada']['name']);
-        $ext = pathinfo($originalName, PATHINFO_EXTENSION);
-        $newFileName = uniqid('portada_', true) . '.' . $ext;
+        $fotodata = $_FILES['portada'];
+        $fileName = basename($fotodata['name']);
+        $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
 
-        $uploadDir = '../images/';
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
-        }
+        // Permitir solo ciertos tipos de archivos de imagen
+        if (in_array(strtolower($fileExtension), ['jpg', 'jpeg', 'png', 'gif'])) {
+            $filePath = "../images/" . $fileName;
 
-        $destination = $uploadDir . $newFileName;
-
-        if (move_uploaded_file($tmpName, $destination)) {
-            $uploadPath = $destination;
-            $data['portada_path'] = $uploadPath;
+            if (move_uploaded_file($fotodata['tmp_name'], $filePath)) {
+                $fotoRuta = $filePath;
+            } else {
+                echo json_encode(["estado" => false, "msj" => "Error al subir la imagen."]);
+                exit;
+            }
         } else {
-            die('Error al mover el archivo subido.');
+            echo json_encode(["estado" => false, "msj" => "Solo se permiten archivos de imagen (jpg, jpeg, png, gif)."]);
+            exit;
         }
     }
 
-    session_start();
-    $_SESSION["nombre"] = $_POST["nombre"];
-    $_SESSION["juego"] = $_POST["juego"];
-    $_SESSION["numeroJugadores"] = $_POST["numeroJugadores"];
-    $_SESSION["fechaInicio"] = $_POST["fechaInicio"];
-    $_SESSION["descripcion"] = $_POST["descripcion"];
-    $_SESSION["portada_path"] = $uploadPath;
-    header("Location: ./normal.php?action=irMapa");
+    echo json_encode(["estado" => true, "fotoRuta" => $fotoRuta]);
 }
-//Ir al mapa
+//Ir a la creación de una partida en el mapa
 function irMapa()
 {
     require_once("../vista/header.php");
@@ -167,37 +161,31 @@ function irMapa()
 function crearPartida()
 {
     session_start();
-    $nombre = $_SESSION["nombre"];
-    $juego = $_SESSION["juego"];
-    $numJugadores = $_SESSION["numeroJugadores"];
-    $fechaInicio = $_SESSION["fechaInicio"];
-    $descripcion = $_SESSION["descripcion"];
     $latitud = $_POST["lat"];
     $longitud = $_POST["lng"];
     $ciudad = $_POST["city"];
-    $portada_path = $_SESSION["portada_path"];
+    $nombre = $_POST['nombre'];
+    $juego = $_POST['juego'];
+    $numJugadores = $_POST['numeroJugadores'];
+    $fechaInicio = $_POST['fechaInicio'];
+    $descripcion = $_POST['descripcion'];
+    $fotoRuta = $_POST['fotoRuta'];
 
-    unset($_SESSION["nombre"]);
-    unset($_SESSION["juego"]);
-    unset($_SESSION["numeroJugadores"]);
-    unset($_SESSION["fechaInicio"]);
-    unset($_SESSION["descripcion"]);
-    unset($_SESSION["portada_path"]);
     require_once("../classes/partida.php");
     $partida = new partida("../../../");
-    $partida->crearPartida($nombre, $juego, $numJugadores, $fechaInicio, $descripcion, $latitud, $longitud, $ciudad, $portada_path);
+    $partida->crearPartida($nombre, $juego, $numJugadores, $fechaInicio, $descripcion, $latitud, $longitud, $ciudad, $fotoRuta);
 
     header("Location: ../index.php");
 }
 //Buscar partida
 function buscarPartida()
-{   
+{
     header('Content-Type: application/json');
     $lat = $_POST['lat'];
     $lon = $_POST['lng'];
     require_once("../classes/partida.php");
     $partida = new partida("../../../");
-    $datos = $partida->buscarPartidas($lat,$lon);
+    $datos = $partida->buscarPartidas($lat, $lon);
     echo json_encode($datos);
 }
 //Buscar las partidas que ha creado el usuario
@@ -216,7 +204,8 @@ function irlistaPartidasPropias()
 }
 //FORO
 //Buscar los Mensajes de un foro
-function buscarMensajes(){
+function buscarMensajes()
+{
     header('Content-Type: application/json');
     $idPartida = $_POST['id'];
     require_once("../classes/foroMensaje.php");
@@ -225,25 +214,28 @@ function buscarMensajes(){
     echo json_encode($datos);
 }
 //Crear un mensaje en un foro
-function crearMensajeForo(){
+function crearMensajeForo()
+{
     header('Content-Type: application/json');
     $idPartida = $_POST['id'];
     $texto = $_POST['texto'];
     require_once("../classes/foroMensaje.php");
     $foro = new foroMensaje("../../../");
-    $datos = $foro->crearMensajeForo($texto,$idPartida);
+    $datos = $foro->crearMensajeForo($texto, $idPartida);
     echo json_encode($datos);
 }
 // BLOQUEO Y REPORTES
 //Bloquear Usuario
-function bloquearUsuario(){
+function bloquearUsuario()
+{
     $nombreBloqueado = $_POST['nombreBloqueado'];
     require_once("../classes/bloqueado.php");
     $bloc = new bloqueado("../../../");
     $bloc->crearBloqueo($nombreBloqueado);
 }
 //Desbloquear Usuario
-function desbloquearUsuario(){
+function desbloquearUsuario()
+{
     $nombreBloqueado = $_POST['nombreBloqueado'];
     require_once("../classes/bloqueado.php");
     $bloc = new bloqueado("../../../");
@@ -252,20 +244,23 @@ function desbloquearUsuario(){
 
 //CHAT PRIVADOS
 //Ir a un chat privado
-function irListaChatPrivado(){
+function irListaChatPrivado()
+{
     header("Location: ../vista/listaChatPrivado.php");
 }
-function irChatPrivado(){
+function irChatPrivado()
+{
     $nomUsuario = $_REQUEST['usuarioNom'];
     require_once("../classes/chatPrivado.php");
-    $chat = new chatPrivado("../../../"); 
+    $chat = new chatPrivado("../../../");
     $idChat = $chat->checkExistenciaChat($nomUsuario);
     require_once("../vista/header.php");
     require_once("../vista/chatPrivado.php");
     require_once("../vista/footer.php");
 }
 // Crear un mensaje en un chat privado
-function crearMensajePrivado(){
+function crearMensajePrivado()
+{
     $texto = $_POST['texto'];
     $idPrivado = $_POST['id'];
     require_once("../classes/mensajesPrivados.php");
@@ -273,7 +268,8 @@ function crearMensajePrivado(){
     $mensajes->crearMensajePrivado($texto, $idPrivado);
 }
 // Buscar los mensajes de un chat privado
-function buscarMensajesPrivados(){
+function buscarMensajesPrivados()
+{
     header('Content-Type: application/json');
     $idPrivado = $_POST['id'];
     require_once("../classes/mensajesPrivados.php");
@@ -282,7 +278,8 @@ function buscarMensajesPrivados(){
     echo json_encode($datos);
 }
 // Buscar los chats privados del usuario
-function buscarChatsPrivados(){
+function buscarChatsPrivados()
+{
     header('Content-Type: application/json');
     require_once("../classes/chatPrivado.php");
     $chat = new chatPrivado("../../../");
