@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const imgTag = document.getElementById('imgTag');
     const inputNombre = document.getElementsByName('nom')[0];
     const inputMail = document.getElementsByName('mail')[0];
     const inputContra = document.getElementsByName('contra')[0];

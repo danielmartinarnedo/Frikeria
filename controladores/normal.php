@@ -25,6 +25,28 @@ function insertarUsuario()
         echo json_encode(["estado" => false, "msj" => "Nombre de usuario ya existe."]);
     }
 }
+//Maneja el inicio de sesion
+function inicio()
+{
+    require_once('../modelo.php');
+    require_once('../classes/usuario.php');
+
+    $usus = new usuario("../../../");
+
+    if (!isset($_POST["rec"]))
+        unset_cookie("usuario");
+
+    if ($usus->compCrede($_POST["nom"], $_POST["contra"])) {
+        if (isset($_POST["rec"])) {
+            set_cookie("usuario", $_POST["nom"]);
+            set_session('user', $_POST["nom"]);
+        }
+        echo json_encode(["estado" => true, "msj" => "Login hecho correctamente."]);
+    } else {
+        echo json_encode(["estado" => false, "msj" => "Nombre de usuario o contraseña incorrectos."]);
+    }
+}
+
 //Ir a la modificación de un usuario
 function irModUser()
 {

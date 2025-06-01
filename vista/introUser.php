@@ -2,7 +2,7 @@
 <main class="card mb-3 mt-3 col-md-6 offset-md-3 w-md-50">
   <div class="card-body">
     <h2 class="card-title">INTRODUCIR USUARIO</h2>
-    <div id="formularioModUser">
+    <div id="formularioIntroUser">
       <div class="mb-3">
         <label for="nom">NOMBRE:</label>
         <input type="text" class="form-control"  name="nom" required>
