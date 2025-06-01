@@ -13,23 +13,16 @@ function insertarUsuario()
 {
     $nom = $_POST["nom"];
     $contra1 = $_POST["contra"];
-    $contra2 = $_POST["contra2"];
     $mail = $_POST["mail"];
     require_once("../classes/usuario.php");
     $usus = new usuario("../../../");
-    $pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/";
-    if (preg_match($pattern, $contra1)) {
-        if ($contra1 === $contra2) {
-            echo "<script>alert('Todo bien');</script>";
-            $usus->insertUser($nom, $contra1, $mail);
-            header("Location: ../index.php");
-        } else {
-            echo "<script>alert('Las contreseñas tienen que ser iguales.');</script>";
-            header("Location: ../vista/introUser.php?action=Uno");
-        }
+    if ($usus->compExistencia($nom)) {
+        $usus->insertUser($nom, $contra1, $mail);
+        session_start();
+        $_SESSION['user'] = $nom;
+        echo json_encode(["estado" => true, "msj" => "Usuario creado correctamente."]);
     } else {
-        echo "<script>alert('La contraseña tiene que tener al menos 1 numero, 1 mayuscula, 1 minuscula y 8 caracteres');</script>";
-        header("Location: ../vista/introUser.php?action=Dos");
+        echo json_encode(["estado" => false, "msj" => "Nombre de usuario ya existe."]);
     }
 }
 //Ir a la modificación de un usuario
@@ -74,6 +67,7 @@ function modUsuario()
         }
     }
 
+
     require_once("../classes/usuario.php");
     $usus = new usuario("../../../");
     $usus->modUser($nom, $contra, $mail, $foto);
@@ -86,12 +80,12 @@ function modUsuario()
 function conseguirUsuario()
 {
     session_start();
-    $usuario = $_SESSION['user'] ?? null;
+    $usuario = isset($_SESSION['user']) ? $_SESSION['user'] : null;
     require_once("../classes/usuario.php");
     $usus = new usuario("../../../");
-    $role = $usus->getRole($usuario);
 
-    if ($usuario) {
+    if ($usuario !== null && $usuario !== "") {
+        $role = $usus->getRole($usuario);
         header('Content-Type: application/json');
         $datos = array(
             'nombre' => $usuario,

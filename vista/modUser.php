@@ -3,19 +3,23 @@
   <div class="card-body">
     <h5 class="card-title">MODIFICAR USUARIO</h5>
     <div id="formularioModUser">
-      <label for="nom">Nombre:</label>
-      <input type="text" name="nom" value="<?php echo $datos["nom"]; ?>" required>
-      <br>
-      <label for="mail">E-mail:</label>
-      <input type="email" name="mail" value="<?php echo $datos["mail"]; ?>" required>
-      <br>
-      <label for="contra1">Contraseña:</label>
-      <input type="password" name="contra" value="<?php echo $datos["contra"]; ?>" required>
-      <br>
-      <label for="foto">Foto:</label>
-      <input type="file" name="foto" accept="image/*">
-      <br>
-      <input type="submit" value="Modificar" name="enviar">
+      <div class="mb-3">
+        <label for="nom">Nombre:</label>
+        <input type="text" name="nom" class="form-control" value="<?php echo $datos["nom"]; ?>" required>
+      </div>
+      <div class="mb-3">
+        <label for="mail">E-mail:</label>
+        <input type="email" name="mail" class="form-control" value="<?php echo $datos["mail"]; ?>" required>
+      </div>
+      <div class="mb-3">
+        <label for="contra1">Contraseña:</label>
+        <input type="password" name="contra" class="form-control" value="<?php echo $datos["contra"]; ?>" required>
+      </div>
+      <div class="mb-3">
+        <label for="foto">Foto:</label>
+        <input type="file" name="foto" class="form-control" accept="image/*">
+      </div>
+      <button name="enviar" class="btn btn-primary col-12">MODIFICAR</button>
     </div>
   </div>
 </main>

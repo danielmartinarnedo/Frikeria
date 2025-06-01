@@ -29,6 +29,26 @@ class usuario
         return $existe;
     }
 
+    //Comprobar si existe el nombre de usuario
+    public function compExistencia(String $nom)
+    {
+        $sentencia = "SELECT COUNT(*) FROM usuario WHERE nombre=?";
+        $consulta = $this->db->prepare($sentencia);
+        $consulta->bind_param("s", $nom);
+        $consulta->bind_result($count);
+
+        $consulta->execute();
+        $consulta->fetch();
+
+        $noExiste = true;
+
+        if ($count > 0) $noExiste = false;
+
+        $consulta->close();
+
+        return $noExiste;
+    }
+
     //Comprobar si el usuario es admin
     public function compAdmin(String $nom)
     {
