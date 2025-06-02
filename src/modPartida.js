@@ -1,9 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Cargar HEADER
-    const SNB = document.createElement('link');
-    SNB.rel = 'stylesheet';
-    SNB.href = 'summernote-bs5.css';
-    document.head.appendChild(SNB);
     // VARIABLES
     const imgTag = document.getElementById('imgTag');
     const inputNombre = document.getElementsByName('nombre')[0];
@@ -83,14 +78,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 foto: inputFoto.files[0] ? inputFoto.files[0].name : 'No file selected'
             });
 
-            fetch('../controladores/normal.php?action=crearPartidaForm', {
+            fetch('../controladores/normal.php?action=modPartidaForm', {
                 method: 'POST',
                 body: formularioDatos
             })
                 .then(response => response.json())
                 .then(data => {
                     if (data.estado) {
-                        formularioDatos.append('fotoRuta', data.fotoRuta);
+                        formularioDatos.append('fotoRuta', data.fotoRuta ?? imgTag.src);
                         const formularioMapa = document.createElement('form');
                         formularioMapa.method = 'POST';
                         formularioMapa.action = '../controladores/normal.php?action=irMapa';
@@ -139,19 +134,22 @@ document.addEventListener("DOMContentLoaded", function () {
     submitForm.addEventListener('click', (e) => {
         crearPartida();
     });
-
+    // Inicializa el Summernote para el campo de descripción
     $(inputDescripcion).summernote({
         height: 250,
+        lang: 'es-ES',
         toolbar: [
-            // [groupName, [list of button]]
             ['style', ['bold', 'italic', 'underline', 'clear']],
             ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
+            ['para', ['ul', 'ol', 'paragraph', 'table']],
             ['insert', ['link', 'picture', 'video']],
-            ['view', ['fullscreen', 'codeview', 'help']]
-        ],
-      callbacks: {
-            // your optional callbacks here
+            ['view', ['fullscreen', 'help']]
+        ], callbacks: {
+            onInit: function () {
+                inputDescripcionValue = document.getElementsByName('descripcionGET')[0];
+                $(inputDescripcion).summernote('code', inputDescripcionValue.value.trim());
+                inputDescripcionValue.remove();
+            }
         }
     });
 });

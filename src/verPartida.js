@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const partida = {};
     valoresInput.forEach(input => {
         partida[input.name] = input.value;
-        input.parentNode.removeChild(input);
-    });
+        input.remove();
+    })
 
     fetch('../controladores/normal.php?action=conseguirUsuario', {
         method: 'POST',
@@ -16,11 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             if (data !== null) {
-                if (data.nombre.toLowerCase().trim() === partida.creador.toLowerCase().trim()) {
+                if (!partida.creador || data.nombre.toLowerCase().trim() === partida.creador.toLowerCase().trim() ) {
                     const enlace = document.createElement('a');
                     enlace.className = 'btn col-12 mt-3 mb-3 btn-success';
                     enlace.textContent = 'MODIFICAR PARTIDA';
-                    enlace.href = `./modPartida.php?titulo=${encodeURIComponent(partida.titulo)}&juego=${encodeURIComponent(partida.juego)}&jugadores=${encodeURIComponent(partida.jugadores)}&fecha=${encodeURIComponent(partida.fecha)}&ciudad=${encodeURIComponent(partida.ciudad)}&descripcion=${encodeURIComponent(partida.descripcion)}&portada=${encodeURIComponent(partida.portada)}&foro=${encodeURIComponent(partida.foro)}&creador=${encodeURIComponent(partida.creador)}`;
+                    enlace.href = `./modPartida.php?titulo=${encodeURIComponent(partida.titulo)}&juego=${encodeURIComponent(partida.juego)}&jugadores=${encodeURIComponent(partida.jugadores)}&fecha=${encodeURIComponent(partida.fecha)}&ciudad=${encodeURIComponent(partida.ciudad)}&descripcion=${encodeURIComponent(partida.descripcion)}&portada=${encodeURIComponent(partida.portada)}&foro=${encodeURIComponent(partida.foro)}`;
                     carta.appendChild(enlace);
                 } else {
                     const boton = document.createElement('button');

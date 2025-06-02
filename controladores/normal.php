@@ -155,14 +155,21 @@ function crearPartidaForm()
             if (move_uploaded_file($fotodata['tmp_name'], $filePath)) {
                 $fotoRuta = $filePath;
             } else {
+                // Si no se pudo mover el archivo, error
                 echo json_encode(["estado" => false, "msj" => "Error al subir la imagen."]);
                 exit;
             }
         } else {
+            // Si el archivo no es una imagen
             echo json_encode(["estado" => false, "msj" => "Solo se permiten archivos de imagen (jpg, jpeg, png, gif)."]);
             exit;
         }
+    }else {
+        // Si no se subió archivo, error
+        echo json_encode(["estado" => false, "msj" => "Debes seleccionar una imagen de portada."]);
+        exit;
     }
+
 
     echo json_encode(["estado" => true, "fotoRuta" => $fotoRuta]);
 }
@@ -192,6 +199,34 @@ function crearPartida()
     $partida->crearPartida($nombre, $juego, $numJugadores, $fechaInicio, $descripcion, $latitud, $longitud, $ciudad, $fotoRuta);
 
     header("Location: ../index.php");
+}
+//Modificar una partida
+function modPartidaForm()
+{
+    $fotoRuta = null;
+
+    if (isset($_FILES['portada']) && $_FILES['portada']['error'] === UPLOAD_ERR_OK) {
+        $fotodata = $_FILES['portada'];
+        $fileName = basename($fotodata['name']);
+        $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
+
+        // Permitir solo ciertos tipos de archivos de imagen
+        if (in_array(strtolower($fileExtension), ['jpg', 'jpeg', 'png', 'gif'])) {
+            $filePath = "../images/" . $fileName;
+
+            if (move_uploaded_file($fotodata['tmp_name'], $filePath)) {
+                $fotoRuta = $filePath;
+            } else {
+                echo json_encode(["estado" => false, "msj" => "Error al subir la imagen."]);
+                exit;
+            }
+        } else {
+            echo json_encode(["estado" => false, "msj" => "Solo se permiten archivos de imagen (jpg, jpeg, png, gif)."]);
+            exit;
+        }
+    }
+
+    echo json_encode(["estado" => true, "fotoRuta" => $fotoRuta]);
 }
 //Buscar partida
 function buscarPartida()
