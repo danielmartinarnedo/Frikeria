@@ -29,32 +29,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         datos.forEach(partida => {
                             const row = document.createElement('div');
-                            row.className = 'row justify-content-center mb-4';
-                        
-                            row.innerHTML =`
-                            <div class="col-12 mt-3 pb-1 pt-1 border bg-light">
-            <div class="container">
-                <div class="row">
-                    <div class="col-4">
-                        <img class="img-fluid h-100" src="${partida.portada}" alt="Portada de ${partida.titulo}" srcset="">
-                    </div>
-                    <div class="col-8">
-                        <h3>${partida.titulo}</h3>
-                        <h4>${partida.juego}</h4>
-                        <p>Número de jugadores: ${partida.numJugadores}</p>
-                        <p>Fecha: ${partida.fecha}</p>
-                        <p>Ciudad: ${partida.ciudad}</p>
-                        <p>${partida.descripcion}</p>
-                        <a class="btn btn-primary col-12" 
-                        href="./verPartida.php?titulo=${encodeURIComponent(partida.titulo)}&juego=${encodeURIComponent(partida.juego)}&jugadores=${partida.numJugadores}&fecha=${partida.fecha}&ciudad=${encodeURIComponent(partida.ciudad)}&descripcion=${encodeURIComponent(partida.descripcion)}&portada=${encodeURIComponent(partida.portada)}&foro=${encodeURIComponent(partida.id)}">
-                        VER PARTIDA
-                        </a>                    
-                    </div>
-                </div>
-            </div>
-        </div>
-                            `;
-                        
+                            row.className = 'card col-12 col-md-5 mt-3 mb-3 me-1 ms-1 pb-1 pt-1 border bg-light';
+
+                            row.innerHTML = `
+                                    <img class="img-fluid card-img-top" src="${partida.portada}" alt="Portada de ${partida.titulo}" srcset="">
+                                    <div class="card-body">
+                                        <h3 class="card-title">${partida.titulo}</h3>
+                                        <h4 class="card-subtitle mb-2 text-body-secondary">${partida.juego}</h4>
+                                        <p class="card-text">Creador de Anuncio: ${partida.nombreCreador}</p>
+                                        <p class="card-text">Número de jugadores: ${partida.numJugadores}</p>
+                                        <p class="card-text">Fecha: ${partida.fecha}</p>
+                                        <p class="card-text">Ciudad: ${partida.ciudad}</p>
+                                        <p class="card-text text-truncate">${partida.descripcion}</p>
+                                        <a class="btn btn-primary col-12" 
+                                        href="./verPartida.php?titulo=${encodeURIComponent(partida.titulo)}&juego=${encodeURIComponent(partida.juego)}&jugadores=${partida.numJugadores}&fecha=${partida.fecha}&ciudad=${encodeURIComponent(partida.ciudad)}&descripcion=${encodeURIComponent(partida.descripcion)}&portada=${encodeURIComponent(partida.portada)}&foro=${encodeURIComponent(partida.id)}&creador=${encodeURIComponent(partida.nombreCreador)}">
+                                        VER PARTIDA
+                                        </a>                    
+                                    </div>
+
+                                                `;
+
                             container.appendChild(row);
                         });
                     })

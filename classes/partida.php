@@ -28,7 +28,7 @@ class partida
     {
         require_once("../classes/usuario.php");
         $sentencia = "
-        SELECT titulo, juego, numJugadores, fecha, descripcion, latitud, longitud, ciudad, portada, id
+        SELECT titulo, juego, numJugadores, fecha, descripcion, latitud, longitud, ciudad, portada, id, idCreador
         FROM partidas WHERE fecha >= CURDATE()
         ORDER BY (6371 * ACOS(
             COS(RADIANS(?)) * COS(RADIANS(latitud)) *
@@ -37,10 +37,13 @@ class partida
         )) ASC";
         $consulta = $this->db->prepare($sentencia);
         $consulta->bind_param("ddd", $latitud, $longitud, $latitud);
-        $consulta->bind_result($titulo, $juego, $numJugadores, $fecha, $descripcion, $lat, $lng, $ciudad, $portada, $id);
+        $consulta->bind_result($titulo, $juego, $numJugadores, $fecha, $descripcion, $lat, $lng, $ciudad, $portada, $id, $idCreador);
         $consulta->execute();
         $res = [];
+        require_once("../classes/usuario.php");
+        $user = new usuario("../../../");
         while ($consulta->fetch()) {
+            $nombreCreador = $user->getNombreUsuario($idCreador);
             $res[] = [
                 'titulo' => $titulo,
                 'juego' => $juego,
@@ -51,7 +54,8 @@ class partida
                 'longitud' => $lng,
                 'ciudad' => $ciudad,
                 'portada' => $portada,
-                'id' => $id
+                'id' => $id,
+                'nombreCreador' => $nombreCreador
             ];
         }
         $consulta->close();
