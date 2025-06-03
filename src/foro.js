@@ -185,4 +185,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Actualizar mensajes cada 5 segundos
     setInterval(cargarMensajes, 5000);
+
+    
 });

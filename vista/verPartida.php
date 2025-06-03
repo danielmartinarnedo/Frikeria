@@ -14,7 +14,7 @@
                             <p class="card-text">CREADOR: <?php session_start(); echo htmlspecialchars($_GET["creador"] ?? $_SESSION["user"], ENT_QUOTES); ?></p>
                             <p class="card-text">FECHA: <?php echo $_GET["fecha"]; ?></p>
                             <p class="card-text">MUNCIPIO: <?php echo $_GET["ciudad"]; ?></p>
-                            <p class="card-text">DESCRIPCIÓN:<?php echo $_GET["descripcion"]; ?></p>
+                            <div class="card-text"><?php echo $_GET["descripcion"]; ?></div>
                             <a class="btn btn-primary col-12" href="./foro.php?foro=<?php echo $_GET["foro"]; ?>&titulo=<?php echo $_GET["titulo"]; ?>">IR AL FORO</a>
                 </div>
             </div>

@@ -64,18 +64,10 @@ document.addEventListener("DOMContentLoaded", function () {
             formularioDatos.append('juego', inputJuego.value.trim());
             formularioDatos.append('numeroJugadores', inputNumeroJugadores.value);
             formularioDatos.append('fechaInicio', inputFechaInicio.value);
-            formularioDatos.append('descripcion', inputDescripcion.value.trim());
+            formularioDatos.append('descripcion', $(inputDescripcion).summernote('code').trim());
             if (inputFoto.files[0]) {
                 formularioDatos.append('portada', inputFoto.files[0]);
             }
-            console.log("Datos del formulario:", {
-                nom: inputNombre.value.trim(),
-                juego: inputJuego.value.trim(),
-                numJugadores: inputNumeroJugadores.value,
-                fechaInicio: inputFechaInicio.value,
-                descripcion: inputDescripcion.value.trim(),
-                foto: inputFoto.files[0] ? inputFoto.files[0].name : 'No file selected'
-            });
 
             fetch('../controladores/normal.php?action=crearPartidaForm', {
                 method: 'POST',
@@ -132,5 +124,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     submitForm.addEventListener('click', (e) => {
         crearPartida();
+    });
+
+    // Inicializa el Summernote para el campo de descripción
+    $(inputDescripcion).summernote({
+        height: 250,
+        lang: 'es-ES',
+        toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['para', ['ul', 'ol', 'paragraph', 'table']],
+            ['insert', ['link', 'video']],
+            ['view', ['fullscreen', 'help']]
+        ],
     });
 });

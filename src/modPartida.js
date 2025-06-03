@@ -145,7 +145,6 @@ document.addEventListener("DOMContentLoaded", function () {
         lang: 'es-ES',
         toolbar: [
             ['style', ['bold', 'italic', 'underline', 'clear']],
-            ['color', ['color']],
             ['para', ['ul', 'ol', 'paragraph', 'table']],
             ['insert', ['link', 'video']],
             ['view', ['fullscreen', 'help']]

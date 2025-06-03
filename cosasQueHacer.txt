@@ -8,7 +8,9 @@ Arreglar el formulario creacion de partida. (Hecho)
 Arreglar el formulario de registro. (Hecho)
 Arreglar el formulario inicio de sesion. (Hecho)
 Crear la modificacion del anuncio de partidas si eres el creador[USAR SUMMERNOTE BOOTSTRAP]. (Hecho)
-Cambiar los textarea de los chat y al crear partida por Summernote boostrap
+Cambiar el textarea de crear partida por Summernote boostrap (Hecho)
+Cambiar el textarea del chat del foro
+Cambiar el textarea del chat del privado
 Administracion
 Mejorar la pagina de inicio y embellezar la pagina web.
 Buscar por fecha, Ciudad, o nombre de juego la partida en buscarPartida.[OPCIONAL]
