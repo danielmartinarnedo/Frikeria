@@ -37,7 +37,7 @@ class mensajesPrivados
         $bloc = new bloqueado("../../../");
         while ($datos = $resultado->fetch_assoc()) {
             $usuario = $user->getDatosForoUsuario($datos["idUsuario"]);
-            $texto = htmlspecialchars($datos["texto"]);
+            $texto = ($datos["texto"]);
             $soyYo = false;
             $bloqueado = false;
             $estoyBloqueado = false;

@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 mensajeContendor.innerHTML = "";
                 mensajes.forEach(mensaje => {
     let innerRows = "";
-
+    console.log(mensaje);
     if (mensaje.bloqueo) {
         innerRows += `
             <div class="row d-flex justify-content-center align-items-center">
@@ -179,12 +179,21 @@ document.addEventListener("DOMContentLoaded", function () {
     // Enviar mensaje al hacer clic en el botón
     enviarBoton.addEventListener("click", function (e) {
         e.preventDefault();
-        enviarMensaje(escribirMensaje.value);
-        escribirMensaje.value = "";
+        enviarMensaje($(escribirMensaje).summernote('code').trim());
+        $(escribirMensaje).summernote('reset');
     });
 
     // Actualizar mensajes cada 5 segundos
     setInterval(cargarMensajes, 5000);
 
-    
+    $(escribirMensaje).summernote({
+        height: 250,
+        lang: 'es-ES',
+        toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['para', ['ul', 'ol', 'paragraph', 'table']],
+            ['insert', ['link', 'video']],
+            ['view', ['fullscreen', 'help']]
+        ]
+    });
 });

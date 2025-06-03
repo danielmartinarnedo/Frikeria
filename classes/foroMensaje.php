@@ -38,7 +38,7 @@ class foroMensaje
         $bloc = new bloqueado("../../../");
         while ($datos = $resultado->fetch_assoc()) {
             $usuario = $user->getDatosForoUsuario($datos["idUser"]);
-            $texto = htmlspecialchars($datos["texto"]);
+            $texto = ($datos["texto"]);
             $soyYo = false;
             $bloqueado = false;
             $estoyBloqueado = false;
