@@ -1,20 +1,21 @@
 <body>
     <h1 class="text-center">¿Donde quieres jugar?</h1>
     <div id="map" style="height: 500px; width: 100%;"></div>
-    <form method="POST" action="./normal.php?action=crearPartida" enctype="multipart/form-data">
+    <form method="POST" action="./normal.php?action=modPartida" enctype="multipart/form-data">
         <input type="hidden" name="lat" id="lat">
         <input type="hidden" name="lng" id="lng">
         <input type="hidden" name="city" id="city">
 
-        <input type="hidden" name="nombre" id="nombre" value="<?php echo $_POST['nombre']; ?>">
-        <input type="hidden" name="juego" id="juego" value="<?php echo $_POST['juego']; ?>">
-        <input type="hidden" name="numeroJugadores" id="numeroJugadores" value="<?php echo $_POST['numeroJugadores']; ?>">
-        <input type="hidden" name="fechaInicio" id="fechaInicio" value="<?php echo $_POST['fechaInicio']; ?>">
-        <input type="hidden" name="descripcion" id="descripcion" value="<?php echo $_POST['descripcion']; ?>">
-        <input type="hidden" name="fotoRuta" id="fotoRuta" value="<?php echo $_POST['fotoRuta']; ?>">
-
-        <button class="btn btn-primary col-12" type="submit" name="crearPartida">CREAR PARTIDA</button>
+        <?php
+        foreach ($_POST as $key => $value) {
+            if ($key != 'latInit' || $key != 'lngInit') {
+                echo "<input type=\"hidden\" name=\"$key\" id=\"$key\" value=\"$value\">\n";
+            }
+        }
+        ?>
+        <button class="btn btn-primary col-12" type="submit" name="crearPartida">MODIFICAR PARTIDA</button>
     </form>
 </body>
+<script>window.datosPost = <?php echo json_encode($_POST); ?>;</script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQRBU4caqOv1t1Fi3NuI9ZlG8Eb9oV9mY&libraries=places&callback=initMap"></script>
 <script src="../src/modPartidaMapa.js"></script>

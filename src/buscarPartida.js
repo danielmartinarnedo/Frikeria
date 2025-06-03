@@ -36,13 +36,13 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <div class="card-body">
                                         <h3 class="card-title">${partida.titulo}</h3>
                                         <h4 class="card-subtitle mb-2 text-body-secondary">${partida.juego}</h4>
-                                        <p class="card-text">Creador de Anuncio: ${partida.nombreCreador}</p>
-                                        <p class="card-text">Número de jugadores: ${partida.numJugadores}</p>
-                                        <p class="card-text">Fecha: ${partida.fecha}</p>
-                                        <p class="card-text">Ciudad: ${partida.ciudad}</p>
+                                        <p class="card-text">CREADOR DEL ANUNCIO: ${partida.nombreCreador}</p>
+                                        <p class="card-text">NÚMERO DE JUGADORES: ${partida.numJugadores}</p>
+                                        <p class="card-text">FECHA: ${partida.fecha}</p>
+                                        <p class="card-text">MUNICIPIO: ${partida.ciudad}</p>
                                         <p class="card-text text-truncate">${partida.descripcion}</p>
                                         <a class="btn btn-primary col-12" 
-                                        href="./verPartida.php?titulo=${encodeURIComponent(partida.titulo)}&juego=${encodeURIComponent(partida.juego)}&jugadores=${partida.numJugadores}&fecha=${partida.fecha}&ciudad=${encodeURIComponent(partida.ciudad)}&descripcion=${encodeURIComponent(partida.descripcion)}&portada=${encodeURIComponent(partida.portada)}&foro=${encodeURIComponent(partida.id)}&creador=${encodeURIComponent(partida.nombreCreador)}">
+                                        href="./verPartida.php?titulo=${encodeURIComponent(partida.titulo)}&juego=${encodeURIComponent(partida.juego)}&jugadores=${partida.numJugadores}&fecha=${partida.fecha}&ciudad=${encodeURIComponent(partida.ciudad)}&descripcion=${encodeURIComponent(partida.descripcion)}&portada=${encodeURIComponent(partida.portada)}&foro=${encodeURIComponent(partida.id)}&creador=${encodeURIComponent(partida.nombreCreador)}&lat=${partida.latitud}&lng=${partida.longitud}">
                                         VER PARTIDA
                                         </a>                    
                                     </div>

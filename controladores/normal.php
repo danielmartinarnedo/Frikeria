@@ -228,6 +228,35 @@ function modPartidaForm()
 
     echo json_encode(["estado" => true, "fotoRuta" => $fotoRuta]);
 }
+//Ir a la modificacion de una partida en el mapa
+function irMapaMod()
+{
+    require_once("../vista/header.php");
+    require_once("../vista/modPartidaMapa.php");
+    require_once("../vista/footer.php");
+}
+//Modificar una partida y te manda a la lista de partidas propias
+
+function modPartida()
+{
+    session_start();
+    $latitud = $_POST["lat"];
+    $longitud = $_POST["lng"];
+    $ciudad = $_POST["city"];
+    $nombre = $_POST['nombre'];
+    $juego = $_POST['juego'];
+    $numJugadores = $_POST['numeroJugadores'];
+    $fechaInicio = $_POST['fechaInicio'];
+    $descripcion = $_POST['descripcion'];
+    $fotoRuta = $_POST['fotoRuta'];
+    $idPartida = $_POST['idPartida'];
+
+    require_once("../classes/partida.php");
+    $partida = new partida("../../../");
+    $partida->modPartida($idPartida, $nombre, $juego, $numJugadores, $fechaInicio, $descripcion, $latitud, $longitud, $ciudad, $fotoRuta);
+
+    header("Location: ../index.php");
+}
 //Buscar partida
 function buscarPartida()
 {

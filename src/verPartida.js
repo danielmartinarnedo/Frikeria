@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const enlace = document.createElement('a');
                     enlace.className = 'btn col-12 mt-3 mb-3 btn-success';
                     enlace.textContent = 'MODIFICAR PARTIDA';
-                    enlace.href = `./modPartida.php?titulo=${encodeURIComponent(partida.titulo)}&juego=${encodeURIComponent(partida.juego)}&jugadores=${encodeURIComponent(partida.jugadores)}&fecha=${encodeURIComponent(partida.fecha)}&ciudad=${encodeURIComponent(partida.ciudad)}&descripcion=${encodeURIComponent(partida.descripcion)}&portada=${encodeURIComponent(partida.portada)}&foro=${encodeURIComponent(partida.foro)}`;
+                    enlace.href = `./modPartida.php?titulo=${encodeURIComponent(partida.titulo)}&juego=${encodeURIComponent(partida.juego)}&jugadores=${encodeURIComponent(partida.jugadores)}&fecha=${encodeURIComponent(partida.fecha)}&ciudad=${encodeURIComponent(partida.ciudad)}&descripcion=${encodeURIComponent(partida.descripcion)}&portada=${encodeURIComponent(partida.portada)}&foro=${encodeURIComponent(partida.foro)}&lat=${partida.lat}&lng=${partida.lng}`;
                     carta.appendChild(enlace);
                 } else {
                     const boton = document.createElement('button');

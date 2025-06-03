@@ -28,10 +28,13 @@
             <label for="descripcion" class="form-label">Descripción</label>
             <textarea class="form-control" name="descripcion" rows="3" required></textarea>
         </div>
-        <button name="enviar" class="btn btn-primary col-12">CREAR</button>
+        <button name="enviar" class="btn btn-primary col-12">MODIFICAR</button>
     </div>
 </main>
 <input type="hidden" name="descripcionGET" value="<?php echo $_GET['descripcion']; ?>">
+<input type="hidden" name="lat" value="<?php echo $_GET['lat']; ?>">
+<input type="hidden" name="lng" value="<?php echo $_GET['lng']; ?>">
+<input type="hidden" name="idPartida" value="<?php echo $_GET['foro']; ?>">
 <script src="../src/modPartida.js"></script>
 <?php require_once("./footer.php"); ?>
 

@@ -30,12 +30,20 @@ function geolocalizar(localizacion) {
     });
 }
 function initMap() {
+    const datosPost = window.datosPost || {};
+    const lat = parseFloat(datosPost.latInit) || 0;
+    const lng = parseFloat(datosPost.lngInit) || 0;
+    console.log("Latitud inicial:", lat, "Longitud inicial:", lng);
+    const PartidaLocInicial = {
+        lat: lat,
+        lng: lng
+    }
     // Opciones del mapa
     var options = {
         zoom: 8,
         center: {
-            lat: 0,
-            lng: 0
+            lat: lat,
+            lng: lng
         }
     };
 
@@ -45,38 +53,18 @@ function initMap() {
     // Agregar un marcador
     var marker = new google.maps.Marker({
         position: {
-            lat: 0,
-            lng: 0
+            lat: lat,
+            lng: lng
         },
         map: map,
         title: 'No has seleccionado una ubicación',
     });
 
-    // Solicitar permiso para obtener la ubicación del usuario
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            function (position) {
-                // Centrar el mapa en la ubicación del usuario
-                const userLocation = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-                map.setCenter(userLocation);
-                marker.setPosition(userLocation);
+    // Centrar el mapa y el marcador en la ubicación inicial
+    map.setCenter(PartidaLocInicial);
+    marker.setPosition(PartidaLocInicial);
 
-                geolocalizar(userLocation);
-            },
-            function (error) {
-            },
-            {
-                enableHighAccuracy: true,
-                timeout: 10000,
-                maximumAge: 0
-            }
-        );
-    } else {
-        console.error('La geolocalización no es compatible con este navegador.');
-    }
+    geolocalizar(PartidaLocInicial);
 
     // Agregar un listener para los clics en el mapa
     google.maps.event.addListener(map, 'click', function (event) {

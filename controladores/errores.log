@@ -1,0 +1,7 @@
+[03-Jun-2025 14:15:14 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: The number of elements in the type definition string must match the number of bind variables in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\partida.php:38
+Stack trace:
+#0 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\partida.php(38): mysqli_stmt->bind_param('ssissddssii', 'Prueba1235', 'Prueba22', '4', '2025-06-07', '<p>aaaaaaaaaaaa...', '36.726274398163...', '-4.469180685408...', 'M\xC3\xA1laga', 'null', '8')
+#1 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(256): partida->modPartida('8', 'Prueba1235', 'Prueba22', '4', '2025-06-07', '<p>aaaaaaaaaaaa...', '36.726274398163...', '-4.469180685408...', 'M\xC3\xA1laga', 'null')
+#2 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(372): modPartida()
+#3 {main}
+  thrown in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\partida.php on line 38

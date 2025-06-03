@@ -23,6 +23,27 @@ class partida
         $consulta->execute();
         $consulta->close();
     }
+    // Actualizar una partida
+    public function modPartida($idPartida, $nombre, $juego, $numJugadores, $fechaInicio, $descripcion, $latitud, $longitud, $ciudad, $portada_path)
+    {
+        require_once("../classes/usuario.php");
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $user = new usuario("../../../");
+        $id_user = $user->getId($_SESSION["user"]);
+        if ($portada_path) {
+            $sentencia = "UPDATE partidas SET titulo=?, juego=?, numJugadores=?, fecha=?, descripcion=?, latitud=?, longitud=?, ciudad=?, portada=? WHERE id=?";
+            $consulta = $this->db->prepare($sentencia);
+            $consulta->bind_param("ssissddssi", $nombre, $juego, $numJugadores, $fechaInicio, $descripcion, $latitud, $longitud, $ciudad, $portada_path, $idPartida);
+        } else {
+            $sentencia = "UPDATE partidas SET titulo=?, juego=?, numJugadores=?, fecha=?, descripcion=?, latitud=?, longitud=?, ciudad=? WHERE id=?";
+            $consulta = $this->db->prepare($sentencia);
+            $consulta->bind_param("ssissddsi", $nombre, $juego, $numJugadores, $fechaInicio, $descripcion, $latitud, $longitud, $ciudad, $idPartida);
+        }
+        $consulta->execute();
+        $consulta->close();
+    }
     //Buscar partida
     public function buscarPartidas($latitud, $longitud)
     {

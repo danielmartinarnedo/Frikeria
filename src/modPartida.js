@@ -8,6 +8,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const inputDescripcion = document.getElementsByName('descripcion')[0];
     const inputFoto = document.getElementsByName('portada')[0];
     const submitForm = document.getElementsByName('enviar')[0];
+    const inputLatitud = document.getElementsByName('lat')[0];
+    const inputLongitud = document.getElementsByName('lng')[0];
+    const idPartidaInput = document.getElementsByName('idPartida')[0];
+    const idPartida = idPartidaInput.value;
+    const lat= inputLatitud.value;
+    const lng= inputLongitud.value;
+    inputLatitud.remove();
+    inputLongitud.remove();
+    idPartidaInput.remove();
 
     // Funcion que valida el formulario
     function validacionFormulario() {
@@ -69,14 +78,9 @@ document.addEventListener("DOMContentLoaded", function () {
             if (inputFoto.files[0]) {
                 formularioDatos.append('portada', inputFoto.files[0]);
             }
-            console.log("Datos del formulario:", {
-                nom: inputNombre.value.trim(),
-                juego: inputJuego.value.trim(),
-                numJugadores: inputNumeroJugadores.value,
-                fechaInicio: inputFechaInicio.value,
-                descripcion: inputDescripcion.value.trim(),
-                foto: inputFoto.files[0] ? inputFoto.files[0].name : 'No file selected'
-            });
+            formularioDatos.append('latInit', lat);
+            formularioDatos.append('lngInit', lng);
+            formularioDatos.append('idPartida', idPartida);
 
             fetch('../controladores/normal.php?action=modPartidaForm', {
                 method: 'POST',
@@ -85,10 +89,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(response => response.json())
                 .then(data => {
                     if (data.estado) {
-                        formularioDatos.append('fotoRuta', data.fotoRuta ?? imgTag.src);
+                        formularioDatos.append('fotoRuta', data.fotoRuta || "");
                         const formularioMapa = document.createElement('form');
                         formularioMapa.method = 'POST';
-                        formularioMapa.action = '../controladores/normal.php?action=irMapa';
+                        formularioMapa.action = '../controladores/normal.php?action=irMapaMod';
 
                         for (const [key, value] of formularioDatos.entries()) {
                             const input = document.createElement('input');
@@ -97,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             input.value = value;
                             formularioMapa.appendChild(input);
                         }
+                        console.log(formularioMapa);
                         document.body.appendChild(formularioMapa);
                         formularioMapa.submit();
                     } else {
@@ -142,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ['style', ['bold', 'italic', 'underline', 'clear']],
             ['color', ['color']],
             ['para', ['ul', 'ol', 'paragraph', 'table']],
-            ['insert', ['link', 'picture', 'video']],
+            ['insert', ['link', 'video']],
             ['view', ['fullscreen', 'help']]
         ], callbacks: {
             onInit: function () {
