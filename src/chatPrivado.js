@@ -136,11 +136,22 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("idChatPrivado").remove();
 
     btnEnviar.addEventListener('click', function () {
-        enviarMensaje(inputMensaje.value);
-        inputMensaje.value = '';
+        enviarMensaje($(inputMensaje).summernote('code').trim());
+        $(inputMensaje).summernote('reset');
     });
 
     cargarMensajes();
 
     setInterval(cargarMensajes, 5000);
+
+    $(inputMensaje).summernote({
+        height: 250,
+        lang: 'es-ES',
+        toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['para', ['ul', 'ol', 'paragraph', 'table']],
+            ['insert', ['link', 'video']],
+            ['view', ['fullscreen', 'help']]
+        ]
+    });
 });
