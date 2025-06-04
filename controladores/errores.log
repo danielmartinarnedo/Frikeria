@@ -1,1 +1,21 @@
-
+[04-Jun-2025 15:54:59 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`frikeria`.`reportechatprivado`, CONSTRAINT `fk_repPriv_mens` FOREIGN KEY (`idMensaje`) REFERENCES `mensajeschatprivados` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\reportes.php:40
+Stack trace:
+#0 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\reportes.php(40): mysqli_stmt->execute()
+#1 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(397): reportes->crearReporteChatPrivado('5', 'null', 'Holiasdasda23')
+#2 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(415): reportarChatPrivado()
+#3 {main}
+  thrown in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\reportes.php on line 40
+[04-Jun-2025 15:56:47 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`frikeria`.`reportechatprivado`, CONSTRAINT `fk_repPriv_mens` FOREIGN KEY (`idMensaje`) REFERENCES `mensajeschatprivados` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\reportes.php:40
+Stack trace:
+#0 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\reportes.php(40): mysqli_stmt->execute()
+#1 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(397): reportes->crearReporteChatPrivado('5', 'null', 'Holxia')
+#2 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(415): reportarChatPrivado()
+#3 {main}
+  thrown in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\reportes.php on line 40
+[04-Jun-2025 15:57:32 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`frikeria`.`reportechatprivado`, CONSTRAINT `fk_repPriv_mens` FOREIGN KEY (`idMensaje`) REFERENCES `mensajeschatprivados` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\reportes.php:40
+Stack trace:
+#0 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\reportes.php(40): mysqli_stmt->execute()
+#1 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(397): reportes->crearReporteChatPrivado('5', 'null', 'Holixia')
+#2 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(415): reportarChatPrivado()
+#3 {main}
+  thrown in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\reportes.php on line 40

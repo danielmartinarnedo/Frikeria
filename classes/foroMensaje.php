@@ -23,7 +23,7 @@ class foroMensaje
     }
     public function buscarMensajes($id_anuncio)
     {
-        $sentencia = "SELECT idUser, texto FROM foromensaje WHERE idAnuncio = ? AND estado = 1 ORDER BY fecha ASC";
+        $sentencia = "SELECT idUser, texto, id FROM foromensaje WHERE idAnuncio = ? AND estado = 1 ORDER BY fecha ASC";
         $consulta = $this->db->prepare($sentencia);
         $consulta->bind_param("i", $id_anuncio);
         $consulta->execute();
@@ -39,6 +39,7 @@ class foroMensaje
         while ($datos = $resultado->fetch_assoc()) {
             $usuario = $user->getDatosForoUsuario($datos["idUser"]);
             $texto = ($datos["texto"]);
+            $idMensaje = $datos["id"];
             $soyYo = false;
             $bloqueado = false;
             $estoyBloqueado = false;
@@ -54,7 +55,8 @@ class foroMensaje
                 "texto" => $texto,
                 "estado" => $soyYo,
                 "bloqueo" => $bloqueado,
-                "estoyBloqueado" => $estoyBloqueado
+                "estoyBloqueado" => $estoyBloqueado,
+                "idMensaje" => $idMensaje
             ));
         }
         return $mensajes;

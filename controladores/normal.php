@@ -366,6 +366,49 @@ function buscarChatsPrivados()
     $datos = $chat->buscarChatsPrivados();
     echo json_encode($datos);
 }
+//REPORTES
+//Crear un reporte de una partida
+function reportarPartida(){
+    header('Content-Type: application/json');
+    $idPartida = $_POST['idPartida'];
+    $texto = $_POST['descripcion'];
+    require_once("../classes/reportes.php");
+    $reporte = new reportes("../../../");
+    $reporte->crearReportePartida($idPartida, $texto);
+}
+//Crear un reporte de un foro
+function reportarForo(){
+    header('Content-Type: application/json');
+    $idChat = $_POST['idChat'];
+    $idMensaje = $_POST['idMensaje'];
+    $texto = $_POST['descripcion'];
+    require_once("../classes/reportes.php");
+    $reporte = new reportes("../../../");
+    $reporte->crearReporteForo($idChat, $idMensaje, $texto);
+}
+//Crear un reporte de un chat privado
+function reportarChatPrivado(){
+    header('Content-Type: application/json');
+    $idChat = $_POST['idChat'];
+    $idMensaje = $_POST['idMensaje'];
+    $texto = $_POST['descripcion'];
+    require_once("../classes/reportes.php");
+    $reporte = new reportes("../../../");
+    $reporte->crearReporteChatPrivado($idChat, $idMensaje, $texto);
+}
+//Crear un reporte de un usuario
+function reportarUsuario(){
+    header('Content-Type: application/json');
+    $nomUsuario = $_POST['nombreUsuario'];
+    session_start();
+    require_once("../classes/usuario.php");
+    $usus = new usuario("../../../");
+    $idUsuario = $usus->getId($nomUsuario);
+    $texto = $_POST['descripcion'];
+    require_once("../classes/reportes.php");
+    $reporte = new reportes("../../../");
+    $reporte->crearReporteUsuario($idUsuario, $texto);
+}
 //Maneja las acciones enviadas por el usuario
 if (isset($_REQUEST["action"])) {
     $action = $_REQUEST["action"];

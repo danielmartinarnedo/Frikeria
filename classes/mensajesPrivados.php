@@ -22,7 +22,7 @@ class mensajesPrivados
     }
     public function buscarMensajesPrivados($id_chat)
     {
-        $sentencia = "SELECT idUsuario, texto FROM mensajeschatprivados WHERE idChat = ? AND estado = 1 ORDER BY fecha ASC";
+        $sentencia = "SELECT id, idUsuario, texto FROM mensajeschatprivados WHERE idChat = ? AND estado = 1 ORDER BY fecha ASC";
         $consulta = $this->db->prepare($sentencia);
         $consulta->bind_param("i", $id_chat);
         $consulta->execute();
@@ -53,7 +53,8 @@ class mensajesPrivados
                 "texto" => $texto,
                 "estado" => $soyYo,
                 "bloqueo" => $bloqueado,
-                "estoyBloqueado" => $estoyBloqueado
+                "estoyBloqueado" => $estoyBloqueado,
+                "idMensaje" => $datos["id"]
             ));
         }
         return $mensajes;
