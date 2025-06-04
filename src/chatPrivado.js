@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.error('Error al enviar el reporte:', error);
                     alert('Ocurrió un error al enviar el reporte. Por favor, inténtalo de nuevo más tarde.');
                 });
-            modalReporte.hide();
+            bloquear();
         } else {
             alert('Por favor, ingresa una descripción para el reporte.');
         }
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.error('Error al enviar el reporte:', error);
                     alert('Ocurrió un error al enviar el reporte. Por favor, inténtalo de nuevo más tarde.');
                 });
-            modalReporte.hide();
+            bloquear();
         } else {
             alert('Por favor, ingresa una descripción para el reporte.');
         }
@@ -241,7 +241,6 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             reportarMensaje();
         }
-        bloquear();
     });
 
     cargarMensajes();

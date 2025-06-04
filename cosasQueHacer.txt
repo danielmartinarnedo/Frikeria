@@ -13,9 +13,9 @@ Cambiar el textarea del chat del foro (Hecho)
 Cambiar el textarea del chat del privado (Hecho)
 
 Administracion:
-1. Crear Reporte VerAnuncio
-2. Crear Reporte foro
-3. Crear Reporte ChatPrivado
+1. Crear Reporte VerAnuncio (Hecho)
+2. Crear Reporte foro (Hecho)
+3. Crear Reporte ChatPrivado (Hecho)
 4. Crear Zona de Reporte de Admin donde los se vean los reportes de los 3 puntos anteriores con los datos que tengan los reportes y la opcion de los 3 siguientes puntos dependiendo que clase de reporte es.
 5. Crear zona donde se vea mejor el reporte de anuncios siendo algo similar a VerAnuncios pero con los datos extra del reporte.
 6. Crear la zona de reporte del foro, llevandote al chat del foro o privado pero sin habilidad de escribir y resaltando con otro color el mensaje del reporte (Puedes hacer opciones del reporte en cualquier persona)
