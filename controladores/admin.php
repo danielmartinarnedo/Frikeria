@@ -52,6 +52,10 @@ function quitarTicket()
     echo json_encode($res);
 }
 
+function irAdminUsuario(){
+    require_once("../vista/adminUsuario.php");
+}
+
 //Maneja las acciones enviadas por el usuario
 if (isset($_REQUEST["action"])) {
     $action = $_REQUEST["action"];

@@ -69,6 +69,8 @@ function cargarTickets(clave, valor) {
                         action = '../controladores/admin.php?action=irAdminAnuncio';
                         break;
                     case 'chatForo':
+                        action = '../controladores/admin.php?action=irAdminChat';
+                        break;
                     case 'chatPartida':
                         action = '../controladores/admin.php?action=irAdminChat';
                         break;
