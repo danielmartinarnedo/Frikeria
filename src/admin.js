@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function cargarTicketsInit(objeto) {
         for (const [clave, valor] of Object.entries(objeto)) {
-            console.log(clave, valor);
             cargarTickets(clave,valor);
         }
     }
@@ -69,10 +68,10 @@ function cargarTickets(clave, valor) {
                         action = '../controladores/admin.php?action=irAdminAnuncio';
                         break;
                     case 'chatForo':
-                        action = '../controladores/admin.php?action=irAdminChat';
+                        action = '../controladores/admin.php?action=irAdminChatForo';
                         break;
                     case 'chatPartida':
-                        action = '../controladores/admin.php?action=irAdminChat';
+                        action = '../controladores/admin.php?action=irAdminChatPartida';
                         break;
                     case 'usuario':
                         action = '../controladores/admin.php?action=irAdminUsuario';

@@ -210,7 +210,7 @@ class usuario
         return $role;
     }
 
-    //Eliminar un usuario
+    //Eliminar un usuario y todas sus partidas
     function quitarUsuario($id)
     {
         $sentencia = "UPDATE usuario SET estado = 0 WHERE id = ?";
@@ -219,6 +219,12 @@ class usuario
         $consulta->execute();
         $filasAfectadas = $consulta->affected_rows;
         $consulta->close();
-        return $filasAfectadas > 0;
+        $estado = $filasAfectadas > 0;
+        if ($estado) {
+            require_once("partida.php");
+            $partida = new partida("../../../");
+            $estado=$partida->quitarPartidasUsuario($id);
+        }
+        return $estado;
     }
 }

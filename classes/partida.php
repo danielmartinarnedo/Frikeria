@@ -50,7 +50,7 @@ class partida
         require_once("../classes/usuario.php");
         $sentencia = "
         SELECT titulo, juego, numJugadores, fecha, descripcion, latitud, longitud, ciudad, portada, id, idCreador
-        FROM partidas WHERE fecha >= CURDATE()
+        FROM partidas WHERE fecha >= CURDATE() AND estado = 1
         ORDER BY (6371 * ACOS(
             COS(RADIANS(?)) * COS(RADIANS(latitud)) *
             COS(RADIANS(longitud) - RADIANS(?)) +
@@ -83,7 +83,7 @@ class partida
         return $res;
     }
     //Buscar las partidas que ha creado el usuario
-    function buscarPartidasPropias()
+    public function buscarPartidasPropias()
     {
         require_once("../classes/usuario.php");
         if (session_status() == PHP_SESSION_NONE) {
@@ -91,7 +91,7 @@ class partida
         }
         $user = new usuario("../../../");
         $id_user = $user->getId($_SESSION["user"]);
-        $sentencia = "SELECT titulo, juego, numJugadores, fecha, descripcion, latitud, longitud, ciudad, portada, id FROM partidas WHERE idCreador = ?";
+        $sentencia = "SELECT titulo, juego, numJugadores, fecha, descripcion, latitud, longitud, ciudad, portada, id FROM partidas WHERE idCreador = ? AND estado = 1";
         $consulta = $this->db->prepare($sentencia);
         $consulta->bind_param("i", $id_user);
         $consulta->bind_result($titulo, $juego, $numJugadores, $fecha, $descripcion, $latitud, $longitud, $ciudad, $portada, $id);
@@ -113,5 +113,60 @@ class partida
         }
         $consulta->close();
         return $res;
+    }
+    //Funcion que quita todas las partidas de un usuario
+    function quitarPartidasUsuario($id)
+    {
+        $sentencia = "UPDATE partidas SET estado = 0 WHERE idCreador = ?";
+        $consulta = $this->db->prepare($sentencia);
+        $consulta->bind_param("i", $id);
+        $consulta->execute();
+        $est = $consulta->affected_rows;
+        $consulta->close();
+        return $est > 0;
+    }
+    //Funcion para conseguir toda la informacion de una partida
+    public function getPartida($id)
+    {
+        $sentencia = "SELECT titulo, juego, numJugadores, fecha, descripcion, ciudad, portada, idCreador FROM partidas WHERE id = ?";
+        $consulta = $this->db->prepare($sentencia);
+        $consulta->bind_param("i", $id);
+        $consulta->bind_result($titulo, $juego, $numJugadores, $fecha, $descripcion, $ciudad, $portada, $idCreador);
+        $consulta->execute();
+        $consulta->fetch();
+        $consulta->close();
+        require_once("../classes/usuario.php");
+        $user = new usuario("../../../");
+        $nombreCreador = $user->getNombreUsuario($idCreador);
+        return array(
+            'titulo' => $titulo,
+            'juego' => $juego,
+            'numJugadores' => $numJugadores,
+            'fecha' => $fecha,
+            'descripcion' => $descripcion,
+            'ciudad' => $ciudad,
+            'portada' => $portada,
+            'nombreCreador' => $nombreCreador,
+            'idCreador' => $idCreador
+        );
+    }
+    //Funcion para quitar una partida
+    function quitarPartida($id)
+    {
+        $sentencia = "UPDATE partidas SET estado = 0 WHERE id = ?";
+        $consulta = $this->db->prepare($sentencia);
+        $consulta->bind_param("i", $id);
+        $consulta->execute();
+        $est = $consulta->affected_rows;
+        $consulta->close();
+        if ($est == 0) {
+            $sentencia = "SELECT p.idCreador FROM partidas p, usuario u WHERE p.id = ? AND u.estado = 0 AND p.idCreador = u.id";
+            $consulta = $this->db->prepare($sentencia);
+            $consulta->bind_param("i", $id);
+            $consulta->execute();
+            $est = $consulta->affected_rows;
+            $consulta->close();
+        }
+        return $est > 0;
     }
 }
