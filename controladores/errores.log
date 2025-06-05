@@ -1,0 +1,7 @@
+[05-Jun-2025 22:06:08 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: No connection could be made because the target machine actively refused it in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\usuario.php:9
+Stack trace:
+#0 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\usuario.php(9): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'frikeria')
+#1 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(107): usuario->__construct('../../../')
+#2 C:\Users\Dan\Documents\xampp\htdocs\Frikeria\controladores\normal.php(415): conseguirUsuario()
+#3 {main}
+  thrown in C:\Users\Dan\Documents\xampp\htdocs\Frikeria\classes\usuario.php on line 9

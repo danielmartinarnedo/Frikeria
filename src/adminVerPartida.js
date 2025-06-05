@@ -11,12 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     console.log(partida);
     //FUNCIONES
-    //Funcion que quita una partida y todos sus tickets
-    function removerPartida() {
 
-    }
 
     //CODIGO GENERICO
+    //Funcion que quita el ticket
     quitarTicket.addEventListener('click', function () {
         fetch('../controladores/admin.php', {
             method: 'POST',
@@ -42,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Error quitando el ticket:', error);
             });
     });
+    //Funcion que quita una partida y todos sus tickets
     quitarPartida.addEventListener('click', function () {
         fetch('../controladores/admin.php', {
             method: 'POST',

@@ -93,7 +93,7 @@ function sentenciarTicketUsuario()
     echo json_encode($res);
 }
 // Funcion que redirige a la vista de administracion de anuncios y coje el anuncio de la base de datos
-function irAdminAnuncio ()
+function irAdminAnuncio()
 {
     require_once("../classes/partida.php");
     $anuncio = new partida("../../../");
@@ -104,7 +104,8 @@ function irAdminAnuncio ()
     require_once("../vista/footer.php");
 }
 // Funcion que quita anuncios de la base de datos
-function sentenciarTicketPartida(){
+function sentenciarTicketPartida()
+{
     header('Content-Type: application/json');
     $idPartida = $_POST["idPartida"];
     require_once("../classes/partida.php");
@@ -123,6 +124,35 @@ function sentenciarTicketPartida(){
         $res = ["estado" => false, "mensaje" => "Ha habido un error al sentenciar el ticket."];
     }
     echo json_encode($res);
+}
+//Funcion para eliminar un mensaje del foro
+function sentenciarTicketforoMensaje()
+{
+    header('Content-Type: application/json');
+    $idMensaje = $_POST["idMensaje"];
+    require_once("../classes/foroMensaje.php");
+    $foro = new foroMensaje("../../../");
+    $res = $foro->quitarMensaje($idMensaje);
+    if ($res) {
+        require_once("../classes/reportes.php");
+        $reportes = new reportes("../../../");
+        $res = $reportes->quitarTodosTicketForoMensaje($idMensaje);
+        $res = ["estado" => true, "mensaje" => "El mensaje ha sido sentenciado correctamente."];
+    } else {
+        $res = ["estado" => false, "mensaje" => "Ha habido un error al sentenciar el ticket."];
+    }
+    echo json_encode($res);
+}
+
+// Funcion para ir al chat admin
+function irAdminChatForo()
+{
+    require_once("../classes/foroMensaje.php");
+    $foro = new foroMensaje("../../../");
+    $mensajes = $foro->buscarMensajes($_POST["idChat"]);
+    require_once("../vista/header.php");
+    require_once("../vista/adminChatForo.php");
+    require_once("../vista/footer.php");
 }
 //Maneja las acciones enviadas por el usuario
 if (isset($_REQUEST["action"])) {

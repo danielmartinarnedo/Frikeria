@@ -1,7 +1,7 @@
 <input type="hidden" id="idChatPrivado" value="<?php echo $idChat; ?>">
 <main class="container-fluid">
-    <main class="container-fluid">
-        <section id="foro-container" class="row d-flex justify-content-center align-items-center">
+    <section class="container-fluid">
+        <div id="foro-container" class="row d-flex justify-content-center align-items-center">
             <div class="col-11 col-md-8">
                 <div class="container">
                     <div id="mensajes-container" class="row d-flex justify-content-center align-items-center">
@@ -9,8 +9,8 @@
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
     <section class="row d-flex justify-content-center align-items-center">
         <div class="col-12 col-md-8">
             <div class="mb-3">

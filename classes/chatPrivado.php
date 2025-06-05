@@ -72,5 +72,6 @@ class chatPrivado
         }
         return $datos;
     }
+    
 }
 ?>

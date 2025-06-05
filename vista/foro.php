@@ -1,17 +1,17 @@
 <?php require_once("./header.php"); ?>
 <main class="container-fluid">
     <h2 class="text-center"><?php echo $_GET["titulo"]; ?></h2>
-    <main class="container-fluid">
-        <section id="foro-container" class="row d-flex justify-content-center align-items-center">
+    <section class="container-fluid">
+        <div id="foro-container" class="row d-flex justify-content-center align-items-center">
             <div class="col-11 col-md-8">
                 <div class="container">
                     <div id="mensajes-container" class="row d-flex justify-content-center align-items-center">
-                        
+
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
     <section id="input-foro" class="row d-flex justify-content-center align-items-center">
         <div class="col-12 col-md-8">
             <div class="mb-3">
@@ -30,7 +30,7 @@
                 </div>
                 <div class="modal-body">
                     <label for="tipoReporte" class="form-label">TIPO DEL REPORTE:</label>
-                    <select  id="reporteOpcion" class="form-select">
+                    <select id="reporteOpcion" class="form-select">
                         <option value="usuario">USUARIO</option>
                         <option value="mensaje" selected>MENSAJE</option>
                     </select>

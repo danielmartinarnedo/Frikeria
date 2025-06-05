@@ -146,5 +146,13 @@ class reportes
         $consulta->close();
         return $resultado;
     }
+    function quitarTodosTicketForoMensaje($id)
+    {
+        $sentencia = "UPDATE reporteforomensaje SET resuelto = 1 WHERE idMensaje = ?";
+        $consulta = $this->db->prepare($sentencia);
+        $consulta->bind_param("i", $id);
+        $consulta->execute();
+        $consulta->close();
+    }
 }
 ?>
