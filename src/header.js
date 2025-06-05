@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
           headerDiv.innerHTML = `
             <li class="nav-item ms-3"><a class="nav-link" href="${ruta + 'irModUser'}">MODIFICAR DATOS</a></li>
             <li  class="nav-item ms-3"><a class="nav-link" href="${ruta + 'cerrarSes'}">CERRAR SESIÓN</a></li>`;
-          navbarBrand.href = `..vista/admin.php`;
+          navbarBrand.href = `../vista/admin.php`;
         } else {
           headerDiv.innerHTML = `
                         <li class="nav-item ms-3">

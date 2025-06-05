@@ -12,7 +12,7 @@ class usuario
     //Comprobar credenciales del usuario para ver si existe y los datos son correctos
     public function compCrede(String $nom, String $contra)
     {
-        $sentencia = "SELECT COUNT(*) FROM usuario WHERE nombre=? AND contra=?";
+        $sentencia = "SELECT COUNT(*) FROM usuario WHERE nombre=? AND contra=? AND estado = 1";
         $consulta = $this->db->prepare($sentencia);
         $consulta->bind_param("ss", $nom, $contra);
         $consulta->bind_result($count);
@@ -32,7 +32,7 @@ class usuario
     //Comprobar si existe el nombre de usuario
     public function compExistencia(String $nom)
     {
-        $sentencia = "SELECT COUNT(*) FROM usuario WHERE nombre=?";
+        $sentencia = "SELECT COUNT(*) FROM usuario WHERE nombre=? AND estado = 1";
         $consulta = $this->db->prepare($sentencia);
         $consulta->bind_param("s", $nom);
         $consulta->bind_result($count);
@@ -208,5 +208,17 @@ class usuario
         $consulta->fetch();
         $consulta->close();
         return $role;
+    }
+
+    //Eliminar un usuario
+    function quitarUsuario($id)
+    {
+        $sentencia = "UPDATE usuario SET estado = 0 WHERE id = ?";
+        $consulta = $this->db->prepare($sentencia);
+        $consulta->bind_param("i", $id);
+        $consulta->execute();
+        $filasAfectadas = $consulta->affected_rows;
+        $consulta->close();
+        return $filasAfectadas > 0;
     }
 }

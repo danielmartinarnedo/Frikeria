@@ -17,7 +17,7 @@ Administracion:
 2. Crear Reporte foro (Hecho)
 3. Crear Reporte ChatPrivado (Hecho)
 4. Crear Zona de Reporte de Admin donde los se vean los reportes de los 3 puntos anteriores con los datos que tengan los reportes y la opcion de los 3 siguientes puntos dependiendo que clase de reporte es.(Hecho)
-5. Crear una zona donde se vea la foto y el nombre del usuario, con opciones para quitar el usuario o quitar el ticket del reportaje.
+5. Crear una zona donde se vea la foto y el nombre del usuario, con opciones para quitar el usuario o quitar el ticket del reportaje.(Hecho)
 6. Crear zona donde se vea mejor el reporte de anuncios siendo algo similar a VerAnuncios pero con los datos extra del reporte.
 7. Crear la zona de reporte del foro, llevandote al chat del foro o privado pero sin habilidad de escribir y resaltando con otro color el mensaje del reporte (Puedes hacer opciones del reporte en cualquier persona)
 

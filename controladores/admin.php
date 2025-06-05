@@ -52,10 +52,45 @@ function quitarTicket()
     echo json_encode($res);
 }
 
-function irAdminUsuario(){
+function irAdminUsuario()
+{
+    require_once("../vista/header.php");
     require_once("../vista/adminUsuario.php");
+    require_once("../vista/footer.php");
 }
 
+function getDatosUsuario()
+{
+    header('Content-Type: application/json');
+    require_once("../classes/usuario.php");
+    $usuario = new usuario("../../../");
+    $id = $_POST["id"];
+    $datosUsuario = $usuario->getDatosForoUsuario($id);
+    echo json_encode($datosUsuario);
+}
+
+function sentenciarTicketUsuario()
+{
+    header('Content-Type: application/json');
+    $idUsuario = $_POST["idUsuario"];
+    require_once("../classes/usuario.php");
+    $usuario = new usuario("../../../");
+    $res = $usuario->quitarUsuario($idUsuario);
+    if ($res) {
+        require_once("../classes/reportes.php");
+        $reportes = new reportes("../../../");
+        $id = $_POST["id"];
+        $res = $reportes->quitarTicketUsuario($id);
+        if ($res) {
+            $res = ["estado" => true, "mensaje" => "El usuario ha sido sentenciado correctamente."];
+        } else {
+            $res = ["estado" => false, "mensaje" => "Ha habido un error al sentenciar el ticket."];
+        }
+    } else {
+        $res = ["estado" => false, "mensaje" => "Ha habido un error al eliminar el usuario."];
+    }
+    echo json_encode($res);
+}
 //Maneja las acciones enviadas por el usuario
 if (isset($_REQUEST["action"])) {
     $action = $_REQUEST["action"];

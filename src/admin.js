@@ -15,7 +15,7 @@ function cargarTickets(clave, valor) {
         ticketsContainer.innerHTML +=
             `<div class="card col-12 mb-3" id="${clave}${claveTicket}">
                 <div class="card-header">
-                    <h4 class="card-title">TIPO DE TICKET: ${clave}</h4>
+                    <h4 class="card-title">TIPO DE TICKET: ${clave.toUpperCase()}</h4>
                 </div>
                 <div class="card-body">
                     <p class="card-text">${ticket.descripcion}</p>
@@ -46,7 +46,7 @@ function cargarTickets(clave, valor) {
                     .then(data => {
                         if (data.estado) {
                             document.getElementById(`${clave}${claveTicket}`).remove();
-                            delete objTickets[clave][claveTicket]; // fix: use variable 'clave' not hardcoded 'anuncio'
+                            delete objTickets[clave][claveTicket];
                         } else {
                             alert('Error al quitar el ticket: ' + data.mensaje);
                         }
