@@ -48,6 +48,7 @@ class mensajesPrivados
                 $estoyBloqueado = $bloc->estoyBloqueado($usuario["nom"]);
             }
             array_push($mensajes, array(
+                "usuarioId" => $datos["idUsuario"],
                 "usuarioNom" => $usuario["nom"],
                 "usuarioImg" => $usuario["foto"],
                 "texto" => $texto,

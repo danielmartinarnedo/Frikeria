@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     mensajes.forEach((mensaje, index) => {
+        console.log(mensaje);
         // Crea el contenedor del mensaje
         const mensajeRow = document.createElement('div');
         mensajeRow.id = `mensaje${mensaje["idMensaje"]}`;
@@ -89,6 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Agrega el evento de click al icono de accion
         svg.addEventListener('click', function () {
             datosReporte = mensaje;
+            console.log(datosReporte);
             reportModal.show();
         });
     });
@@ -153,14 +155,34 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             body: new URLSearchParams({
                 action: 'sentenciarTicketUsuario',
-                idUsuario: partida.anuncio_idCreador
+                idUsuario: datosReporte.usuarioId
             })
         })
             .then(response => response.json())
             .then(data => {
                 if (data.estado) {
-                    alert('Usuario Eliminado correctamente');
-
+                    fetch('../controladores/admin.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: new URLSearchParams({
+                            action: 'cojerIdMensajesEliminadosChatForo',
+                            idChat: datosIniciales.idChat,
+                            idUsuario: datosReporte.usuarioId
+                        })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            for (let i = 0; i < data.length; i++) {
+                                const mensajeRow = document.getElementById('mensaje' + data[i]);
+                                mensajeRow.remove();
+                            }
+                            alert('Usuario Eliminado correctamente');
+                        })
+                        .catch(error => {
+                            console.error('Error quitando los mensajes del chat:', error);
+                        })
                 } else {
                     alert('Error al sentenciar el ticket: ' + data.mensaje);
                 }
@@ -169,4 +191,5 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Error sentenciando el ticket:', error);
             });
     });
+    console.log(datosIniciales);
 });

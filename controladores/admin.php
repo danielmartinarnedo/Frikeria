@@ -169,6 +169,14 @@ function irAdminChatPrivado()
     require_once("../vista/adminChatForo.php");
     require_once("../vista/footer.php");
 }
+// Funcion que coje todos los mensajes borrados de un usuario en un chat
+function cojerIdMensajesEliminadosChatForo(){
+    header('Content-Type: application/json');
+    require_once("../classes/foroMensaje.php");
+    $foro = new foroMensaje("../../../");
+    $mensajes = $foro->cojerIdMensajesEliminadosChatForo($_POST["idChat"], $_POST["idUsuario"]);
+    echo json_encode($mensajes);
+}
 //Maneja las acciones enviadas por el usuario
 if (isset($_REQUEST["action"])) {
     $action = $_REQUEST["action"];

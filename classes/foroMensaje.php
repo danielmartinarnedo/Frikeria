@@ -50,6 +50,7 @@ class foroMensaje
                 $estoyBloqueado = $bloc->estoyBloqueado($usuario["nom"]);
             }
             array_push($mensajes, array(
+                "usuarioId" => $datos["idUser"],
                 "usuarioNom" => $usuario["nom"],
                 "usuarioImg" => $usuario["foto"],
                 "texto" => $texto,
@@ -70,5 +71,19 @@ class foroMensaje
         $res=$consulta->execute();
         $consulta->close();
         return $res>0;
+    }
+
+    function cojerIdMensajesEliminadosChatForo($idChat, $idUsuario) {
+        $sentencia = "SELECT id FROM foromensaje WHERE idAnuncio = ? AND idUser = ? AND estado = 0";
+        $consulta = $this->db->prepare($sentencia);
+        $consulta->bind_param("ii", $idChat, $idUsuario);
+        $consulta->execute();
+        $resultado = $consulta->get_result();
+        $consulta->close();
+        $mensajes = array();
+        while ($datos = $resultado->fetch_assoc()) {
+            array_push($mensajes, $datos["id"]);
+        }
+        return $mensajes;
     }
 }
