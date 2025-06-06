@@ -128,15 +128,6 @@ class reportes
         $consulta->close();
         return $resultado;
     }
-    function quitarTodosTicketUsuario($id)
-    {
-        $sentencia = "UPDATE reporteusuario SET resuelto = 1 WHERE idUsuario = ?";
-        $consulta = $this->db->prepare($sentencia);
-        $consulta->bind_param("i", $id);
-        $resultado = $consulta->execute();
-        $consulta->close();
-        return $resultado;
-    }
     function quitarTodosTicketPartida($id)
     {
         $sentencia = "UPDATE reportepartidaanuncio SET resuelto = 1 WHERE idPartida = ?";

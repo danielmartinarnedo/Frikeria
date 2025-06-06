@@ -114,17 +114,6 @@ class partida
         $consulta->close();
         return $res;
     }
-    //Funcion que quita todas las partidas de un usuario
-    function quitarPartidasUsuario($id)
-    {
-        $sentencia = "UPDATE partidas SET estado = 0 WHERE idCreador = ?";
-        $consulta = $this->db->prepare($sentencia);
-        $consulta->bind_param("i", $id);
-        $consulta->execute();
-        $est = $consulta->affected_rows;
-        $consulta->close();
-        return $est > 0;
-    }
     //Funcion para conseguir toda la informacion de una partida
     public function getPartida($id)
     {

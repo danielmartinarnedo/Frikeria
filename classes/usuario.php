@@ -124,7 +124,7 @@ class usuario
         $filasAfectadas = $consulta->affected_rows;
         $consulta->close();
 
-        if ($filasAfectadas> 0) {
+        if ($filasAfectadas > 0) {
             unset($_SESSION['user']);
             $_SESSION['user'] = $nom;
         }
@@ -213,18 +213,26 @@ class usuario
     //Eliminar un usuario y todas sus partidas
     function quitarUsuario($id)
     {
-        $sentencia = "UPDATE usuario SET estado = 0 WHERE id = ?";
-        $consulta = $this->db->prepare($sentencia);
-        $consulta->bind_param("i", $id);
-        $consulta->execute();
-        $filasAfectadas = $consulta->affected_rows;
-        $consulta->close();
-        $estado = $filasAfectadas > 0;
-        if ($estado) {
-            require_once("partida.php");
-            $partida = new partida("../../../");
-            $estado=$partida->quitarPartidasUsuario($id);
+        $res = ["estado" => true, "mensaje" => "Todos los datos del usuario, sus partidas y elementos relacionado a sus tickets han sido eliminados."];
+        $sentencias =
+            [
+                ["input"=>"UPDATE usuario SET estado = 0 WHERE id = ?", "mensaje"=>"Error al eliminar el usuario."],
+                ["input"=>"UPDATE mensajeschatprivados mcp JOIN reportechatprivado rcp ON mcp.id = rcp.idMensaje SET mcp.estado = 0, rcp.resuelto = 1 WHERE mcp.idUsuario = ?;", "mensaje"=>"Error al eliminar los mensajes privados del usuario y sus tickets."],
+                ["input"=>"UPDATE foromensaje fm JOIN reporteforomensaje rfm ON fm.id = rfm.idMensaje SET fm.estado = 0, rfm.resuelto = 1 WHERE fm.idUser = ?;", "mensaje"=>"Error al eliminar los mensajes del foro relacionado con el usuario y sus tickets."],
+                ["input"=>"UPDATE reporteusuario SET resuelto = 1 WHERE idUsuario = ?;", "mensaje"=>"Error al eliminar los tickets del usuario."],
+                ["input"=>"UPDATE partidas p JOIN reportepartidaanuncio rpa ON p.id = rpa.idPartida SET p.estado = 0, rpa.resuelto = 1 WHERE p.idCreador = ?;", "mensaje"=>"Error al eliminar los anuncios de partidas del usuario y sus tickets."],
+                ["input"=>"UPDATE partidas SET estado = 0 WHERE idCreador = ?", "mensaje"=>"Error al eliminar las partidas del usuario."]
+            ];
+        for ($i = 0; $i < count($sentencias) && $res["estado"]; $i++) {
+            $sentencia = $sentencias[$i];
+            $consulta = $this->db->prepare($sentencia["input"]);
+            $consulta->bind_param("i", $id);
+            $ejecutar = $consulta->execute();
+            if (!$ejecutar) {
+                $res = ["estado" => false, "mensaje" => $sentencia["mensaje"]];
+            }
+            $consulta->close();
         }
-        return $estado;
+        return $res;
     }
 }

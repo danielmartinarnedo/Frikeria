@@ -78,18 +78,6 @@ function sentenciarTicketUsuario()
     require_once("../classes/usuario.php");
     $usuario = new usuario("../../../");
     $res = $usuario->quitarUsuario($idUsuario);
-    if ($res) {
-        require_once("../classes/reportes.php");
-        $reportes = new reportes("../../../");
-        $res = $reportes->quitarTodosTicketUsuario($idUsuario);
-        if ($res) {
-            $res = ["estado" => true, "mensaje" => "El usuario ha sido sentenciado correctamente."];
-        } else {
-            $res = ["estado" => false, "mensaje" => "Ha habido un error al sentenciar el ticket."];
-        }
-    } else {
-        $res = ["estado" => false, "mensaje" => "Ha habido un error al eliminar el usuario."];
-    }
     echo json_encode($res);
 }
 // Funcion que redirige a la vista de administracion de anuncios y coje el anuncio de la base de datos
