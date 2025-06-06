@@ -1,6 +1,4 @@
-ID: 1
 Array
 (
-    [nom] => prueba
-    [foto] => ../images/usuarioIcono.png
+    [0] => 8
 )

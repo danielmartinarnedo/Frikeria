@@ -177,6 +177,14 @@ function cojerIdMensajesEliminadosChatForo(){
     $mensajes = $foro->cojerIdMensajesEliminadosChatForo($_POST["idChat"], $_POST["idUsuario"]);
     echo json_encode($mensajes);
 }
+// Funcion que coje todos los mensajes borrados de un usuario en un chat
+function cojerIdMensajesEliminadosPrivados(){
+    header('Content-Type: application/json');
+    require_once("../classes/mensajesPrivados.php");
+    $foro = new mensajesPrivados("../../../");
+    $mensajes = $foro->cojerIdMensajesEliminadosPrivados($_POST["idChat"], $_POST["idUsuario"]);
+    echo json_encode($mensajes);
+}
 //Maneja las acciones enviadas por el usuario
 if (isset($_REQUEST["action"])) {
     $action = $_REQUEST["action"];

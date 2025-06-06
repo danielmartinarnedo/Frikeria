@@ -167,13 +167,14 @@ document.addEventListener('DOMContentLoaded', function () {
                             'Content-Type': 'application/x-www-form-urlencoded'
                         },
                         body: new URLSearchParams({
-                            action: 'cojerIdMensajesEliminadosChatForo',
+                            action: 'cojerIdMensajesEliminadosPrivados',
                             idChat: datosIniciales.idChat,
                             idUsuario: datosReporte.usuarioId
                         })
                     })
                         .then(response => response.json())
                         .then(data => {
+                            console.log(data);
                             for (let i = 0; i < data.length; i++) {
                                 const mensajeRow = document.getElementById('mensaje' + data[i]);
                                 mensajeRow.remove();

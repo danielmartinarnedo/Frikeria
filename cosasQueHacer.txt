@@ -25,5 +25,6 @@ Administracion:
 Footer(Polizas de privacidad y todo eso)
 Mejorar la pagina de inicio y embellezar la pagina web.
 Buscar por fecha, Ciudad, o nombre de juego la partida en buscarPartida.[OPCIONAL]
+
 Hacer la documentación
 Hacer Readme (Mirar Pautas)

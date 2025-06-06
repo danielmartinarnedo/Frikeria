@@ -81,12 +81,26 @@ class mensajesPrivados
     // Quitar un mensaje del chat privado
     function quitarMensaje($idMensaje)
     {
-        $sentencia = "UPDATE foromensaje SET estado = 0 WHERE id = ?";
+        $sentencia = "UPDATE mensajeschatprivados SET estado = 0 WHERE id = ?";
         $consulta = $this->db->prepare($sentencia);
         $consulta->bind_param("i", $idMensaje);
         $res=$consulta->execute();
         $consulta->close();
         return $res>0;
+    }
+    function cojerIdMensajesEliminadosPrivados($idChat, $idUsuario) {
+        $sentencia = "SELECT id FROM mensajeschatprivados WHERE idChat = ? AND idUsuario = ? AND estado = 0";
+        $consulta = $this->db->prepare($sentencia);
+        $consulta->bind_param("ii", $idChat, $idUsuario);
+        $consulta->execute();
+        $resultado = $consulta->get_result();
+        $consulta->close();
+        $mensajes = array();
+        while ($datos = $resultado->fetch_assoc()) {
+            array_push($mensajes, $datos["id"]);
+        }
+        file_put_contents('test.txt', print_r($mensajes, true));
+        return $mensajes;
     }
 }
 ?>
