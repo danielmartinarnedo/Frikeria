@@ -17,12 +17,12 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/lang/summernote-es-ES.min.js"></script>
 
-    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/frikeriaStyle.css">
 </head>
 
 <body>
-    <header class="bg-light py-5">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <header class="py-5">
+        <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="../vista/landing.php">Logo</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

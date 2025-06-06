@@ -1,4 +1,4 @@
-<body>
+<main>
     <h1 class="text-center">¿Donde quieres jugar?</h1>
     <div id="map" style="height: 500px; width: 100%;"></div>
     <form method="POST" action="./normal.php?action=crearPartida" enctype="multipart/form-data">
@@ -15,6 +15,6 @@
 
         <button class="btn btn-primary col-12" type="submit" name="crearPartida">CREAR PARTIDA</button>
     </form>
-</body>
+</main>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQRBU4caqOv1t1Fi3NuI9ZlG8Eb9oV9mY&libraries=places&callback=initMap"></script>
 <script src="../src/crearPartidaMapa.js"></script>

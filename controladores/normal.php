@@ -7,6 +7,15 @@ function irLanding()
 {
     header("Location: ../vista/landing.php");
 }
+function irLandingOrBuscarPartida(){
+    session_start();
+    $usuario = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+    if ($usuario) {
+        echo json_encode("../vista/buscarPartida.php");
+    } else {
+        echo json_encode("../vista/login.php");
+    }    
+}
 //USUARIO
 //Introduce un usuario y te envia a la landing
 function insertarUsuario()

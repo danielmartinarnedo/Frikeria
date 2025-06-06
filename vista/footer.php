@@ -1,4 +1,4 @@
-<footer class="bg-light py-5">
+<footer class="py-5">
     <div class="container d-flex justify-content-around">
         <a class="text-center text-black " href="../vista/politicaPrivacidad.php">POLITICA DE PRIVACIDAD</a>
         <a class="text-center text-black" href="../vista/cookiesPoliza.php">POLITICA DE COOKIES</a>

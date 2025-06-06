@@ -22,8 +22,10 @@ Administracion:
 7. Crear la zona de reporte del foro, llevandote al chat del foro o privado pero sin habilidad de escribir y resaltando con otro color el mensaje del reporte (Hecho)
 8. Hacer opcion de sentencia de usuario que quite todos los tickets del usuario, todos los anuncios que ha creado el usuario, todos los tickets de dicho anuncios, todos los tickets de los mensajes del usuario (tanto publico como privado)
 
-Footer(Polizas de privacidad y todo eso)
-Mejorar la pagina de inicio y embellezar la pagina web.
+Footer(Hecho)
+Mejorar la pagina de inicio.
+Arreglos:
+Parpadeo al recargar los mensajes en los chats
 Buscar por fecha, Ciudad, o nombre de juego la partida en buscarPartida.[OPCIONAL]
 
 Hacer la documentación
