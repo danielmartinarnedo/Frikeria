@@ -38,7 +38,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="reportarBoton" class="col-12 btn bg-danger text-white">REPORTAR</button>
-                    <button type="button" id="bloquearBoton" class="col-12 btn bg-danger-subtle text-white">BLOQUEAR</button>
+                    <button type="button" id="bloquearBoton" class="col-12 btn bg-danger text-white">BLOQUEAR</button>
                 </div>
             </div>
         </div>
