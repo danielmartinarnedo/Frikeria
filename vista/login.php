@@ -24,4 +24,3 @@
 </main>
 <script src="../src/login.js"></script>
 <?php require_once("./footer.php"); ?>
-<!--                 <form action="../index.php?action=inicio" method="post"> -->

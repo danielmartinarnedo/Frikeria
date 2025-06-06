@@ -34,4 +34,3 @@
 <script src="../src/crearPartida.js"></script>
 <?php require_once("./footer.php"); ?>
 
-<!--  action="../controladores/normal.php?action=descargarFoto" method="POST" enctype="multipart/form-data"  -->
