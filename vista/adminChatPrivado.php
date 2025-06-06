@@ -37,4 +37,4 @@ foreach ($mensajes as $key => $value) {
         </div>
     </div>
 </main>
-<script src="../src/adminChatForo.js"></script>
+<script src="../src/adminChatPrivado.js"></script>

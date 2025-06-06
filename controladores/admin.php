@@ -143,13 +143,40 @@ function sentenciarTicketforoMensaje()
     }
     echo json_encode($res);
 }
-
 // Funcion para ir al chat admin
 function irAdminChatForo()
 {
     require_once("../classes/foroMensaje.php");
     $foro = new foroMensaje("../../../");
     $mensajes = $foro->buscarMensajes($_POST["idChat"]);
+    require_once("../vista/header.php");
+    require_once("../vista/adminChatForo.php");
+    require_once("../vista/footer.php");
+}
+//Funcion para eliminar un mensaje del foro
+function sentenciarTicketchatPrivadoMensaje()
+{
+    header('Content-Type: application/json');
+    $idMensaje = $_POST["idMensaje"];
+    require_once("../classes/foroMensaje.php");
+    $foro = new mensajesPrivados("../../../");
+    $res = $foro->quitarMensaje($idMensaje);
+    if ($res) {
+        require_once("../classes/reportes.php");
+        $reportes = new reportes("../../../");
+        $res = $reportes->quitarTodosTicketChatPrivado($idMensaje);
+        $res = ["estado" => true, "mensaje" => "El mensaje ha sido sentenciado correctamente."];
+    } else {
+        $res = ["estado" => false, "mensaje" => "Ha habido un error al sentenciar el ticket."];
+    }
+    echo json_encode($res);
+}
+// Funcion para ir al chat admin
+function irAdminChatPrivado()
+{
+    require_once("../classes/mensajesPrivados.php");
+    $foro = new mensajesPrivados("../../../");
+    $mensajes = $foro->buscarMensajesPrivados($_POST["idChat"]);
     require_once("../vista/header.php");
     require_once("../vista/adminChatForo.php");
     require_once("../vista/footer.php");

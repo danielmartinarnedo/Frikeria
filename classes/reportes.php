@@ -154,5 +154,13 @@ class reportes
         $consulta->execute();
         $consulta->close();
     }
+    function quitarTodosTicketChatPrivado($id)
+    {
+        $sentencia = "UPDATE reportechatprivado SET resuelto = 1 WHERE idMensaje = ?";
+        $consulta = $this->db->prepare($sentencia);
+        $consulta->bind_param("i", $id);
+        $consulta->execute();
+        $consulta->close();
+    }
 }
 ?>

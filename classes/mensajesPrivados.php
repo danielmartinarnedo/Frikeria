@@ -77,5 +77,15 @@ class mensajesPrivados
         }
         $consulta->close();
     }
+    // Quitar un mensaje del chat privado
+    function quitarMensaje($idMensaje)
+    {
+        $sentencia = "UPDATE foromensaje SET estado = 0 WHERE id = ?";
+        $consulta = $this->db->prepare($sentencia);
+        $consulta->bind_param("i", $idMensaje);
+        $res=$consulta->execute();
+        $consulta->close();
+        return $res>0;
+    }
 }
 ?>

@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             body: new URLSearchParams({
                 action: 'quitarTicket',
-                tipo: 'chatForo',
+                tipo: 'chatPrivado',
                 id: datosIniciales.id
             })
         })
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: new URLSearchParams({
-                action: 'sentenciarTicketforoMensaje',
+                action: 'sentenciarTicketchatPrivadoMensaje',
                 idMensaje: datosReporte.idMensaje
             })
         })

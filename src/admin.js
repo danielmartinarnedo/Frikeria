@@ -70,8 +70,8 @@ function cargarTickets(clave, valor) {
                     case 'chatForo':
                         action = '../controladores/admin.php?action=irAdminChatForo';
                         break;
-                    case 'chatPartida':
-                        action = '../controladores/admin.php?action=irAdminChatPartida';
+                    case 'chatPrivado':
+                        action = '../controladores/admin.php?action=irAdminChatPrivado';
                         break;
                     case 'usuario':
                         action = '../controladores/admin.php?action=irAdminUsuario';
