@@ -18,7 +18,7 @@
             <div class="mb-3">
                 <button name="enviar" class="btn btn-primary col-12">INICIAR SESIÓN</button>
             </div>
-            <a href="./normal/introUser.php"><button class="btn btn-success col-12" type="submit">REGISTRARSE</button></a>
+            <a href="../vista/introUser.php"><button class="btn btn-success col-12" type="submit">REGISTRARSE</button></a>
         </div>
     </div>
 </main>
