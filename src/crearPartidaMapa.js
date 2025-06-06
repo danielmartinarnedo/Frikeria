@@ -32,7 +32,7 @@ function geolocalizar(localizacion) {
 function initMap() {
     // Opciones del mapa
     var options = {
-        zoom: 8,
+        zoom: 17,
         center: {
             lat: 0,
             lng: 0
@@ -63,6 +63,9 @@ function initMap() {
                 };
                 map.setCenter(userLocation);
                 marker.setPosition(userLocation);
+                setTimeout(() => {
+                    map.setZoom(17);
+                }, 100);
 
                 geolocalizar(userLocation);
             },

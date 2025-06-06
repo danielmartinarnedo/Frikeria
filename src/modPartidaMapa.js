@@ -40,7 +40,7 @@ function initMap() {
     }
     // Opciones del mapa
     var options = {
-        zoom: 8,
+        zoom: 17,
         center: {
             lat: lat,
             lng: lng
@@ -63,6 +63,9 @@ function initMap() {
     // Centrar el mapa y el marcador en la ubicación inicial
     map.setCenter(PartidaLocInicial);
     marker.setPosition(PartidaLocInicial);
+    setTimeout(() => {
+        map.setZoom(17);
+    }, 100);
 
     geolocalizar(PartidaLocInicial);
 
