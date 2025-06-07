@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2025 at 10:31 PM
+-- Generation Time: Jun 07, 2025 at 10:27 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,68 @@ SET time_zone = "+00:00";
 --
 -- Database: `frikeria`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_estados` ()   BEGIN
+  DECLARE done INT DEFAULT FALSE;
+  DECLARE tbl_name VARCHAR(255);
+  DECLARE cur CURSOR FOR
+    SELECT TABLE_NAME
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE COLUMN_NAME = 'estado'
+      AND TABLE_NAME != 'bloqueado'
+      AND TABLE_SCHEMA = DATABASE();
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+  OPEN cur;
+
+  read_loop: LOOP
+    FETCH cur INTO tbl_name;
+    IF done THEN
+      LEAVE read_loop;
+    END IF;
+
+    SET @sql = CONCAT('UPDATE `', tbl_name, '` SET `estado` = 1');
+    PREPARE stmt FROM @sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+  END LOOP;
+
+  CLOSE cur;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_resueltos` ()   BEGIN
+  DECLARE done INT DEFAULT FALSE;
+  DECLARE tbl_name VARCHAR(255);
+  DECLARE cur CURSOR FOR
+    SELECT TABLE_NAME
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE COLUMN_NAME = 'resuelto'
+      AND TABLE_NAME != 'bloqueado'
+      AND TABLE_SCHEMA = DATABASE();
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+  OPEN cur;
+
+  read_loop: LOOP
+    FETCH cur INTO tbl_name;
+    IF done THEN
+      LEAVE read_loop;
+    END IF;
+
+    SET @sql = CONCAT('UPDATE `', tbl_name, '` SET `resuelto` = 0');
+    PREPARE stmt FROM @sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+  END LOOP;
+
+  CLOSE cur;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -39,18 +101,18 @@ CREATE TABLE `bloqueados` (
 --
 
 INSERT INTO `bloqueados` (`id`, `idUsuario`, `idBloqueado`, `estado`) VALUES
-(1, 2, 1, 0),
-(2, 2, 1, 0),
-(3, 2, 1, 0),
-(4, 2, 1, 0),
-(5, 2, 1, 0),
-(6, 2, 1, 0),
-(7, 2, 1, 0),
-(8, 2, 1, 0),
-(9, 2, 1, 0),
-(10, 2, 1, 0),
-(11, 2, 1, 0),
-(12, 2, 1, 0),
+(1, 2, 1, 1),
+(2, 2, 1, 1),
+(3, 2, 1, 1),
+(4, 2, 1, 1),
+(5, 2, 1, 1),
+(6, 2, 1, 1),
+(7, 2, 1, 1),
+(8, 2, 1, 1),
+(9, 2, 1, 1),
+(10, 2, 1, 1),
+(11, 2, 1, 1),
+(12, 2, 1, 1),
 (13, 9, 2, 0),
 (14, 9, 2, 0),
 (15, 9, 2, 0),
@@ -65,7 +127,13 @@ INSERT INTO `bloqueados` (`id`, `idUsuario`, `idBloqueado`, `estado`) VALUES
 (24, 9, 2, 0),
 (25, 9, 2, 0),
 (26, 9, 2, 0),
-(27, 9, 2, 1);
+(27, 9, 2, 0),
+(28, 2, 9, 0),
+(29, 9, 2, 0),
+(30, 9, 2, 0),
+(31, 9, 2, 0),
+(32, 9, 2, 0),
+(33, 2, 9, 1);
 
 -- --------------------------------------------------------
 
@@ -114,7 +182,11 @@ INSERT INTO `foromensaje` (`id`, `idUser`, `idAnuncio`, `texto`, `fecha`, `estad
 (4, 1, 4, 'Otra prueba', '2025-05-08 16:00:02', 1),
 (5, 2, 4, 'Usasda', '2025-05-18 14:41:20', 1),
 (6, 9, 11, '<p>Lleva la tarara <b>un </b><i>vestido</i></p>', '2025-06-03 17:55:23', 1),
-(7, 2, 11, '<ol><li>llsllasdasddasdasd<u>asdasdasdasdasdasdsadas</u></li></ol>', '2025-06-03 18:04:19', 1);
+(7, 2, 11, '<ol><li>llsllasdasddasdasd<u>asdasdasdasdasdasdsadas</u></li></ol>', '2025-06-03 18:04:19', 1),
+(8, 9, 8, '<p>Hola que tal</p>', '2025-06-06 21:11:50', 1),
+(9, 9, 8, '<p>Como estas?</p><p><br></p>', '2025-06-06 21:11:59', 1),
+(10, 9, 8, '<p>Bien y tu?</p>', '2025-06-06 21:12:06', 1),
+(11, 2, 8, '<p>holi</p><p><br></p>', '2025-06-06 21:14:33', 1);
 
 -- --------------------------------------------------------
 
@@ -177,7 +249,10 @@ INSERT INTO `partidas` (`id`, `titulo`, `juego`, `numJugadores`, `fecha`, `porta
 (6, 'Prueba24567', 'Prueba24567', 4, '2025-06-03', '../images/portada_683b59ce0df5f1.73805200.jpg', 'Esto es una prueba', 37.03384986638156, -3.5825838716104452, 'Padul', 2, 1),
 (7, 'Prueba123', 'Prueba24567', 4, '2025-06-05', '../images/Pathfinder2ogimage.jpg', 'Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 36.7394816, -3.5913728, 'Salobreña', 2, 1),
 (8, 'Prueba1235', 'Prueba22', 4, '2025-06-07', '../images/Pathfinder2ogimage.jpg', '<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdasdasd2345</p>', 37.16966568743458, -3.6012621046379034, 'Granada', 9, 1),
-(11, 'Prueba24567', 'Prueba24567', 5, '2025-06-06', '../images/Pathfinder2ogimage.jpg', '<ul><li>j<b>kl</b><i>oi<u>868666666666666666666666666666666</u></i></li></ul>', 36.7394816, -3.5913728, 'Salobreña', 9, 1);
+(11, 'Prueba24567', 'Prueba24567', 5, '2025-06-08', '../images/Pathfinder2ogimage.jpg', '<ul><li>j<b>kl</b><i>oi<u>868666666666666666666666666666666</u></i></li></ul>', 37.182796228137136, -3.5441317231729452, 'Granada', 9, 1),
+(12, 'Preasd24', 'wee2', 4, '2025-06-09', '../images/Pathfinder2ogimage.jpg', '<p>Lleva la tarara un vestido blanco lleno de cascabeles.</p>', 37.173702101058346, -3.6002808705955247, 'Granada', 9, 1),
+(13, 'Unnombre', 'HOla', 3, '2025-06-11', '../images/Pathfinder2ogimage.jpg', '<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>', 36.7394816, -3.5913728, 'Salobreña', 9, 1),
+(14, 'Name', 'Game', 4, '2025-06-09', '../images/Pathfinder2ogimage.jpg', '<p>AaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>', 36.7466088, -3.586411, 'Salobreña', 9, 1);
 
 -- --------------------------------------------------------
 
@@ -219,7 +294,7 @@ CREATE TABLE `reporteforomensaje` (
 --
 
 INSERT INTO `reporteforomensaje` (`id`, `idChat`, `idMensaje`, `descripcion`, `resuelto`) VALUES
-(1, 11, 7, 'asdasdasdasdas', 1);
+(1, 11, 7, 'asdasdasdasdas', 0);
 
 -- --------------------------------------------------------
 
@@ -389,7 +464,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `bloqueados`
 --
 ALTER TABLE `bloqueados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `chatprivado`
@@ -401,7 +476,7 @@ ALTER TABLE `chatprivado`
 -- AUTO_INCREMENT for table `foromensaje`
 --
 ALTER TABLE `foromensaje`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `mensajeschatprivados`
@@ -413,7 +488,7 @@ ALTER TABLE `mensajeschatprivados`
 -- AUTO_INCREMENT for table `partidas`
 --
 ALTER TABLE `partidas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `reportechatprivado`
