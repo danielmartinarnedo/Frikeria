@@ -40,9 +40,29 @@ class usuario
         $consulta->execute();
         $consulta->fetch();
 
-        $noExiste = true;
+        $noExiste = ["estado" => true];
 
-        if ($count > 0) $noExiste = false;
+        if ($count > 0) $noExiste = ["estado" => false, "msj" => "Nombre de usuario ya existe."];
+
+        $consulta->close();
+
+        return $noExiste;
+    }
+
+    //Comprobar si existe el mail en otro usuario
+    public function compExistenciaMail(String $nom)
+    {
+        $sentencia = "SELECT COUNT(*) FROM usuario WHERE mail=? AND estado = 1";
+        $consulta = $this->db->prepare($sentencia);
+        $consulta->bind_param("s", $nom);
+        $consulta->bind_result($count);
+
+        $consulta->execute();
+        $consulta->fetch();
+
+        $noExiste = ["estado" => true];
+
+        if ($count > 0) $noExiste = ["estado" => false, "msj" => "Correo electronico esta en uso"];;
 
         $consulta->close();
 

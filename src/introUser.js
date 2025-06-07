@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .then(response => response.json())
             .then(data => {
+                console.log(data);
                 if (data.estado) {
                     window.location.href = '../index.php';
                 } else {

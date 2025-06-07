@@ -7,14 +7,15 @@ function irLanding()
 {
     header("Location: ../vista/landing.php");
 }
-function irLandingOrBuscarPartida(){
+function irLandingOrBuscarPartida()
+{
     session_start();
     $usuario = isset($_SESSION['user']) ? $_SESSION['user'] : null;
     if ($usuario) {
         echo json_encode("../vista/buscarPartida.php");
     } else {
         echo json_encode("../vista/login.php");
-    }    
+    }
 }
 //USUARIO
 //Introduce un usuario y te envia a la landing
@@ -25,13 +26,19 @@ function insertarUsuario()
     $mail = $_POST["mail"];
     require_once("../classes/usuario.php");
     $usus = new usuario("../../../");
-    if ($usus->compExistencia($nom)) {
+    $req1 = $usus->compExistencia($nom);
+    $req2 = $usus->compExistenciaMail($mail);
+    if ($req1["estado"] && $req2["estado"]) {
         $usus->insertUser($nom, $contra1, $mail);
         session_start();
         $_SESSION['user'] = $nom;
         echo json_encode(["estado" => true, "msj" => "Usuario creado correctamente."]);
     } else {
-        echo json_encode(["estado" => false, "msj" => "Nombre de usuario ya existe."]);
+        if (!$req1["estado"]) {
+            echo json_encode($req1);
+        } else {
+            echo json_encode($req2);
+        }
     }
 }
 //Maneja el inicio de sesion
@@ -173,7 +180,7 @@ function crearPartidaForm()
             echo json_encode(["estado" => false, "msj" => "Solo se permiten archivos de imagen (jpg, jpeg, png, gif)."]);
             exit;
         }
-    }else {
+    } else {
         // Si no se subió archivo, error
         echo json_encode(["estado" => false, "msj" => "Debes seleccionar una imagen de portada."]);
         exit;
@@ -377,7 +384,8 @@ function buscarChatsPrivados()
 }
 //REPORTES
 //Crear un reporte de una partida
-function reportarPartida(){
+function reportarPartida()
+{
     header('Content-Type: application/json');
     $idPartida = $_POST['idPartida'];
     $texto = $_POST['descripcion'];
@@ -386,7 +394,8 @@ function reportarPartida(){
     $reporte->crearReportePartida($idPartida, $texto);
 }
 //Crear un reporte de un foro
-function reportarForo(){
+function reportarForo()
+{
     header('Content-Type: application/json');
     $idChat = $_POST['idChat'];
     $idMensaje = $_POST['idMensaje'];
@@ -396,7 +405,8 @@ function reportarForo(){
     $reporte->crearReporteForo($idChat, $idMensaje, $texto);
 }
 //Crear un reporte de un chat privado
-function reportarChatPrivado(){
+function reportarChatPrivado()
+{
     header('Content-Type: application/json');
     $idChat = $_POST['idChat'];
     $idMensaje = $_POST['idMensaje'];
@@ -406,7 +416,8 @@ function reportarChatPrivado(){
     $reporte->crearReporteChatPrivado($idChat, $idMensaje, $texto);
 }
 //Crear un reporte de un usuario
-function reportarUsuario(){
+function reportarUsuario()
+{
     header('Content-Type: application/json');
     $nomUsuario = $_POST['nombreUsuario'];
     session_start();
