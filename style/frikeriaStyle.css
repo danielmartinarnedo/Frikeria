@@ -102,3 +102,15 @@ main{
   margin: 0;
   text-align: justify;
 }
+.btn-success, .bg-success{
+    background-color: teal !important;
+    border-color: teal !important;
+}
+.btn-danger, .bg-danger{
+    background-color: #F25C54 !important;
+    border-color: #F25C54 !important;
+}
+.btn-primary, .bg-primary{
+    background-color: purple !important;
+    border-color: purple !important;
+}

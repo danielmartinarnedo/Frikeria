@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 0); // oculta errores en la salida
-ini_set('log_errors', 1); // activa log
-ini_set('error_log', __DIR__ . '/errores.log'); // archivo donde se guardan errores
 //Funcion que redirige al inicio del administrador
 function irAdminIncio()
 {
