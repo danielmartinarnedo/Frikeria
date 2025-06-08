@@ -43,6 +43,7 @@ class chatPrivado
         }
         return $id;
     }
+    //Busca todos los chats privados de un usuario
     public function buscarChatsPrivados()
     {
         session_start();

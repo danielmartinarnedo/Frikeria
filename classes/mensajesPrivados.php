@@ -8,6 +8,7 @@ class mensajesPrivados
         // $this->db = new mysqli("localhost",USU_CONN, PSW_CONN, "frikeria");
         $this->db = new mysqli("localhost", "root", "", "frikeria");
     }
+    //Crear un mensaje en un chat privado
     public function crearMensajePrivado($texto, $id_chat)
     {
         require_once("../classes/usuario.php");
@@ -20,6 +21,7 @@ class mensajesPrivados
         $consulta->execute();
         $consulta->close();
     }
+    //Busca todos los mensajes de un chat privado
     public function buscarMensajesPrivados($id_chat)
     {
         $sentencia = "SELECT id, idUsuario, texto FROM mensajeschatprivados WHERE idChat = ? AND estado = 1 ORDER BY fecha ASC";
@@ -88,6 +90,7 @@ class mensajesPrivados
         $consulta->close();
         return $res>0;
     }
+    // Buscar los mensajes eliminados de un chat privado relacionados con un Usuario
     function cojerIdMensajesEliminadosPrivados($idChat, $idUsuario) {
         $sentencia = "SELECT id FROM mensajeschatprivados WHERE idChat = ? AND idUsuario = ? AND estado = 0";
         $consulta = $this->db->prepare($sentencia);

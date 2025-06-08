@@ -54,6 +54,7 @@ class bloqueado
         $consulta->close();
         return ($bloqueoEstado>0);
     }
+    //Desbloquear a un usuario
     public function desbloquear($nombreBloqueado)
     {
         require_once("../classes/usuario.php");

@@ -8,7 +8,7 @@ class foroMensaje
         // $this->db = new mysqli("localhost",USU_CONN, PSW_CONN, "frikeria");
         $this->db = new mysqli("localhost", "root", "", "frikeria");
     }
-    //Crear una partida
+    //Crear un mensaje en un foro
     public function crearMensajeForo($texto, $id_anuncio)
     {
         require_once("../classes/usuario.php");
@@ -21,6 +21,7 @@ class foroMensaje
         $consulta->execute();
         $consulta->close();
     }
+    // Carga todos los mensajes de un foro
     public function buscarMensajes($id_anuncio)
     {
         $sentencia = "SELECT idUser, texto, id FROM foromensaje WHERE idAnuncio = ? AND estado = 1 ORDER BY fecha ASC";
@@ -62,7 +63,7 @@ class foroMensaje
         }
         return $mensajes;
     }
-
+    //Hace un ban a un mensaje
     function quitarMensaje($idMensaje)
     {
         $sentencia = "UPDATE foromensaje SET estado = 0 WHERE id = ?";
@@ -72,7 +73,7 @@ class foroMensaje
         $consulta->close();
         return $res>0;
     }
-
+    //Carga todos los mensajes eliminados de un foro
     function cojerIdMensajesEliminadosChatForo($idChat, $idUsuario) {
         $sentencia = "SELECT id FROM foromensaje WHERE idAnuncio = ? AND idUser = ? AND estado = 0";
         $consulta = $this->db->prepare($sentencia);

@@ -114,3 +114,6 @@ main{
     background-color: purple !important;
     border-color: purple !important;
 }
+.nav-link{
+    color: black !important;
+}
