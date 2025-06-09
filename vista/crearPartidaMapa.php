@@ -10,7 +10,7 @@
         <input type="hidden" name="juego" id="juego" value="<?php echo $_POST['juego']; ?>">
         <input type="hidden" name="numeroJugadores" id="numeroJugadores" value="<?php echo $_POST['numeroJugadores']; ?>">
         <input type="hidden" name="fechaInicio" id="fechaInicio" value="<?php echo $_POST['fechaInicio']; ?>">
-        <input type="hidden" name="descripcion" id="descripcion" value="<?php echo $_POST['descripcion']; ?>">
+        <input type="hidden" name="descripcion" id="descripcion" value="<?php echo htmlspecialchars($_POST['descripcion'], ENT_QUOTES, 'UTF-8'); ?>">
         <input type="hidden" name="fotoRuta" id="fotoRuta" value="<?php echo $_POST['fotoRuta']; ?>">
 
         <button class="btn btn-primary col-12" type="submit" name="crearPartida">CREAR PARTIDA</button>

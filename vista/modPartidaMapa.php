@@ -9,7 +9,7 @@
         <?php
         foreach ($_POST as $key => $value) {
             if ($key != 'latInit' || $key != 'lngInit') {
-                echo "<input type=\"hidden\" name=\"$key\" id=\"$key\" value=\"$value\">\n";
+                echo "<input type=\"hidden\" name=\"$key\" id=\"$key\" value=\"htmlspecialchars($value, ENT_QUOTES, 'UTF-8')\">\n";
             }
         }
         ?>
