@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     mensajes.forEach((mensaje, index) => {
-        console.log(mensaje);
         // Crea el contenedor del mensaje
         const mensajeRow = document.createElement('div');
         mensajeRow.id = `mensaje${mensaje["idMensaje"]}`;
@@ -90,7 +89,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Agrega el evento de click al icono de accion
         svg.addEventListener('click', function () {
             datosReporte = mensaje;
-            console.log(datosReporte);
             reportModal.show();
         });
     });
@@ -174,7 +172,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     })
                         .then(response => response.json())
                         .then(data => {
-                            console.log(data);
                             for (let i = 0; i < data.length; i++) {
                                 const mensajeRow = document.getElementById('mensaje' + data[i]);
                                 mensajeRow.remove();
@@ -192,5 +189,4 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Error sentenciando el ticket:', error);
             });
     });
-    console.log(datosIniciales);
 });

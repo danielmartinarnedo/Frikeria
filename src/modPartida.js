@@ -101,7 +101,6 @@ document.addEventListener("DOMContentLoaded", function () {
                             input.value = value;
                             formularioMapa.appendChild(input);
                         }
-                        console.log(formularioMapa);
                         document.body.appendChild(formularioMapa);
                         formularioMapa.submit();
                     } else {

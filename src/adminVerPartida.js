@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
         partida[input.name] = input.value;
         input.remove();
     })
-    console.log(partida);
     //FUNCIONES
 
 

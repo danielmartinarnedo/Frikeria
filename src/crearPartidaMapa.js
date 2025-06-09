@@ -20,10 +20,6 @@ function geolocalizar(localizacion) {
             document.getElementById('lng').value = lng;
             document.getElementById('city').value = city;
 
-            // Mostrar los detalles en la consola
-            console.log('Latitud:', lat);
-            console.log('Longitud:', lng);
-            console.log('Ciudad/Pueblo/Villa:', city);
         } else {
             console.error('La geocodificación falló debido a:', status);
         }

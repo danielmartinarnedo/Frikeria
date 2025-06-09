@@ -20,10 +20,6 @@ function geolocalizar(localizacion) {
             document.getElementById('lng').value = lng;
             document.getElementById('city').value = city;
 
-            // Mostrar los detalles en la consola
-            console.log('Latitud:', lat);
-            console.log('Longitud:', lng);
-            console.log('Ciudad/Pueblo/Villa:', city);
         } else {
             console.error('La geocodificación falló debido a:', status);
         }
@@ -33,7 +29,6 @@ function initMap() {
     const datosPost = window.datosPost || {};
     const lat = parseFloat(datosPost.latInit) || 0;
     const lng = parseFloat(datosPost.lngInit) || 0;
-    console.log("Latitud inicial:", lat, "Longitud inicial:", lng);
     const PartidaLocInicial = {
         lat: lat,
         lng: lng

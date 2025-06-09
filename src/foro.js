@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Variables
     const idPartida = new URLSearchParams(window.location.search).get("foro");
-    console.log(idPartida);
     const mensajeContendor = document.getElementById("mensajes-container");
     const enviarBoton = document.getElementById("enviar");
     const escribirMensaje = document.getElementById("escribirMensaje");
@@ -16,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Funciones
     // Funcion para bloquear un usuario
     function bloquear() {
-        console.log("Bloqueando a " + nombreParaModal);
         fetch('../controladores/normal.php', {
             method: 'POST',
             headers: {
@@ -80,7 +78,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     // Funcion para desbloquear un usuario
     function desbloquear(nombreBloqueado) {
-        console.log("Desbloqueando a " + nombreBloqueado);
         fetch('../controladores/normal.php', {
             method: 'POST',
             headers: {
@@ -110,7 +107,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 mensajeContendor.innerHTML = "";
                 mensajes.forEach(mensaje => {
                     let innerRows = "";
-                    console.log(mensaje);
                     if (mensaje.bloqueo) {
                         innerRows += `
             <div class="row d-flex justify-content-center align-items-center">

@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             row.className = 'card col-12 col-md-5 mt-3 mb-3 me-1 ms-1 pb-1 pt-1 border bg-light';
 
                             row.innerHTML = `
-                                    <img class="img-fluid card-img-top" src="${partida.portada}" alt="Portada de ${partida.titulo}" srcset="">
+                                    <img class="img-fluid card-img-top anuncioImagen" src="${partida.portada}" alt="Portada de ${partida.titulo}" srcset="">
                                     <div class="card-body">
                                         <h3 class="card-title">${partida.titulo}</h3>
                                         <h4 class="card-subtitle mb-2 text-body-secondary">${partida.juego}</h4>                                        <p class="card-text">NÚMERO DE JUGADORES: ${partida.numJugadores}</p>

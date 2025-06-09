@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // FUNCIONES
     function bloquear() {
-        console.log("Bloqueando a " + nombreParaModal);
         fetch('../controladores/normal.php', {
             method: 'POST',
             headers: {
@@ -79,7 +78,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Funcion para desbloquear un usuario
     function desbloquear(nombreBloqueado) {
-        console.log("Desbloqueando a " + nombreBloqueado);
         fetch('../controladores/normal.php', {
             method: 'POST',
             headers: {
@@ -124,7 +122,6 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(mensajes => {
                 areaMensajes.innerHTML = "";
                 mensajes.forEach(mensaje => {
-                    console.log(`data-mensaje-id= "${mensaje.idMensaje}"`);
                     if (mensaje.bloqueo) {
                         areaMensajes.innerHTML += `<div class="container">
                     <div class="row d-flex justify-content-center align-items-center">

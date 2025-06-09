@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
         datos[input.name] = input.value;
         input.remove();
     });
-    console.log(datos);
     // FUNCIONES
 
 

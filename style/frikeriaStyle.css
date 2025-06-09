@@ -117,3 +117,11 @@ main{
 .nav-link{
     color: black !important;
 }
+.anuncioImagen {
+    display: block;
+    max-height: 220px;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    background: #f8f9fa;
+}

@@ -113,7 +113,6 @@ function cargarTickets(clave, valor) {
         .then(data => {
             objTickets = data;
             ticketsContainer.innerHTML += ``;
-            console.log(objTickets);
             cargarTicketsInit(objTickets)
         }).catch(error => {
             console.error('Error fetching tickets:', error);

@@ -56,13 +56,6 @@ document.addEventListener("DOMContentLoaded", function () {
             formularioDatos.append('contra', inputContra.value.trim());
             formularioDatos.append('foto', inputFoto.files[0]);
 
-            console.log("Datos del formulario:", {
-                nom: inputNombre.value.trim(),
-                mail: inputMail.value.trim(),
-                contra: inputContra.value.trim(),
-                foto: inputFoto.files[0] ? inputFoto.files[0].name : 'No file selected'
-            });
-
             fetch('../controladores/normal.php?action=modUsuario', {
                 method: 'POST',
                 body: formularioDatos
