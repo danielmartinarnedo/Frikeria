@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2025 at 10:27 AM
+-- Generation Time: Jun 09, 2025 at 01:57 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -133,7 +133,8 @@ INSERT INTO `bloqueados` (`id`, `idUsuario`, `idBloqueado`, `estado`) VALUES
 (30, 9, 2, 0),
 (31, 9, 2, 0),
 (32, 9, 2, 0),
-(33, 2, 9, 1);
+(33, 2, 9, 0),
+(34, 2, 9, 0);
 
 -- --------------------------------------------------------
 
@@ -186,7 +187,11 @@ INSERT INTO `foromensaje` (`id`, `idUser`, `idAnuncio`, `texto`, `fecha`, `estad
 (8, 9, 8, '<p>Hola que tal</p>', '2025-06-06 21:11:50', 1),
 (9, 9, 8, '<p>Como estas?</p><p><br></p>', '2025-06-06 21:11:59', 1),
 (10, 9, 8, '<p>Bien y tu?</p>', '2025-06-06 21:12:06', 1),
-(11, 2, 8, '<p>holi</p><p><br></p>', '2025-06-06 21:14:33', 1);
+(11, 2, 8, '<p>holi</p><p><br></p>', '2025-06-06 21:14:33', 1),
+(12, 9, 15, '<p>Aqui teneis un tutorial de como jugar Dragones Y Mazmorras. Quien se apunta?</p><p><iframe frameborder=\"0\" src=\"//www.youtube.com/embed/DFpG47HfDeo\" width=\"640\" height=\"360\" class=\"note-video-clip\"></iframe><br></p>', '2025-06-09 00:21:42', 1),
+(13, 9, 16, '<p>Hey, muy buenas a todos, guapisimos dejad aqui vuestra caracter con el que vais a jugrar.</p>', '2025-06-09 13:18:50', 1),
+(14, 9, 16, 'Y recordad buen comportamiento en el chat', '2025-06-09 13:28:30', 1),
+(15, 2, 16, '<p>Mi personaje es <a href=\"https://pathbuilder2e.com/launch.html?build=1144441\" target=\"_blank\">Bart</a>, un luchador que se especializa en ataques con lanza.</p><p><br></p>', '2025-06-09 13:41:46', 1);
 
 -- --------------------------------------------------------
 
@@ -252,7 +257,10 @@ INSERT INTO `partidas` (`id`, `titulo`, `juego`, `numJugadores`, `fecha`, `porta
 (11, 'Prueba24567', 'Prueba24567', 5, '2025-06-08', '../images/Pathfinder2ogimage.jpg', '<ul><li>j<b>kl</b><i>oi<u>868666666666666666666666666666666</u></i></li></ul>', 37.182796228137136, -3.5441317231729452, 'Granada', 9, 1),
 (12, 'Preasd24', 'wee2', 4, '2025-06-09', '../images/Pathfinder2ogimage.jpg', '<p>Lleva la tarara un vestido blanco lleno de cascabeles.</p>', 37.173702101058346, -3.6002808705955247, 'Granada', 9, 1),
 (13, 'Unnombre', 'HOla', 3, '2025-06-11', '../images/Pathfinder2ogimage.jpg', '<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>', 36.7394816, -3.5913728, 'Salobreña', 9, 1),
-(14, 'Name', 'Game', 4, '2025-06-09', '../images/Pathfinder2ogimage.jpg', '<p>AaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>', 36.7466088, -3.586411, 'Salobreña', 9, 1);
+(14, 'Name', 'Game', 4, '2025-06-09', '../images/Pathfinder2ogimage.jpg', '<p>AaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>', 36.7466088, -3.586411, 'Salobreña', 9, 1),
+(15, 'Tutorial', 'Dragones Y Mazmorrars', 3, '2025-06-20', '../images/815XxpBjHpL._AC_UF1000,1000_QL80_.jpg', '<p>Esto es un tutorial de como jugar la primera versión de <b>DRAGONES Y MAZMORRAS.</b></p>', 36.746583, -3.5863371, 'Salobreña', 9, 1),
+(16, 'Pathfinder Kingmaker', 'Pathfinder 2e', 3, '2025-06-14', '../images/Pathfinder2ogimage.jpg', '<p data-start=\"94\" data-end=\"418\">?️ <strong data-start=\"98\" data-end=\"144\">¡Se buscan valientes para forjar un reino!</strong> ⚔️<br data-start=\"147\" data-end=\"150\">\nEste <strong data-start=\"155\" data-end=\"177\">sábado a las 16:00</strong> comienza nuestra épica campaña de <strong data-start=\"212\" data-end=\"225\">Kingmaker</strong>. Aventura, exploración y decisiones que marcarán el destino de una nación te esperan.<br data-start=\"311\" data-end=\"314\" data-is-only-node=\"\">\nForma parte de un grupo de pioneros en tierras salvajes, construye tu legado... o muere en el intento.</p>\n<p data-start=\"420\" data-end=\"473\"><strong data-start=\"420\" data-end=\"473\">¡Plazas limitadas! ¿Te atreves a tomar la corona?</strong></p><p data-start=\"420\" data-end=\"473\"><iframe frameborder=\"0\" src=\"//www.youtube.com/embed/MrP8-wuZSoU\" width=\"640\" height=\"360\" class=\"note-video-clip\"></iframe><strong data-start=\"420\" data-end=\"473\"><br></strong></p>', 36.7394816, -3.5913728, 'Salobreña', 9, 1),
+(17, 'La Huella de los Dioses', 'Call of Cthulhu', 2, '2025-06-15', '../images/61vJOgQA8DL._AC_UF1000,1000_QL80_DpWeblab_.jpg', '<p data-start=\"146\" data-end=\"465\">?️ <strong data-start=\"150\" data-end=\"210\">El fin del mundo puede empezar con una pista olvidada...</strong> ?️<br data-start=\"214\" data-end=\"217\">\r\nEste <strong data-start=\"222\" data-end=\"245\">domingo a las 20:00</strong> nos sumergimos en los horrores de <strong data-start=\"280\" data-end=\"307\">La Huella de los Dioses</strong>, una campaña de <em data-start=\"324\" data-end=\"341\" data-is-only-node=\"\">Call of Cthulhu</em> donde el misterio, la locura y lo desconocido acechan en cada esquina.<br data-start=\"412\" data-end=\"415\">\r\n¿Podrás descubrir la verdad sin perder tu cordura?</p>\r\n<p data-start=\"467\" data-end=\"522\"><strong data-start=\"467\" data-end=\"522\">Prepara tu ficha, afila tu mente… y no mires atrás.</strong></p><p><br></p>', 36.98830105875798, -3.5676405535264477, 'Dúrcal', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -454,7 +462,8 @@ ALTER TABLE `reporteusuario`
 --
 ALTER TABLE `usuario`
   ADD UNIQUE KEY `id` (`id`),
-  ADD UNIQUE KEY `nombre` (`nombre`);
+  ADD UNIQUE KEY `nombre` (`nombre`),
+  ADD UNIQUE KEY `mail` (`mail`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -464,7 +473,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `bloqueados`
 --
 ALTER TABLE `bloqueados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `chatprivado`
@@ -476,7 +485,7 @@ ALTER TABLE `chatprivado`
 -- AUTO_INCREMENT for table `foromensaje`
 --
 ALTER TABLE `foromensaje`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `mensajeschatprivados`
@@ -488,7 +497,7 @@ ALTER TABLE `mensajeschatprivados`
 -- AUTO_INCREMENT for table `partidas`
 --
 ALTER TABLE `partidas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `reportechatprivado`
