@@ -2,7 +2,7 @@
 <main class="card mb-3 mt-3 col-md-6 offset-md-3 w-md-50">
   <img src="<?php echo $_GET['portada']; ?>" class="card-img-top" alt="Foto de la Partida" id="imgTag">
   <div class="card-body">
-    <h5 class="card-title">CREAR PARTIDA</h5>
+    <h5 class="card-title">MODIFICAR PARTIDA</h5>
     <div id="crearPartidaForm">
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
