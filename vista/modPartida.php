@@ -37,5 +37,3 @@
 <input type="hidden" name="idPartida" value="<?php echo $_GET['foro']; ?>">
 <script src="../src/modPartida.js"></script>
 <?php require_once("./footer.php"); ?>
-
-<!--  action="../controladores/normal.php?action=descargarFoto" method="POST" enctype="multipart/form-data"  -->

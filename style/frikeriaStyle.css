@@ -129,3 +129,13 @@ iframe{
     max-width: 100%;
     max-height: 100%
 }
+/* Oculta la barra de redimensionamiento de Summernote */
+.note-resizebar {
+  display: none !important;
+}
+
+/* Previene resize desde el contenteditable */
+.note-editable {
+  resize: none !important;
+  overflow: auto !important;
+}

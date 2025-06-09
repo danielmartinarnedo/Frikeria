@@ -1,4 +1,4 @@
-<?php require_once("../vista/header.php"); ?>
+<?php session_start(); require_once("../vista/header.php"); ?>
 <?php foreach ($_GET as $key => $value): ?>
     <input type="hidden" name="<?php echo htmlspecialchars($key, ENT_QUOTES); ?>" value="<?php echo htmlspecialchars($value, ENT_QUOTES); ?>">
 <?php endforeach; ?>
@@ -11,7 +11,7 @@
                     <h3 class="card-title"><?php echo $_GET["titulo"]; ?></h5>
                         <h4 class="card-subtitle mb-2 text-muted"><?php echo $_GET["juego"]; ?></h6>
                             <p class="card-text">NÚMERO DE JUGADORES: <?php echo $_GET["jugadores"]; ?></p>
-                            <p class="card-text">CREADOR: <?php session_start();
+                            <p class="card-text">CREADOR: <?php
                                                             echo htmlspecialchars($_GET["creador"] ?? $_SESSION["user"], ENT_QUOTES); ?></p>
                             <p class="card-text">FECHA: <?php echo $_GET["fecha"]; ?></p>
                             <p class="card-text">MUNCIPIO: <?php echo $_GET["ciudad"]; ?></p>

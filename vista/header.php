@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -15,8 +15,7 @@
     <!-- Summernote CSS & JS -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs5.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs5.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/lang/summernote-es-ES.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/lang/summernote-es-ES.js"></script>
     <link rel="stylesheet" href="../style/frikeriaStyle.css">
 </head>
 
