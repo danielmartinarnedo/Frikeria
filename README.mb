@@ -1,0 +1,18 @@
+
+# FRIKERIA
+
+La FRIKERIA es una aplicacion web en la que los usuarios buscan partidas locales de TTRPGs en persona. Puediendo crear anuncios participar en foros de estos anuncios y enviar mensajes privados en orden de orginizar todo lo necesario para el mejor encuentro posible.
+
+
+
+
+
+## Authors
+
+- [@LamentProjects ](https://github.com/danielmartinarnedo)
+
+
+## Instalacion
+
+Pon el SQL en PHPMYADMIN, está puesto para que coja el root debido al anterior trabajo de PHP el cual dio problemas a la hora de demostrar a la mayoria de la clase. Inicia XAMPP y prueba la aplicación.
+    
