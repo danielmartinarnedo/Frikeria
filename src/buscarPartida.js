@@ -40,11 +40,13 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <p class="card-text">NÚMERO DE JUGADORES: ${partida.numJugadores}</p>
                                         <p class="card-text">FECHA: ${partida.fecha}</p>
                                         <p class="card-text">MUNICIPIO: ${partida.ciudad}</p>
-                                        <p class="card-text text-truncate">${partida.descripcion}</p>
+                                        <p class="card-text text-truncate">${partida.descripcion}</p>                
+                                    </div>
+                                    <div class="card-footer">
                                         <a class="btn btn-primary col-12" 
                                         href="./verPartida.php?titulo=${encodeURIComponent(partida.titulo)}&juego=${encodeURIComponent(partida.juego)}&jugadores=${partida.numJugadores}&fecha=${partida.fecha}&ciudad=${encodeURIComponent(partida.ciudad)}&descripcion=${encodeURIComponent(partida.descripcion)}&portada=${encodeURIComponent(partida.portada)}&foro=${encodeURIComponent(partida.id)}&creador=${encodeURIComponent(partida.nombreCreador)}&lat=${partida.latitud}&lng=${partida.longitud}">
                                         VER PARTIDA
-                                        </a>                    
+                                        </a>                                        
                                     </div>
 
                                                 `;
